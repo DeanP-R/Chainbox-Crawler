@@ -1,0 +1,2387 @@
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:33 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:34 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:35 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:36 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:37 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:38 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:39 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:40 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:41 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:42 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:43 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:44 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:45 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:46 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:47 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:48 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:49 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:50 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:51 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:52 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:53 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:54 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:55 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:56 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:57 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:58 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:45:59 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:00 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:01 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:02 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:03 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:04 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:05 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:06 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:07 Jog ignored: controller not connected
+14:46:08 Jog ignored: controller not connected
+14:46:08 Jog ignored: controller not connected
+14:46:08 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:49 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:50 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:51 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:52 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:53 Jog ignored: controller not connected
+14:46:54 Jog ignored: controller not connected
+14:46:54 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:13 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:14 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:15 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:16 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:17 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:18 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:19 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:20 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+21:58:21 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:01 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:02 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:03 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:04 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:05 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:14 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:15 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:16 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:17 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:18 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:19 Jog ignored: controller not connected
+22:00:20 Jog ignored: controller not connected
+22:00:20 Jog ignored: controller not connected
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:20 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:21 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:22 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:23 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:24 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:25 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:26 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:27 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:28 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:29 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:30 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:31 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:32 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:33 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:34 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:35 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:36 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:37 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:38 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:39 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:40 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:41 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:42 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:43 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA0;VB0;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:44 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:45 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:46 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:47 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:48 SIM: VA10000;VB10000;VC0
+22:00:49 SIM: VA10000;VB10000;VC0
+22:00:49 SIM: VA10000;VB10000;VC0
+22:00:49 SIM: VA10000;VB10000;VC0
+22:00:49 SIM: VA10000;VB10000;VC0
+22:00:49 SIM: VA0;VB0;VC0
+22:00:49 SIM: VA0;VB0;VC0
+22:00:49 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:50 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:51 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:52 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:53 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:54 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:55 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:56 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:57 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:58 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:00:59 SIM: VA0;VB0;VC0
+22:01:00 SIM: VA0;VB0;VC0
