@@ -123,8 +123,8 @@
             this.btnProbeRight = new System.Windows.Forms.Button() { Text = "Move Right", Dock = System.Windows.Forms.DockStyle.Fill };
             this.numProbeSpeed = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numProbeSpeed)).BeginInit();
-            this.numProbeSpeed.Maximum = 100000m;
-            this.numProbeSpeed.Value = 2000m;
+            this.numProbeSpeed.Maximum = 1000000m;
+            this.numProbeSpeed.Value = 20000m;
             ((System.ComponentModel.ISupportInitialize)(this.numProbeSpeed)).EndInit();
 
             tlpProbe.Controls.Add(this.btnProbeLeft, 0, 0);
@@ -133,8 +133,9 @@
             gbProbe.Controls.Add(tlpProbe);
 
             // Settings panel (compact)
-            var gbSettings = new System.Windows.Forms.GroupBox() { Text = "Drive Settings", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(12), BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) };
-            var tlpSettings = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 2, RowCount = 4 };
+            var gbSettings = new System.Windows.Forms.GroupBox() { Text = "Drive Settings", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(6), BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4) };
+            var settingsScroll = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, AutoScroll = true };
+            var tlpSettings = new System.Windows.Forms.TableLayoutPanel() { AutoSize = true, AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink, ColumnCount = 2, RowCount = 4 };
             tlpSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tlpSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 
@@ -149,7 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).BeginInit();
 
             // Set Maximum before Value to avoid ArgumentOutOfRangeException
-            this.numMaxSpeed.Maximum = 100000m; this.numMaxSpeed.Value = 10000m;
+            this.numMaxSpeed.Maximum = 1000000m; this.numMaxSpeed.Value = 10000m;
             this.numAccel.Maximum = 100000m; this.numAccel.Value = 1000m;
             this.numDecel.Maximum = 100000m; this.numDecel.Value = 1000m;
             this.numStepsPerMm.Maximum = 10000m; this.numStepsPerMm.Value = 100m;
@@ -181,7 +182,8 @@
 
             tlpSettings.Controls.Add(this.btnApplySettings, 0, 4);
             tlpSettings.Controls.Add(this.lblSettingsStatus, 1, 4);
-            gbSettings.Controls.Add(tlpSettings);
+            settingsScroll.Controls.Add(tlpSettings);
+            gbSettings.Controls.Add(settingsScroll);
 
             // Simulation checkbox
             this.chkSimulation = new System.Windows.Forms.CheckBox() { Text = "Simulation Mode", Dock = System.Windows.Forms.DockStyle.Left, AutoSize = true };
@@ -189,11 +191,11 @@
 
             // Assemble left column (connection + drive + probe + settings + simulation)
             var leftCol = new System.Windows.Forms.TableLayoutPanel(); leftCol.Dock = System.Windows.Forms.DockStyle.Fill; leftCol.RowCount = 5; leftCol.ColumnCount = 1;
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
             leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
+            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
 
             // Connection group at top of left column
             var gbConnection = new System.Windows.Forms.GroupBox() { Text = "Controller Connection", Dock = System.Windows.Forms.DockStyle.Fill };
@@ -205,7 +207,7 @@
             tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
             tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
 
-            this.txtIp = new System.Windows.Forms.TextBox() { Text = "192.168.0.42", Dock = System.Windows.Forms.DockStyle.Fill };
+            this.txtIp = new System.Windows.Forms.TextBox() { Text = "192.168.0.101", Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnConnect = new System.Windows.Forms.Button() { Text = "Connect", Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnDisconnect = new System.Windows.Forms.Button() { Text = "Disconnect", Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnEnableMotors = new System.Windows.Forms.Button() { Text = "Enable", Dock = System.Windows.Forms.DockStyle.Fill };
@@ -230,7 +232,7 @@
             flInputMode.Padding = new System.Windows.Forms.Padding(4);
             var lblInputModeSel = new System.Windows.Forms.Label() { Text = "Input Mode:", AutoSize = true, Anchor = System.Windows.Forms.AnchorStyles.Left, Margin = new System.Windows.Forms.Padding(4) };
             this.cmbInputMode = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Width = 140, Margin = new System.Windows.Forms.Padding(4) };
-            this.cmbInputMode.Items.AddRange(new object[] { "Automatic", "Keyboard", "Gamepad" });
+            this.cmbInputMode.Items.AddRange(new object[] {  "Gamepad", "Keyboard" });
             this.cmbInputMode.SelectedIndex = 0;
             flInputMode.Controls.Add(lblInputModeSel); flInputMode.Controls.Add(this.cmbInputMode);
             tlpDriveMain.Controls.Add(flInputMode, 0, 1);

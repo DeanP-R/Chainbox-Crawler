@@ -6,7 +6,7 @@ namespace Chainbox_controller
 {
     public partial class Form1 : Form
     {
-        private InputLayer.InputMode currentInputMode = InputLayer.InputMode.Automatic;
+        private InputLayer.InputMode currentInputMode = InputLayer.InputMode.Keyboard;
         private DateTime lastUiUpdate = DateTime.MinValue;
         private bool logAutoScroll = true;
         private const int MaxLogLines = 2000;
@@ -62,7 +62,7 @@ namespace Chainbox_controller
             // input mode selector
             if (this.cmbInputMode != null) this.cmbInputMode.SelectedIndexChanged += (s, e) =>
             {
-                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Automatic;
+                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Keyboard;
                 else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
                 else currentInputMode = InputLayer.InputMode.Gamepad;
                 // reflect in header label if present
@@ -190,84 +190,6 @@ namespace Chainbox_controller
             this.btnCopyLog.Click += BtnCopyLog_Click;
             this.btnClearLog.Click += (s, e) => { this.txtLog.Clear(); };
         }
-
-        private void BuildUi()
-        {
-            Text = "Chainbox Controller";
-            Width = 1000;
-            Height = 700;
-
-            // Connection group
-            gbConnection = new GroupBox() { Text = "Controller Connection", Left = 10, Top = 10, Width = 480, Height = 100 };
-            txtIp = new TextBox() { Left = 10, Top = 24, Width = 180, Text = "192.168.0.42" };
-            btnConnect = new Button() { Left = 200, Top = 22, Width = 80, Text = "Connect" };
-            btnDisconnect = new Button() { Left = 290, Top = 22, Width = 80, Text = "Disconnect" };
-            lblControllerStatus = new Label() { Left = 10, Top = 50, Width = 300, Text = "Controller: DISCONNECTED" };
-            lblMotorsStatus = new Label() { Left = 320, Top = 50, Width = 140, Text = "Motors: DISABLED" };
-            btnConnect.Click += BtnConnect_Click;
-            btnDisconnect.Click += BtnDisconnect_Click;
-            gbConnection.Controls.AddRange(new Control[] { txtIp, btnConnect, btnDisconnect, lblControllerStatus, lblMotorsStatus });
-            Controls.Add(gbConnection);
-
-            // Settings group
-            gbSettings = new GroupBox() { Text = "Drive Settings", Left = 10, Top = 120, Width = 480, Height = 160 };
-            numMaxSpeed = new NumericUpDown() { Left = 10, Top = 24, Width = 120, Maximum = 100000, Value = 10000 };
-            numAccel = new NumericUpDown() { Left = 10, Top = 54, Width = 120, Maximum = 100000, Value = 1000 };
-            numDecel = new NumericUpDown() { Left = 150, Top = 54, Width = 120, Maximum = 100000, Value = 1000 };
-            numStepsPerMm = new NumericUpDown() { Left = 10, Top = 84, Width = 120, Maximum = 10000, Value = 100 };
-            btnApplySettings = new Button() { Left = 10, Top = 114, Width = 120, Text = "Apply Settings" };
-            btnApplySettings.Click += BtnApplySettings_Click;
-            gbSettings.Controls.AddRange(new Control[] { new Label() { Left = 140, Top = 24, Text = "Max Speed" }, numMaxSpeed, new Label() { Left = 140, Top = 54, Text = "Accel / Decel" }, numAccel, numDecel, new Label() { Left = 140, Top = 84, Text = "Steps / mm" }, numStepsPerMm, btnApplySettings });
-            Controls.Add(gbSettings);
-
-            // Telemetry
-            gbTelemetry = new GroupBox() { Text = "Live Motion Status", Left = 500, Top = 10, Width = 470, Height = 200 };
-            lblForwardInput = new Label() { Left = 10, Top = 24, Width = 220, Text = "Forward Input: 0.00" };
-            lblTurnInput = new Label() { Left = 10, Top = 48, Width = 220, Text = "Turn Input: 0.00" };
-            lblProbeInput = new Label() { Left = 10, Top = 72, Width = 220, Text = "Probe Input: 0.00" };
-            lblLeftVel = new Label() { Left = 10, Top = 100, Width = 300, Text = "Left Track Velocity: 0" };
-            lblRightVel = new Label() { Left = 10, Top = 124, Width = 300, Text = "Right Track Velocity: 0" };
-            gbTelemetry.Controls.AddRange(new Control[] { lblForwardInput, lblTurnInput, lblProbeInput, lblLeftVel, lblRightVel });
-            Controls.Add(gbTelemetry);
-
-            // Drive controls
-            gbDrive = new GroupBox() { Text = "Manual Drive Controls", Left = 10, Top = 290, Width = 480, Height = 240 };
-            btnForward = new Button() { Left = 180, Top = 20, Width = 120, Height = 60, Text = "FORWARD" };
-            btnLeft = new Button() { Left = 20, Top = 90, Width = 120, Height = 60, Text = "TURN LEFT" };
-            btnRight = new Button() { Left = 340, Top = 90, Width = 120, Height = 60, Text = "TURN RIGHT" };
-            btnReverse = new Button() { Left = 180, Top = 160, Width = 120, Height = 60, Text = "REVERSE" };
-            btnStop = new Button() { Left = 140, Top = 90, Width = 200, Height = 60, Text = "STOP", BackColor = System.Drawing.Color.Red, ForeColor = System.Drawing.Color.White };
-            btnForward.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Forward = 1.0 });
-            btnForward.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnReverse.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Forward = -1.0 });
-            btnReverse.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Turn = -1.0 });
-            btnLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnRight.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Turn = 1.0 });
-            btnRight.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnStop.Click += (s, e) => { inputLayer.ClearManualOverride(); controller.StopAll(); AppendLog("Emergency STOP"); };
-            gbDrive.Controls.AddRange(new Control[] { btnForward, btnLeft, btnRight, btnReverse, btnStop });
-            Controls.Add(gbDrive);
-
-            // Probe controls
-            gbProbe = new GroupBox() { Text = "Probe Control", Left = 500, Top = 220, Width = 470, Height = 160 };
-            numProbeSpeed = new NumericUpDown() { Left = 10, Top = 24, Width = 120, Maximum = 100000, Value = 2000 };
-            btnProbeLeft = new Button() { Left = 10, Top = 54, Width = 120, Text = "Move Left" };
-            btnProbeRight = new Button() { Left = 140, Top = 54, Width = 120, Text = "Move Right" };
-            btnProbeStop = new Button() { Left = 270, Top = 54, Width = 120, Text = "Stop Probe" };
-            btnProbeLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = -1.0 });
-            btnProbeLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnProbeRight.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = 1.0 });
-            btnProbeRight.MouseUp += (s, e) => inputLayer.ClearManualOverride();
-            btnProbeStop.Click += (s, e) => { inputLayer.ClearManualOverride(); controller.JogVelocity(0, 0, 0); };
-            gbProbe.Controls.AddRange(new Control[] { new Label() { Left = 140, Top = 24, Text = "Probe Speed" }, numProbeSpeed, btnProbeLeft, btnProbeRight, btnProbeStop });
-            Controls.Add(gbProbe);
-
-            // Log box
-            txtLog = new TextBox() { Left = 10, Top = 540, Width = 960, Height = 110, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical };
-            Controls.Add(txtLog);
-        }
-
         private void BtnConnect_Click(object? sender, EventArgs e)
         {
             try
@@ -357,107 +279,77 @@ namespace Chainbox_controller
 
         private void ControlTimer_Tick(object? sender, EventArgs e)
         {
-            var tickStart = DateTime.UtcNow;
-            // refresh currentInputMode from UI control if present (keeps behavior in sync with designer combo)
             try
             {
-                if (this.cmbInputMode != null)
+                var tickStart = DateTime.UtcNow;
+
+                // refresh currentInputMode from UI control if present
+                try
                 {
-                    if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Automatic;
-                    else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
-                    else currentInputMode = InputLayer.InputMode.Gamepad;
-                    if (this.lblInputMode != null) this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
+                    if (this.cmbInputMode != null)
+                    {
+                        if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Gamepad;
+                        else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
+                        else currentInputMode = InputLayer.InputMode.Gamepad;
+
+                        if (this.lblInputMode != null)
+                            this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
+                    }
                 }
-            }
-            catch { }
+                catch { }
 
-            var state = inputLayer.Update(currentInputMode);
-            var outp = mixer.Mix(state.Forward, state.Turn);
+                var state = inputLayer.Update(currentInputMode);
+                var outp = mixer.Mix(state.Forward, state.Turn);
 
-            // scale to steps/sec
-            double leftSteps = outp.Left * settings.MaxVelocityStepsPerSec;
-            double rightSteps = outp.Right * settings.MaxVelocityStepsPerSec;
-            double probeSteps = state.Probe * (double)numProbeSpeed.Value;
+                double leftSteps = outp.Left * settings.MaxVelocityStepsPerSec;
+                double rightSteps = outp.Right * settings.MaxVelocityStepsPerSec;
+                double probeSteps = state.Probe * (double)numProbeSpeed.Value;
 
-            // send or simulate
-            if (!controller.SimulationMode)
-                controller.JogVelocity(leftSteps, rightSteps, probeSteps);
-            else
-                controller.LogMessage($"SIM: VA{(int)leftSteps};VB{(int)rightSteps};VC{(int)probeSteps}");
+                if (!controller.SimulationMode)
+                    controller.JogVelocity(leftSteps, rightSteps, probeSteps);
+                else
+                    controller.LogMessage($"SIM: VA{(int)leftSteps};VB{(int)rightSteps};VC{(int)probeSteps}");
 
-            // update telemetry labels (with mm/s conversion)
-            double leftMm = settings.StepsPerMm > 0 ? leftSteps / settings.StepsPerMm : 0;
-            double rightMm = settings.StepsPerMm > 0 ? rightSteps / settings.StepsPerMm : 0;
+                double leftMm = settings.StepsPerMm > 0 ? leftSteps / settings.StepsPerMm : 0;
+                double rightMm = settings.StepsPerMm > 0 ? rightSteps / settings.StepsPerMm : 0;
 
-            lblForwardInput.Text = $"Forward Input: {state.Forward:0.00}";
-            lblTurnInput.Text = $"Turn Input: {state.Turn:0.00}";
-            lblProbeInput.Text = $"Probe Input: {state.Probe:0.00}";
-            lblLeftVel.Text = $"Left Track Velocity: {leftSteps:0} steps/s ({leftMm:0.##} mm/s)";
-            lblRightVel.Text = $"Right Track Velocity: {rightSteps:0} steps/s ({rightMm:0.##} mm/s)";
-            lblGamepad.Text = inputLayer.GamepadConnected ? $"Gamepad: CONNECTED (#{inputLayer.GamepadIndex})" : "Gamepad: DISCONNECTED";
-            lblControllerStatus.Text = controller.IsConnected ? "Controller: CONNECTED" : "Controller: DISCONNECTED";
-            lblControllerStatus.ForeColor = controller.IsConnected ? System.Drawing.Color.Green : System.Drawing.Color.Red;
-            lblMotorsStatus.Text = controller.MotorsEnabled ? "Motors: ENABLED" : "Motors: DISABLED";
-            lblMotorsStatus.ForeColor = controller.MotorsEnabled ? System.Drawing.Color.Green : System.Drawing.Color.Orange;
+                lblForwardInput.Text = $"Forward Input: {state.Forward:0.00}";
+                lblTurnInput.Text = $"Turn Input: {state.Turn:0.00}";
+                lblProbeInput.Text = $"Probe Input: {state.Probe:0.00}";
+                lblLeftVel.Text = $"Left Track Velocity: {leftSteps:0} steps/s ({leftMm:0.##} mm/s)";
+                lblRightVel.Text = $"Right Track Velocity: {rightSteps:0} steps/s ({rightMm:0.##} mm/s)";
+                lblGamepad.Text = inputLayer.GamepadConnected ? $"Gamepad: CONNECTED (#{inputLayer.GamepadIndex})" : "Gamepad: DISCONNECTED";
+                lblControllerStatus.Text = controller.IsConnected ? "Controller: CONNECTED" : "Controller: DISCONNECTED";
+                lblControllerStatus.ForeColor = controller.IsConnected ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+                lblMotorsStatus.Text = controller.MotorsEnabled ? "Motors: ENABLED" : "Motors: DISABLED";
+                lblMotorsStatus.ForeColor = controller.MotorsEnabled ? System.Drawing.Color.Green : System.Drawing.Color.Orange;
 
-            // update live bars (scale to 0..1 by max velocity)
-            try
-            {
-                double max = Math.Max(1.0, settings.MaxVelocityStepsPerSec);
-                int leftW = (int)( (Math.Abs(leftSteps) / max) * (pnlLeftBarBg?.Width ?? 100) );
-                int rightW = (int)( (Math.Abs(rightSteps) / max) * (pnlRightBarBg?.Width ?? 100) );
-                if (pnlLeftBarFill != null) pnlLeftBarFill.Width = Math.Max(0, Math.Min((pnlLeftBarBg?.Width ?? 100), leftW));
-                if (pnlRightBarFill != null) pnlRightBarFill.Width = Math.Max(0, Math.Min((pnlRightBarBg?.Width ?? 100), rightW));
-            }
-            catch { }
+                try
+                {
+                    double max = Math.Max(1.0, settings.MaxVelocityStepsPerSec);
+                    int leftW = (int)((Math.Abs(leftSteps) / max) * (pnlLeftBarBg?.Width ?? 100));
+                    int rightW = (int)((Math.Abs(rightSteps) / max) * (pnlRightBarBg?.Width ?? 100));
 
-            // debug panel - guard against missing controls to avoid timer crash
-            try
-            {
-                if (lblDbgInputFwd != null) lblDbgInputFwd.Text = $"Input Forward: {state.Forward:0.000}";
-                else AppendLog("Warning: lblDbgInputFwd is null");
+                    if (pnlLeftBarFill != null)
+                        pnlLeftBarFill.Width = Math.Max(0, Math.Min((pnlLeftBarBg?.Width ?? 100), leftW));
 
-                if (lblDbgInputTurn != null) lblDbgInputTurn.Text = $"Input Turn: {state.Turn:0.000}";
-                else AppendLog("Warning: lblDbgInputTurn is null");
+                    if (pnlRightBarFill != null)
+                        pnlRightBarFill.Width = Math.Max(0, Math.Min((pnlRightBarBg?.Width ?? 100), rightW));
+                }
+                catch { }
 
-                if (lblDbgInputProbe != null) lblDbgInputProbe.Text = $"Input Probe: {state.Probe:0.000}";
-                else AppendLog("Warning: lblDbgInputProbe is null");
+                var tickEnd = DateTime.UtcNow;
+                var elapsed = tickEnd - tickStart;
+                double hz = elapsed.TotalSeconds > 0 ? 1.0 / elapsed.TotalSeconds : 0;
+                lblLoopRate.Text = $"Loop Rate: {hz:0.0} Hz";
 
-                if (lblDbgMixerLeft != null) lblDbgMixerLeft.Text = $"Mixer Left: {outp.Left:0.000}";
-                else AppendLog("Warning: lblDbgMixerLeft is null");
-
-                if (lblDbgMixerRight != null) lblDbgMixerRight.Text = $"Mixer Right: {outp.Right:0.000}";
-                else AppendLog("Warning: lblDbgMixerRight is null");
-
-                if (lblDbgCmdLeft != null) lblDbgCmdLeft.Text = $"Cmd Left: {leftSteps:0}";
-                else AppendLog("Warning: lblDbgCmdLeft is null");
-
-                if (lblDbgCmdRight != null) lblDbgCmdRight.Text = $"Cmd Right: {rightSteps:0}";
-                else AppendLog("Warning: lblDbgCmdRight is null");
-
-                if (lblDbgCmdProbe != null) lblDbgCmdProbe.Text = $"Cmd Probe: {probeSteps:0}";
-                else AppendLog("Warning: lblDbgCmdProbe is null");
+                if ((DateTime.UtcNow - lastUiUpdate).TotalMilliseconds >= 100)
+                    lastUiUpdate = DateTime.UtcNow;
             }
             catch (Exception ex)
             {
-                AppendLog("Debug panel update failed: " + ex.Message);
-            }
-
-            // loop timing
-            var tickEnd = DateTime.UtcNow;
-            var elapsed = tickEnd - tickStart;
-            double hz = elapsed.TotalSeconds > 0 ? 1.0 / elapsed.TotalSeconds : 0;
-            lblLoopRate.Text = $"Loop Rate: {hz:0.0} Hz";
-
-            // update log if controller produced output
-            var l = controller.LastLog;
-            if (!string.IsNullOrEmpty(l)) AppendLog(l);
-
-            // throttle UI updates to ~10Hz for labels to keep UI readable
-            if ((DateTime.UtcNow - lastUiUpdate).TotalMilliseconds >= 100)
-            {
-                lastUiUpdate = DateTime.UtcNow;
-                // no-op here because labels updated above; this ensures rate control externally if needed
+                controlTimer.Stop();
+                AppendLog("Control loop crashed: " + ex.Message);
             }
         }
 

@@ -8,24 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Deanr\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Dean Rowlett\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Deanr\\source\\repos\\Chainbox_controller\\Chainbox_controller\\Chainbox_controller.csproj",
+      "projectUniqueName": "C:\\Users\\Dean Rowlett\\Documents\\GitHub\\Chainbox-Crawler\\Chainbox_controller\\Chainbox_controller\\Chainbox_controller.csproj",
       "projectName": "Chainbox_controller",
-      "projectPath": "C:\\Users\\Deanr\\source\\repos\\Chainbox_controller\\Chainbox_controller\\Chainbox_controller.csproj",
-      "packagesPath": "C:\\Users\\Deanr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Deanr\\source\\repos\\Chainbox_controller\\Chainbox_controller\\obj\\",
+      "projectPath": "C:\\Users\\Dean Rowlett\\Documents\\GitHub\\Chainbox-Crawler\\Chainbox_controller\\Chainbox_controller\\Chainbox_controller.csproj",
+      "packagesPath": "C:\\Users\\Dean Rowlett\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dean Rowlett\\Documents\\GitHub\\Chainbox-Crawler\\Chainbox_controller\\Chainbox_controller\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Deanr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Dean Rowlett\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -67,6 +62,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -75,7 +88,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -14,3 +14,20 @@ C:\Users\Deanr\source\repos\Chainbox_controller\Chainbox_controller\obj\Debug\ne
 C:\Users\Deanr\source\repos\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.pdb
 C:\Users\Deanr\source\repos\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.genruntimeconfig.cache
 C:\Users\Deanr\source\repos\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\ref\Chainbox_controller.dll
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.Form1.resources
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.csproj.GenerateResource.cache
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.AssemblyInfoInputs.cache
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.AssemblyInfo.cs
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.csproj.CoreCompileInputs.cache
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.sourcelink.json
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\bin\Debug\net8.0-windows\Chainbox_controller.exe
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\bin\Debug\net8.0-windows\Chainbox_controller.deps.json
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\bin\Debug\net8.0-windows\Chainbox_controller.runtimeconfig.json
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\bin\Debug\net8.0-windows\Chainbox_controller.dll
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\bin\Debug\net8.0-windows\Chainbox_controller.pdb
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.dll
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\refint\Chainbox_controller.dll
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.pdb
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\Chainbox_controller.genruntimeconfig.cache
+C:\Users\Dean Rowlett\Documents\GitHub\Chainbox-Crawler\Chainbox_controller\Chainbox_controller\obj\Debug\net8.0-windows\ref\Chainbox_controller.dll

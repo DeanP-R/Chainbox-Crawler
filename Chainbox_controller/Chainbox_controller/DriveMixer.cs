@@ -1,31 +1,37 @@
+﻿using System;
+
 namespace Chainbox_controller
 {
-    public class DriveOutput
-    {
-        public double Left { get; set; }
-        public double Right { get; set; }
-    }
-
     public class DriveMixer
     {
-        // Mix forward and turn into left/right track commands.
-        // Inputs are expected in range -1..1. Outputs also in -1..1.
-
-        public DriveOutput Mix(double forward, double turn)
+        public struct MixerOutput
         {
-            var outp = new DriveOutput();
-            outp.Left = forward + turn;
-            outp.Right = forward - turn;
+            public double Left;
+            public double Right;
+        }
 
-            // normalize if outside range
-            double max = System.Math.Max(System.Math.Abs(outp.Left), System.Math.Abs(outp.Right));
-            if (max > 1.0)
+        public MixerOutput Mix(double forward, double turn)
+        {
+            double left = forward + turn;
+            double right = forward - turn;
+
+            double maxAbs = Math.Max(Math.Abs(left), Math.Abs(right));
+            if (maxAbs > 1.0)
             {
-                outp.Left /= max;
-                outp.Right /= max;
+                left /= maxAbs;
+                right /= maxAbs;
             }
 
-            return outp;
+            return new MixerOutput
+            {
+                Left = Clamp(left, -1.0, 1.0),
+                Right = Clamp(right, -1.0, 1.0)
+            };
+        }
+
+        private static double Clamp(double value, double min, double max)
+        {
+            return value < min ? min : value > max ? max : value;
         }
     }
 }
