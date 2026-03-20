@@ -14,12 +14,14 @@ namespace Chainbox_controller
         private DriveMixer mixer;
         private ControllerInterface controller;
         private ControllerSettings settings;
-
+        private int _loopCount = 0;
+        private DateTime _lastRateCalc = DateTime.UtcNow;
         private System.Windows.Forms.Timer controlTimer;
 
         public Form1()
         {
             InitializeComponent();
+            this.Icon = new Icon("innovair.ico");
             this.KeyPreview = true;
             this.TabStop = false;
             this.KeyDown += Form1_KeyDown;
@@ -338,10 +340,20 @@ namespace Chainbox_controller
                 }
                 catch { }
 
-                var tickEnd = DateTime.UtcNow;
-                var elapsed = tickEnd - tickStart;
-                double hz = elapsed.TotalSeconds > 0 ? 1.0 / elapsed.TotalSeconds : 0;
-                lblLoopRate.Text = $"Loop Rate: {hz:0.0} Hz";
+                _loopCount++;
+
+                var now = DateTime.UtcNow;
+                var dt = (now - _lastRateCalc).TotalSeconds;
+
+                if (dt >= 0.5) // update at 2 Hz
+                {
+                    double hz = _loopCount / dt;
+
+                    lblLoopRate.Text = $"Loop Rate: {hz:0.0} Hz";
+
+                    _loopCount = 0;
+                    _lastRateCalc = now;
+                }
 
                 if ((DateTime.UtcNow - lastUiUpdate).TotalMilliseconds >= 100)
                     lastUiUpdate = DateTime.UtcNow;

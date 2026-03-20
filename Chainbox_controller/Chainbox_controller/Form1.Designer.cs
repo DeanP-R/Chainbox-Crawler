@@ -34,32 +34,60 @@
 
             // Root layout - vertical: status (fixed), main (fill), diagnostics (fixed)
             var tlpRoot = new System.Windows.Forms.TableLayoutPanel();
+
             tlpRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             tlpRoot.RowCount = 3; tlpRoot.ColumnCount = 1;
-            tlpRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            tlpRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tlpRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            tlpRoot.RowStyles.Clear();
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // header
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // main
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F)); // diagnostics
             tlpRoot.Padding = new System.Windows.Forms.Padding(12);
+            var tlpStatus = new System.Windows.Forms.TableLayoutPanel();
 
             // Status bar (dark header)
-            var header = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.FromArgb(0x2b, 0x2b, 0x2b), Padding = new System.Windows.Forms.Padding(8,6,8,6) };
-            var lblTitle = new System.Windows.Forms.Label()
+            var header = new Panel()
             {
-                Text = "CHAINBOX CRAWLER MANUAL CONTROL",
-                Dock = System.Windows.Forms.DockStyle.Top,
-                Height = 28,
-                ForeColor = System.Drawing.Color.White,
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold)
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(0x2b, 0x2b, 0x2b),
+                Padding = new Padding(8, 2, 8, 2)
             };
 
-            header.Controls.Add(lblTitle);
-            var tlpStatus = new System.Windows.Forms.TableLayoutPanel();
-            tlpStatus.Dock = System.Windows.Forms.DockStyle.Fill; tlpStatus.ColumnCount = 4; tlpStatus.RowCount = 1;
-            tlpStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tlpStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tlpStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tlpStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            var lblTitle = new Label()
+            {
+                Text = "CHAINBOX CRAWLER MANUAL CONTROL",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter,
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 11F, FontStyle.Bold)
+            };
+
+            var headerLayout = new TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                RowCount = 2,
+                ColumnCount = 1
+            };
+
+            headerLayout.RowStyles.Clear();
+            headerLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));  // title
+            headerLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));  // status row
+
+            headerLayout.Controls.Add(lblTitle, 0, 0);
+            headerLayout.Controls.Add(tlpStatus, 0, 1);
+
+            header.Controls.Clear();
+            header.Controls.Add(headerLayout); 
+
+
+            tlpStatus.Dock = System.Windows.Forms.DockStyle.Fill; 
+
+            tlpStatus.RowCount = 1;
+            tlpStatus.ColumnCount = 4;
+            tlpStatus.ColumnStyles.Clear();
+            tlpStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpStatus.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
 
             // Controls - keep names used elsewhere to avoid larger refactor
             var headerFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -72,14 +100,28 @@
             if (this.lblControllerStatus != null) tlpStatus.Controls.Add(this.lblControllerStatus, 0, 0);
             if (this.lblMotorsStatus != null) tlpStatus.Controls.Add(this.lblMotorsStatus, 1, 0);
             if (this.lblGamepad != null) tlpStatus.Controls.Add(this.lblGamepad, 2, 0);
-            // place loop rate and input mode stacked
-            var tlpRightHdr = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 1, RowCount = 2 };
-            tlpRightHdr.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tlpRightHdr.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            if (this.lblLoopRate != null) tlpRightHdr.Controls.Add(this.lblLoopRate, 0, 0);
-            if (this.lblInputMode != null) tlpRightHdr.Controls.Add(this.lblInputMode, 0, 1);
+
+            // Right side horizontal layout
+            var tlpRightHdr = new TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 2,
+                RowCount = 1
+            };
+
+            tlpRightHdr.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpRightHdr.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+
+            tlpRightHdr.Controls.Add(this.lblInputMode, 0, 0);
+            tlpRightHdr.Controls.Add(this.lblLoopRate, 1, 0);
+
+            // Align properly
+            this.lblInputMode.TextAlign = ContentAlignment.MiddleRight;
+            this.lblLoopRate.TextAlign = ContentAlignment.MiddleRight;
+
             tlpStatus.Controls.Add(tlpRightHdr, 3, 0);
-            header.Controls.Add(tlpStatus);
+
+            //header.Controls.Add(tlpStatus);
 
             // Main two-column panel
             var tlpMain = new System.Windows.Forms.TableLayoutPanel();
@@ -90,8 +132,17 @@
             tlpMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
 
             // Left: control panel - groupbox with drive + probe + settings
-            this.gbDrive = new System.Windows.Forms.GroupBox() { Text = "Drive Controls", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(12), BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) };
-            var tlpDrive = new System.Windows.Forms.TableLayoutPanel(); tlpDrive.Dock = System.Windows.Forms.DockStyle.Fill; tlpDrive.RowCount = 3; tlpDrive.ColumnCount = 3;
+            this.gbDrive = new System.Windows.Forms.GroupBox() { 
+                Text = "Drive Controls", 
+                Dock = System.Windows.Forms.DockStyle.Fill, 
+                Padding = new System.Windows.Forms.Padding(12), 
+                BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) 
+            };
+            this.gbDrive.Dock = DockStyle.Fill;
+            var tlpDrive = new System.Windows.Forms.TableLayoutPanel(); 
+            tlpDrive.Dock = System.Windows.Forms.DockStyle.Fill; 
+            tlpDrive.RowCount = 3; 
+            tlpDrive.ColumnCount = 3;
             tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
             tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
             tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
@@ -99,12 +150,16 @@
             tlpDrive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
             tlpDrive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
 
-            this.btnForward = new System.Windows.Forms.Button() { Text = "FORWARD", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8) };
-            this.btnLeft = new System.Windows.Forms.Button() { Text = "TURN LEFT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8) };
-            this.btnStop = new System.Windows.Forms.Button() { Text = "STOP", Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.Red, ForeColor = System.Drawing.Color.White, Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8) };
-            this.btnRight = new System.Windows.Forms.Button() { Text = "TURN RIGHT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8) };
-            this.btnReverse = new System.Windows.Forms.Button() { Text = "REVERSE", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8) };
+            this.btnForward = new System.Windows.Forms.Button() { Text = "FORWARD", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
+            this.btnLeft = new System.Windows.Forms.Button() { Text = "TURN LEFT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
+            this.btnStop = new System.Windows.Forms.Button() { Text = "STOP", Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.Red, ForeColor = System.Drawing.Color.White, Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 20) };
+            this.btnRight = new System.Windows.Forms.Button() { Text = "TURN RIGHT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
+            this.btnReverse = new System.Windows.Forms.Button() { Text = "REVERSE", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
 
+            tlpDrive.RowStyles.Clear();
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
             tlpDrive.Controls.Add(this.btnForward, 1, 0);
             tlpDrive.Controls.Add(this.btnLeft, 0, 1);
             tlpDrive.Controls.Add(this.btnStop, 1, 1);
@@ -114,10 +169,9 @@
             // Probe controls below drive
             var gbProbe = new System.Windows.Forms.GroupBox() { Text = "Probe Controls", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(12), BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) };
             var tlpProbe = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 3, RowCount = 1 };
-            tlpProbe.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            tlpProbe.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            tlpProbe.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             this.btnProbeLeft = new System.Windows.Forms.Button() { Text = "Move Left", Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnProbeStop = new System.Windows.Forms.Button() { Text = "Stop", Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnProbeRight = new System.Windows.Forms.Button() { Text = "Move Right", Dock = System.Windows.Forms.DockStyle.Fill };
@@ -136,8 +190,9 @@
             var gbSettings = new System.Windows.Forms.GroupBox() { Text = "Drive Settings", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(6), BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4) };
             var settingsScroll = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, AutoScroll = true };
             var tlpSettings = new System.Windows.Forms.TableLayoutPanel() { AutoSize = true, AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink, ColumnCount = 2, RowCount = 4 };
-            tlpSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tlpSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tlpSettings.ColumnStyles.Clear();
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));     // labels
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // inputs
 
             this.numMaxSpeed = new System.Windows.Forms.NumericUpDown();
             this.numAccel = new System.Windows.Forms.NumericUpDown();
@@ -191,17 +246,32 @@
 
             // Assemble left column (connection + drive + probe + settings + simulation)
             var leftCol = new System.Windows.Forms.TableLayoutPanel(); leftCol.Dock = System.Windows.Forms.DockStyle.Fill; leftCol.RowCount = 5; leftCol.ColumnCount = 1;
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            leftCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            leftCol.RowStyles.Clear();
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // connection
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 60F)); // drive
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // probe
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 40F)); // settings
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // simulation
 
             // Connection group at top of left column
-            var gbConnection = new System.Windows.Forms.GroupBox() { Text = "Controller Connection", Dock = System.Windows.Forms.DockStyle.Fill };
-            gbConnection.Padding = new System.Windows.Forms.Padding(12);
-            gbConnection.Margin = new System.Windows.Forms.Padding(8);
-            var tlpConn = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 4, RowCount = 1 };
+            var gbConnection = new System.Windows.Forms.GroupBox() { 
+                Text = "Controller Connection", 
+                Dock = System.Windows.Forms.DockStyle.Fill 
+            };
+            gbConnection.AutoSize = true;
+            gbConnection.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            gbConnection.Padding = new System.Windows.Forms.Padding(6);
+            gbConnection.Margin = new System.Windows.Forms.Padding(4);
+
+            var tlpConn = new TableLayoutPanel()
+            {
+                Dock = DockStyle.Top,  
+                AutoSize = true,
+                ColumnCount = 4,
+                RowCount = 1
+            };
+            tlpConn.RowStyles.Clear();
+            tlpConn.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
@@ -221,22 +291,52 @@
 
             leftCol.Controls.Add(gbConnection, 0, 0);
 
-            if (this.gbDrive != null) leftCol.Controls.Add(this.gbDrive, 0, 1);
-            // place drive interior (add an inner layout to allow input mode selector)
-            var tlpDriveMain = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, RowCount = 2, ColumnCount = 1 };
-            tlpDriveMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tlpDriveMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
+            // Build drive layout FIRST
+            var tlpDriveMain = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                RowCount = 2,
+                ColumnCount = 1
+            };
+
+            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
             tlpDriveMain.Controls.Add(tlpDrive, 0, 0);
-            // input mode selector row
-            var flInputMode = new System.Windows.Forms.FlowLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight, AutoSize = true };
-            flInputMode.Padding = new System.Windows.Forms.Padding(4);
-            var lblInputModeSel = new System.Windows.Forms.Label() { Text = "Input Mode:", AutoSize = true, Anchor = System.Windows.Forms.AnchorStyles.Left, Margin = new System.Windows.Forms.Padding(4) };
-            this.cmbInputMode = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Width = 140, Margin = new System.Windows.Forms.Padding(4) };
-            this.cmbInputMode.Items.AddRange(new object[] {  "Gamepad", "Keyboard" });
+
+            // Input mode row
+            var flInputMode = new FlowLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true
+            };
+
+            var lblInputModeSel = new Label()
+            {
+                Text = "Input Mode:",
+                AutoSize = true
+            };
+
+            this.cmbInputMode = new ComboBox()
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Width = 140
+            };
+
+            this.cmbInputMode.Items.AddRange(new object[] { "Gamepad", "Keyboard" });
             this.cmbInputMode.SelectedIndex = 0;
-            flInputMode.Controls.Add(lblInputModeSel); flInputMode.Controls.Add(this.cmbInputMode);
+
+            flInputMode.Controls.Add(lblInputModeSel);
+            flInputMode.Controls.Add(this.cmbInputMode);
+
             tlpDriveMain.Controls.Add(flInputMode, 0, 1);
+
+            // attach to groupbox
             this.gbDrive.Controls.Add(tlpDriveMain);
+
+            // add gbDrive to layout
+            leftCol.Controls.Add(this.gbDrive, 0, 1);
 
             leftCol.Controls.Add(gbProbe, 0, 2);
             leftCol.Controls.Add(gbSettings, 0, 3);
@@ -251,14 +351,9 @@
             this.gbTelemetry.Padding = new System.Windows.Forms.Padding(12);
             this.gbTelemetry.Margin = new System.Windows.Forms.Padding(8);
             var tlpTel = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 1, RowCount = 10 };
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpTel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
+            tlpTel.RowStyles.Clear();
+            for (int i = 0; i < 10; i++)
+                tlpTel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
 
             var mono = new System.Drawing.Font("Consolas", 10);
             this.lblForwardInput = new System.Windows.Forms.Label() { Text = "Forward Input: 0.00", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
@@ -338,22 +433,45 @@
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 
             this.lstCommandStream = new System.Windows.Forms.ListBox() { Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
+            tlpCmd.Controls.Add(this.lstCommandStream, 0, 0);
             this.txtLog = new System.Windows.Forms.TextBox() { Dock = System.Windows.Forms.DockStyle.Fill, Multiline = true, ReadOnly = true, Font = mono, ScrollBars = System.Windows.Forms.ScrollBars.Vertical };
 
-            var fl = new System.Windows.Forms.FlowLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight };
-            this.btnExportLog = new System.Windows.Forms.Button() { Text = "Export Log" };
-            this.btnCopyLog = new System.Windows.Forms.Button() { Text = "Copy Log" };
-            this.btnClearLog = new System.Windows.Forms.Button() { Text = "Clear Log" };
-            this.btnResumeAutoScroll = new System.Windows.Forms.Button() { Text = "Resume Auto-Scroll" };
-            this.chkPauseScrolling = new System.Windows.Forms.CheckBox() { Text = "Pause Scrolling", AutoSize = true, Margin = new System.Windows.Forms.Padding(8, 8, 8, 8) };
-            fl.Controls.Add(this.btnExportLog); fl.Controls.Add(this.btnCopyLog); fl.Controls.Add(this.btnClearLog); fl.Controls.Add(this.btnResumeAutoScroll); fl.Controls.Add(this.chkPauseScrolling);
 
-            tlpCmd.Controls.Add(this.lstCommandStream, 0, 0);
-            tlpCmd.Controls.Add(fl, 0, 1);
+
+            var tlpButtons = new TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 5,
+                RowCount = 1
+            };
+
+            for (int i = 0; i < 5; i++)
+                tlpButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+
+            // create buttons (same as before)
+            this.btnExportLog = new System.Windows.Forms.Button() { Text = "Export Log", Dock = DockStyle.Fill };
+            this.btnCopyLog = new System.Windows.Forms.Button() { Text = "Copy Log", Dock = DockStyle.Fill };
+            this.btnClearLog = new System.Windows.Forms.Button() { Text = "Clear Log", Dock = DockStyle.Fill };
+            this.btnResumeAutoScroll = new System.Windows.Forms.Button() { Text = "Resume Auto-Scroll", Dock = DockStyle.Fill };
+            this.chkPauseScrolling = new System.Windows.Forms.CheckBox() { Text = "Pause Scrolling", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
+
+            // add them to grid
+            tlpButtons.Controls.Add(this.btnExportLog, 0, 0);
+            tlpButtons.Controls.Add(this.btnCopyLog, 1, 0);
+            tlpButtons.Controls.Add(this.btnClearLog, 2, 0);
+            tlpButtons.Controls.Add(this.btnResumeAutoScroll, 3, 0);
+            tlpButtons.Controls.Add(this.chkPauseScrolling, 4, 0);
+
+            // plug into layout (same spot as before)
+            tlpCmd.Controls.Add(tlpButtons, 0, 1);
+
+
+
+
             gbCmd.Controls.Add(tlpCmd);
 
             // Galil console (manual commands)
-            var gbConsole = new System.Windows.Forms.GroupBox() { Text = "Galil Command Console", Dock = System.Windows.Forms.DockStyle.Right, Width = 400 };
+            var gbConsole = new GroupBox() { Dock = DockStyle.Fill };
             gbConsole.Padding = new System.Windows.Forms.Padding(12);
             gbConsole.Margin = new System.Windows.Forms.Padding(8);
             var tlpConsole = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, RowCount = 2, ColumnCount = 2 };
@@ -368,8 +486,11 @@
             tlpRoot.Controls.Add(header, 0, 0);
             tlpRoot.Controls.Add(tlpMain, 0, 1);
             var bottomRow = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 2 };
-            bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            bottomRow.ColumnStyles.Clear();
+            bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
+            bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            //bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            //bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             bottomRow.Controls.Add(gbCmd, 0, 0);
             bottomRow.Controls.Add(gbConsole, 1, 0);
             tlpRoot.Controls.Add(bottomRow, 0, 2);
