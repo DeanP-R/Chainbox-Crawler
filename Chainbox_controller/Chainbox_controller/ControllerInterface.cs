@@ -35,7 +35,8 @@ namespace Chainbox_controller
         public bool IsConnected { get; private set; }
         public bool MotorsEnabled { get; private set; }
         public bool SimulationMode { get; set; }
-
+        private bool _relativeMoveActive = false;
+        public bool RelativeMoveActive => _relativeMoveActive;
         // ── Logging ───────────────────────────────────────────────────────────
         /// <summary>Fired on every Galil command sent or response received.</summary>
         public event Action<string>? OnLog;
@@ -171,17 +172,19 @@ namespace Chainbox_controller
         /// Values are rounded DOWN to the nearest multiple of 1024 (the
         /// hardware resolution at TM=1000). Minimum is 1024.
         /// </summary>
-        public void ApplySettings(ControllerSettings s)
+        public void ApplySettings(ControllerSettings settings)
         {
-            if (!IsConnected && !SimulationMode) return;
+            if (SimulationMode)
+            {
+                SimLog($"AC {(int)Math.Round(settings.AccelStepsPerSec2)},{(int)Math.Round(settings.AccelStepsPerSec2)},{(int)Math.Round(settings.AccelStepsPerSec2)}");
+                SimLog($"DC {(int)Math.Round(settings.DecelStepsPerSec2)},{(int)Math.Round(settings.DecelStepsPerSec2)},{(int)Math.Round(settings.DecelStepsPerSec2)}");
+                LogMessage($"Simulated settings applied — AC={settings.AccelStepsPerSec2:0} DC={settings.DecelStepsPerSec2:0} (counts/s²)");
+                return;
+            }
 
-            int accel = RoundToGalilResolution(s.AccelStepsPerSec2);
-            int decel = RoundToGalilResolution(s.DecelStepsPerSec2);
-
-            GCommandNoReply($"AC {accel},{accel},{accel}");
-            GCommandNoReply($"DC {decel},{decel},{decel}");
-
-            LogMessage($"Settings applied — AC={accel} DC={decel} (counts/s²)");
+            GCommandNoReply($"AC {(int)Math.Round(settings.AccelStepsPerSec2)},{(int)Math.Round(settings.AccelStepsPerSec2)},{(int)Math.Round(settings.AccelStepsPerSec2)}");
+            GCommandNoReply($"DC {(int)Math.Round(settings.DecelStepsPerSec2)},{(int)Math.Round(settings.DecelStepsPerSec2)},{(int)Math.Round(settings.DecelStepsPerSec2)}");
+            LogMessage($"Settings applied — AC={settings.AccelStepsPerSec2:0} DC={settings.DecelStepsPerSec2:0} (counts/s²)");
         }
 
         // ─────────────────────────────────────────────────────────────────────
@@ -211,30 +214,29 @@ namespace Chainbox_controller
         ///   ST AABB — decelerated stop on A and B
         ///   Uses the DC deceleration rate set by the DC command.
         /// </summary>
-        public void JogVelocity(double leftSteps, double rightSteps, double probeSteps)
+        public void JogVelocity(double leftStepsPerSec, double rightStepsPerSec, double probeStepsPerSec)
         {
             if (SimulationMode)
             {
-                LogMessage($"SIM: JG {(int)leftSteps},{(int)rightSteps},{(int)probeSteps}");
-                _lastLeftSteps = leftSteps;
-                _lastRightSteps = rightSteps;
-                _lastProbeSteps = probeSteps;
+                SimLog($"JG {(int)Math.Round(leftStepsPerSec)},{(int)Math.Round(rightStepsPerSec)},{(int)Math.Round(probeStepsPerSec)}");
                 return;
             }
 
-            if (!IsConnected || !MotorsEnabled) return;
+            if (!IsConnected || !MotorsEnabled || _galil == null)
+                return;
 
-            int l = (int)leftSteps;
-            int r = (int)rightSteps;
-            int p = (int)probeSteps;
+            int l = (int)Math.Round(leftStepsPerSec);
+            int r = (int)Math.Round(rightStepsPerSec);
+            int p = (int)Math.Round(probeStepsPerSec);
 
             bool leftChanged = l != (int)_lastLeftSteps;
             bool rightChanged = r != (int)_lastRightSteps;
             bool probeChanged = p != (int)_lastProbeSteps;
 
-            if (!leftChanged && !rightChanged && !probeChanged) return;
+            if (!leftChanged && !rightChanged && !probeChanged)
+                return;
 
-            // Axes going to zero → decelerated ST stop
+            // Axes going to zero → decelerated stop
             string stopMask = BuildAxisMask(
                 l == 0 && leftChanged,
                 r == 0 && rightChanged,
@@ -243,7 +245,7 @@ namespace Chainbox_controller
             if (stopMask.Length > 0)
                 GCommandNoReply($"ST {stopMask}");
 
-            // Axes getting a new non-zero speed → JG then BG
+            // Axes getting a new non-zero speed
             bool setL = leftChanged && l != 0;
             bool setR = rightChanged && r != 0;
             bool setP = probeChanged && p != 0;
@@ -257,9 +259,9 @@ namespace Chainbox_controller
                 GCommandNoReply($"BG {bgMask}");
             }
 
-            _lastLeftSteps = leftSteps;
-            _lastRightSteps = rightSteps;
-            _lastProbeSteps = probeSteps;
+            _lastLeftSteps = leftStepsPerSec;
+            _lastRightSteps = rightStepsPerSec;
+            _lastProbeSteps = probeStepsPerSec;
         }
 
         // ─────────────────────────────────────────────────────────────────────
@@ -272,12 +274,24 @@ namespace Chainbox_controller
         /// </summary>
         public void StopAll()
         {
-            if (SimulationMode) { LogMessage("SIM: ST"); return; }
-            if (!IsConnected) return;
+            if (SimulationMode)
+            {
+                _relativeMoveActive = false;
+                SimLog("ST ABC");
+                LogMessage("Simulated stop issued");
+                return;
+            }
 
-            GCommandNoReply("ST");
-            _lastLeftSteps = _lastRightSteps = _lastProbeSteps = 0;
-            LogMessage("ST — all axes stopping");
+            try
+            {
+                GCommandNoReply("ST ABC");
+                _relativeMoveActive = false;
+                LogMessage("Stop issued");
+            }
+            catch (Exception ex)
+            {
+                LogMessage("Stop failed: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -293,7 +307,10 @@ namespace Chainbox_controller
             _lastLeftSteps = _lastRightSteps = _lastProbeSteps = 0;
             LogMessage("AB 1 — motion aborted");
         }
-
+        private void SimLog(string cmd)
+        {
+            LogMessage($"SIM: {cmd}");
+        }
         // ─────────────────────────────────────────────────────────────────────
         // Raw command console
         // ─────────────────────────────────────────────────────────────────────
@@ -387,9 +404,60 @@ namespace Chainbox_controller
         private void GCommandNoReply(string cmd)
         {
             LogMessage($"> {cmd}");
-            try { _galil!.GCommand(cmd); } catch { /* ':' prompt is not an error */ }
-        }
 
+            if (_galil == null)
+            {
+                LogMessage("Command ignored: Galil handle is null");
+                return;
+            }
+
+            try
+            {
+                _galil.GCommand(cmd);
+            }
+            catch (Exception ex)
+            {
+                LogMessage("Galil command failed: " + ex.Message);
+            }
+        }
+        public void MoveRelative(double leftSteps, double rightSteps, double probeSteps)
+        {
+            if (SimulationMode)
+            {
+                _relativeMoveActive = true;
+                SimLog("ST ABC");
+                SimLog($"PR {(int)Math.Round(leftSteps)},{(int)Math.Round(rightSteps)},{(int)Math.Round(probeSteps)}");
+                SimLog("BG ABC");
+                LogMessage($"Simulated relative move started: A={leftSteps:0}, B={rightSteps:0}, C={probeSteps:0}");
+                return;
+            }
+
+            if (!IsConnected || _galil == null)
+            {
+                LogMessage("Relative move ignored: controller not connected");
+                return;
+            }
+
+            try
+            {
+                _relativeMoveActive = true;
+
+                GCommandNoReply("ST ABC");
+                GCommandNoReply($"PR {(int)Math.Round(leftSteps)},{(int)Math.Round(rightSteps)},{(int)Math.Round(probeSteps)}");
+                GCommandNoReply("BG ABC");
+
+                LogMessage($"Relative move started: A={leftSteps:0}, B={rightSteps:0}, C={probeSteps:0}");
+            }
+            catch (Exception ex)
+            {
+                _relativeMoveActive = false;
+                LogMessage("Relative move failed: " + ex.Message);
+            }
+        }
+        public void ClearRelativeMoveFlag()
+        {
+            _relativeMoveActive = false;
+        }
         /// <summary>Fires OnLog event and updates LastLog.</summary>
         public void LogMessage(string msg)
         {

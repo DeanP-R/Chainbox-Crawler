@@ -131,197 +131,141 @@
             tlpMain.Padding = new System.Windows.Forms.Padding(12);
             tlpMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
 
-            // Left: control panel - groupbox with drive + probe + settings
-            this.gbDrive = new System.Windows.Forms.GroupBox() { 
-                Text = "Drive Controls", 
-                Dock = System.Windows.Forms.DockStyle.Fill, 
-                Padding = new System.Windows.Forms.Padding(12), 
-                BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) 
+            // Left: control panel - groupbox with drive + probe + settings ######################################
+            // Left: control panel - drive + probe + settings
+            this.gbDrive = new System.Windows.Forms.GroupBox()
+            {
+                Text = "Drive Controls",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Padding = new System.Windows.Forms.Padding(12),
+                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
             };
-            this.gbDrive.Dock = DockStyle.Fill;
-            var tlpDrive = new System.Windows.Forms.TableLayoutPanel(); 
-            tlpDrive.Dock = System.Windows.Forms.DockStyle.Fill; 
-            tlpDrive.RowCount = 3; 
-            tlpDrive.ColumnCount = 3;
-            tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            tlpDrive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            tlpDrive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            tlpDrive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            tlpDrive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
 
-            this.btnForward = new System.Windows.Forms.Button() { Text = "FORWARD", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
-            this.btnLeft = new System.Windows.Forms.Button() { Text = "TURN LEFT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
-            this.btnStop = new System.Windows.Forms.Button() { Text = "STOP", Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.Red, ForeColor = System.Drawing.Color.White, Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 20) };
-            this.btnRight = new System.Windows.Forms.Button() { Text = "TURN RIGHT", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
-            this.btnReverse = new System.Windows.Forms.Button() { Text = "REVERSE", Dock = System.Windows.Forms.DockStyle.Fill, Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold), Margin = new System.Windows.Forms.Padding(8), MinimumSize = new Size(10, 6) };
+            // Main 3x3 drive button grid
+            var tlpDrive = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                RowCount = 3,
+                ColumnCount = 3,
+                Margin = new Padding(0),
+                Padding = new Padding(0)
+            };
 
             tlpDrive.RowStyles.Clear();
             tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
             tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
             tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
+
+            tlpDrive.ColumnStyles.Clear();
+            tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+
+            this.btnForward = new System.Windows.Forms.Button()
+            {
+                Text = "FORWARD",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
+            };
+
+            this.btnLeft = new System.Windows.Forms.Button()
+            {
+                Text = "TURN LEFT",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
+            };
+
+            this.btnStop = new System.Windows.Forms.Button()
+            {
+                Text = "STOP",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                BackColor = System.Drawing.Color.Red,
+                ForeColor = System.Drawing.Color.White,
+                Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
+            };
+
+            this.btnRight = new System.Windows.Forms.Button()
+            {
+                Text = "TURN RIGHT",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
+            };
+
+            this.btnReverse = new System.Windows.Forms.Button()
+            {
+                Text = "REVERSE",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
+            };
+
             tlpDrive.Controls.Add(this.btnForward, 1, 0);
             tlpDrive.Controls.Add(this.btnLeft, 0, 1);
             tlpDrive.Controls.Add(this.btnStop, 1, 1);
             tlpDrive.Controls.Add(this.btnRight, 2, 1);
             tlpDrive.Controls.Add(this.btnReverse, 1, 2);
 
-            // Probe controls below drive
-            var gbProbe = new System.Windows.Forms.GroupBox() { Text = "Probe Controls", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(12), BackColor = System.Drawing.Color.FromArgb(0xf4,0xf4,0xf4) };
-            var tlpProbe = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 3, RowCount = 1 };
-            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            this.btnProbeLeft = new System.Windows.Forms.Button() { Text = "Move Left", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnProbeStop = new System.Windows.Forms.Button() { Text = "Stop", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnProbeRight = new System.Windows.Forms.Button() { Text = "Move Right", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.numProbeSpeed = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numProbeSpeed)).BeginInit();
-            this.numProbeSpeed.Maximum = 1000000m;
-            this.numProbeSpeed.Value = 20000m;
-            ((System.ComponentModel.ISupportInitialize)(this.numProbeSpeed)).EndInit();
-
-            tlpProbe.Controls.Add(this.btnProbeLeft, 0, 0);
-            tlpProbe.Controls.Add(this.btnProbeStop, 1, 0);
-            tlpProbe.Controls.Add(this.btnProbeRight, 2, 0);
-            gbProbe.Controls.Add(tlpProbe);
-
-            // Settings panel (compact)
-            var gbSettings = new System.Windows.Forms.GroupBox() { Text = "Drive Settings", Dock = System.Windows.Forms.DockStyle.Fill, Padding = new System.Windows.Forms.Padding(6), BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4) };
-            var settingsScroll = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, AutoScroll = true };
-            var tlpSettings = new System.Windows.Forms.TableLayoutPanel() { AutoSize = true, AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink, ColumnCount = 2, RowCount = 4 };
-            tlpSettings.ColumnStyles.Clear();
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));     // labels
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // inputs
-
-            this.numMaxSpeed = new System.Windows.Forms.NumericUpDown();
-            this.numAccel = new System.Windows.Forms.NumericUpDown();
-            this.numDecel = new System.Windows.Forms.NumericUpDown();
-            this.numStepsPerMm = new System.Windows.Forms.NumericUpDown();
-
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAccel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDecel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).BeginInit();
-
-            // Set Maximum before Value to avoid ArgumentOutOfRangeException
-            this.numMaxSpeed.Maximum = 1000000m; this.numMaxSpeed.Value = 10000m;
-            this.numAccel.Maximum = 100000m; this.numAccel.Value = 1000m;
-            this.numDecel.Maximum = 100000m; this.numDecel.Value = 1000m;
-            this.numStepsPerMm.Maximum = 10000m; this.numStepsPerMm.Value = 100m;
-
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAccel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDecel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).EndInit();
-
-            tlpSettings.RowCount = 5;
-            tlpSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-
-            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Max Speed (steps/s)", Anchor = System.Windows.Forms.AnchorStyles.Left }, 0, 0);
-            tlpSettings.Controls.Add(this.numMaxSpeed, 1, 0);
-            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Accel (steps/s²)", Anchor = System.Windows.Forms.AnchorStyles.Left }, 0, 1);
-            tlpSettings.Controls.Add(this.numAccel, 1, 1);
-            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Decel (steps/s²)", Anchor = System.Windows.Forms.AnchorStyles.Left }, 0, 2);
-            tlpSettings.Controls.Add(this.numDecel, 1, 2);
-            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Steps / mm", Anchor = System.Windows.Forms.AnchorStyles.Left }, 0, 3);
-            tlpSettings.Controls.Add(this.numStepsPerMm, 1, 3);
-
-            this.btnApplySettings = new System.Windows.Forms.Button() { Text = "Apply Settings", Dock = System.Windows.Forms.DockStyle.Right };
-            // status indicator for settings
-            this.lblSettingsStatus = new System.Windows.Forms.Label() { Text = "Settings: APPLIED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft };
-
-            tlpSettings.Controls.Add(this.btnApplySettings, 0, 4);
-            tlpSettings.Controls.Add(this.lblSettingsStatus, 1, 4);
-            settingsScroll.Controls.Add(tlpSettings);
-            gbSettings.Controls.Add(settingsScroll);
-
-            // Simulation checkbox
-            this.chkSimulation = new System.Windows.Forms.CheckBox() { Text = "Simulation Mode", Dock = System.Windows.Forms.DockStyle.Left, AutoSize = true };
-            this.chkSimulation.Margin = new System.Windows.Forms.Padding(8);
-
-            // Assemble left column (connection + drive + probe + settings + simulation)
-            var leftCol = new System.Windows.Forms.TableLayoutPanel(); leftCol.Dock = System.Windows.Forms.DockStyle.Fill; leftCol.RowCount = 5; leftCol.ColumnCount = 1;
-            leftCol.RowStyles.Clear();
-            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // connection
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 60F)); // drive
-            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // probe
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 40F)); // settings
-            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // simulation
-
-            // Connection group at top of left column
-            var gbConnection = new System.Windows.Forms.GroupBox() { 
-                Text = "Controller Connection", 
-                Dock = System.Windows.Forms.DockStyle.Fill 
-            };
-            gbConnection.AutoSize = true;
-            gbConnection.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            gbConnection.Padding = new System.Windows.Forms.Padding(6);
-            gbConnection.Margin = new System.Windows.Forms.Padding(4);
-
-            var tlpConn = new TableLayoutPanel()
+            // Drive bottom strip: jog left, input mode center, jog right
+            var tlpDriveBottom = new System.Windows.Forms.TableLayoutPanel()
             {
-                Dock = DockStyle.Top,  
+                Dock = DockStyle.Fill,
+                ColumnCount = 3,
+                RowCount = 1,
+                Margin = new Padding(0, 6, 0, 0),
+                Padding = new Padding(0)
+            };
+
+            tlpDriveBottom.ColumnStyles.Clear();
+            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+
+            this.btnJogForward = new System.Windows.Forms.Button()
+            {
+                Text = "Jog Forward",
                 AutoSize = true,
-                ColumnCount = 4,
-                RowCount = 1
-            };
-            tlpConn.RowStyles.Clear();
-            tlpConn.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
-            tlpConn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
-
-            this.txtIp = new System.Windows.Forms.TextBox() { Text = "192.168.0.101", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnConnect = new System.Windows.Forms.Button() { Text = "Connect", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnDisconnect = new System.Windows.Forms.Button() { Text = "Disconnect", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnEnableMotors = new System.Windows.Forms.Button() { Text = "Enable", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.btnDisableMotors = new System.Windows.Forms.Button() { Text = "Disable", Dock = System.Windows.Forms.DockStyle.Fill };
-
-            if (this.txtIp != null) tlpConn.Controls.Add(this.txtIp, 0, 0);
-            if (this.btnConnect != null) tlpConn.Controls.Add(this.btnConnect, 1, 0);
-            if (this.btnDisconnect != null) tlpConn.Controls.Add(this.btnDisconnect, 2, 0);
-            if (this.btnEnableMotors != null) tlpConn.Controls.Add(this.btnEnableMotors, 3, 0);
-            gbConnection.Controls.Add(tlpConn);
-
-            leftCol.Controls.Add(gbConnection, 0, 0);
-
-            // Build drive layout FIRST
-            var tlpDriveMain = new System.Windows.Forms.TableLayoutPanel()
-            {
-                Dock = DockStyle.Fill,
-                RowCount = 2,
-                ColumnCount = 1
+                Anchor = AnchorStyles.Left,
+                Margin = new Padding(8, 0, 8, 8)
             };
 
-            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-            tlpDriveMain.Controls.Add(tlpDrive, 0, 0);
-
-            // Input mode row
-            var flInputMode = new FlowLayoutPanel()
+            this.btnJogReverse = new System.Windows.Forms.Button()
             {
-                Dock = DockStyle.Fill,
+                Text = "Jog Reverse",
+                AutoSize = true,
+                Anchor = AnchorStyles.Right,
+                Margin = new Padding(8, 0, 8, 8)
+            };
+
+            var flInputMode = new System.Windows.Forms.FlowLayoutPanel()
+            {
+                AutoSize = true,
                 FlowDirection = FlowDirection.LeftToRight,
-                AutoSize = true
+                Anchor = AnchorStyles.None,
+                Margin = new Padding(0),
+                Padding = new Padding(0)
             };
 
-            var lblInputModeSel = new Label()
+            var lblInputModeSel = new System.Windows.Forms.Label()
             {
                 Text = "Input Mode:",
-                AutoSize = true
+                AutoSize = true,
+                Margin = new Padding(0, 6, 6, 0)
             };
 
-            this.cmbInputMode = new ComboBox()
+            this.cmbInputMode = new System.Windows.Forms.ComboBox()
             {
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Width = 140
+                Width = 140,
+                Margin = new Padding(0)
             };
 
             this.cmbInputMode.Items.AddRange(new object[] { "Gamepad", "Keyboard" });
@@ -330,17 +274,253 @@
             flInputMode.Controls.Add(lblInputModeSel);
             flInputMode.Controls.Add(this.cmbInputMode);
 
-            tlpDriveMain.Controls.Add(flInputMode, 0, 1);
+            tlpDriveBottom.Controls.Add(this.btnJogForward, 0, 0);
+            tlpDriveBottom.Controls.Add(flInputMode, 1, 0);
+            tlpDriveBottom.Controls.Add(this.btnJogReverse, 2, 0);
 
-            // attach to groupbox
+            // Full drive group layout
+            var tlpDriveMain = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                RowCount = 2,
+                ColumnCount = 1,
+                Margin = new Padding(0),
+                Padding = new Padding(0)
+            };
+
+            tlpDriveMain.RowStyles.Clear();
+            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+            tlpDriveMain.Controls.Add(tlpDrive, 0, 0);
+            tlpDriveMain.Controls.Add(tlpDriveBottom, 0, 1);
+
+            this.gbDrive.Controls.Clear();
             this.gbDrive.Controls.Add(tlpDriveMain);
 
-            // add gbDrive to layout
-            leftCol.Controls.Add(this.gbDrive, 0, 1);
+            // Probe controls
+            this.gbProbe = new System.Windows.Forms.GroupBox()
+            {
+                Text = "Probe Controls",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Padding = new System.Windows.Forms.Padding(12),
+                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
+            };
 
-            leftCol.Controls.Add(gbProbe, 0, 2);
-            leftCol.Controls.Add(gbSettings, 0, 3);
+            var tlpProbe = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                ColumnCount = 3,
+                RowCount = 1
+            };
+
+            tlpProbe.ColumnStyles.Clear();
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+
+            this.btnProbeLeft = new System.Windows.Forms.Button() { Text = "Move Left", Dock = DockStyle.Fill };
+            this.btnProbeStop = new System.Windows.Forms.Button() { Text = "Stop", Dock = DockStyle.Fill };
+            this.btnProbeRight = new System.Windows.Forms.Button() { Text = "Move Right", Dock = DockStyle.Fill };
+
+            tlpProbe.Controls.Add(this.btnProbeLeft, 0, 0);
+            tlpProbe.Controls.Add(this.btnProbeStop, 1, 0);
+            tlpProbe.Controls.Add(this.btnProbeRight, 2, 0);
+
+            this.gbProbe.Controls.Add(tlpProbe);
+
+            // Drive settings
+            this.gbSettings = new System.Windows.Forms.GroupBox()
+            {
+                Text = "Drive Settings",
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                Padding = new System.Windows.Forms.Padding(6),
+                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
+            };
+
+            var settingsScroll = new System.Windows.Forms.Panel()
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = true
+            };
+
+            var tlpSettings = new System.Windows.Forms.TableLayoutPanel()
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                ColumnCount = 2,
+                RowCount = 6,
+                Dock = DockStyle.Top
+            };
+
+            tlpSettings.ColumnStyles.Clear();
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+
+            this.numMaxSpeed = new System.Windows.Forms.NumericUpDown();
+            this.numAccel = new System.Windows.Forms.NumericUpDown();
+            this.numDecel = new System.Windows.Forms.NumericUpDown();
+            this.numStepsPerMm = new System.Windows.Forms.NumericUpDown();
+            this.numJogSteps = new System.Windows.Forms.NumericUpDown();
+
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAccel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDecel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numJogSteps)).BeginInit();
+
+            this.numMaxSpeed.Maximum = 1000000m;
+            this.numMaxSpeed.Value = 10000m;
+
+            this.numAccel.Maximum = 100000m;
+            this.numAccel.Value = 1000m;
+
+            this.numDecel.Maximum = 100000m;
+            this.numDecel.Value = 1000m;
+
+            this.numStepsPerMm.Maximum = 10000m;
+            this.numStepsPerMm.Value = 100m;
+
+            this.numJogSteps.Maximum = 1000000m;
+            this.numJogSteps.Value = 1000m;
+
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAccel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDecel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numJogSteps)).EndInit();
+
+            tlpSettings.RowStyles.Clear();
+            for (int i = 0; i < 6; i++)
+                tlpSettings.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Max Speed", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 0);
+            tlpSettings.Controls.Add(this.numMaxSpeed, 1, 0);
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Accel (steps/s²)", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 1);
+            tlpSettings.Controls.Add(this.numAccel, 1, 1);
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Decel (steps/s²)", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 2);
+            tlpSettings.Controls.Add(this.numDecel, 1, 2);
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Steps / mm", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 3);
+            tlpSettings.Controls.Add(this.numStepsPerMm, 1, 3);
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Jog steps", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 4);
+            tlpSettings.Controls.Add(this.numJogSteps, 1, 4);
+
+            this.btnApplySettings = new System.Windows.Forms.Button()
+            {
+                Text = "Apply",
+                AutoSize = true,
+                Anchor = AnchorStyles.Left
+            };
+
+            this.lblSettingsStatus = new System.Windows.Forms.Label()
+            {
+                Text = "Settings: APPLIED",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                AutoSize = true
+            };
+
+            tlpSettings.Controls.Add(this.btnApplySettings, 0, 5);
+            tlpSettings.Controls.Add(this.lblSettingsStatus, 1, 5);
+
+            settingsScroll.Controls.Add(tlpSettings);
+            this.gbSettings.Controls.Add(settingsScroll);
+
+            // Simulation checkbox
+            this.chkSimulation = new System.Windows.Forms.CheckBox()
+            {
+                Text = "Simulation Mode",
+                Dock = DockStyle.Left,
+                AutoSize = true,
+                Margin = new Padding(8)
+            };
+
+            // Left column assembly
+            var leftCol = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                RowCount = 5,
+                ColumnCount = 1
+            };
+
+            leftCol.RowStyles.Clear();
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // connection
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));  // drive
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // probe
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));  // settings
+            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // simulation
+
+            // Connection group at top of left column
+            this.gbConnection = new System.Windows.Forms.GroupBox()
+            {
+                Text = "Controller Connection",
+                Dock = DockStyle.Fill
+            };
+
+            this.gbConnection.Padding = new System.Windows.Forms.Padding(6);
+            this.gbConnection.Margin = new System.Windows.Forms.Padding(4);
+            this.gbConnection.AutoSize = true;
+            this.gbConnection.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+            var tlpConn = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 4,
+                RowCount = 1,
+                AutoSize = true
+            };
+
+            tlpConn.ColumnStyles.Clear();
+            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
+            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
+            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
+
+            this.txtIp = new System.Windows.Forms.TextBox()
+            {
+                Text = "192.168.0.101",
+                Dock = DockStyle.Fill
+            };
+
+            this.btnConnect = new System.Windows.Forms.Button()
+            {
+                Text = "Connect",
+                Dock = DockStyle.Fill,
+                MinimumSize = new Size(80, 32)
+            };
+
+            this.btnDisconnect = new System.Windows.Forms.Button()
+            {
+                Text = "Disconnect",
+                Dock = DockStyle.Fill,
+                MinimumSize = new Size(80, 32)
+            };
+
+            this.btnEnableMotors = new System.Windows.Forms.Button()
+            {
+                Text = "Enable",
+                Dock = DockStyle.Fill,
+                MinimumSize = new Size(80, 32)
+            };
+
+            tlpConn.Controls.Add(this.txtIp, 0, 0);
+            tlpConn.Controls.Add(this.btnConnect, 1, 0);
+            tlpConn.Controls.Add(this.btnDisconnect, 2, 0);
+            tlpConn.Controls.Add(this.btnEnableMotors, 3, 0);
+
+            this.gbConnection.Controls.Add(tlpConn);
+
+            // Add left column controls
+            leftCol.Controls.Add(this.gbConnection, 0, 0);
+            leftCol.Controls.Add(this.gbDrive, 0, 1);
+            leftCol.Controls.Add(this.gbProbe, 0, 2);
+            leftCol.Controls.Add(this.gbSettings, 0, 3);
             leftCol.Controls.Add(this.chkSimulation, 0, 4);
+
 
             // Right: telemetry and debug
             var rightCol = new System.Windows.Forms.TableLayoutPanel(); rightCol.Dock = System.Windows.Forms.DockStyle.Fill; rightCol.RowCount = 2; rightCol.ColumnCount = 1;
@@ -432,11 +612,35 @@
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 
-            this.lstCommandStream = new System.Windows.Forms.ListBox() { Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            tlpCmd.Controls.Add(this.lstCommandStream, 0, 0);
-            this.txtLog = new System.Windows.Forms.TextBox() { Dock = System.Windows.Forms.DockStyle.Fill, Multiline = true, ReadOnly = true, Font = mono, ScrollBars = System.Windows.Forms.ScrollBars.Vertical };
+            var diagnosticsSplit = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                RowCount = 2,
+                ColumnCount = 1
+            };
 
+            diagnosticsSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));
+            diagnosticsSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));
 
+            this.lstCommandStream = new System.Windows.Forms.ListBox()
+            {
+                Dock = DockStyle.Fill,
+                Font = mono
+            };
+
+            this.txtLog = new System.Windows.Forms.TextBox()
+            {
+                Dock = DockStyle.Fill,
+                Multiline = true,
+                ReadOnly = true,
+                Font = mono,
+                ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+            };
+
+            diagnosticsSplit.Controls.Add(this.lstCommandStream, 0, 0);
+            diagnosticsSplit.Controls.Add(this.txtLog, 0, 1);
+
+            tlpCmd.Controls.Add(diagnosticsSplit, 0, 0);
 
             var tlpButtons = new TableLayoutPanel()
             {
@@ -505,7 +709,7 @@
         private Button btnConnect;
         private Button btnDisconnect;
         private Button btnEnableMotors;
-        private Button btnDisableMotors;
+        //private Button btnDisableMotors;
         private Label lblControllerStatus;
         private Label lblMotorsStatus;
 
@@ -571,5 +775,9 @@
         private System.Windows.Forms.Panel pnlRightBarBg;
         private System.Windows.Forms.Panel pnlRightBarFill;
         private CheckBox chkSimulation;
+
+        private NumericUpDown numJogSteps;
+        private Button btnJogForward;
+        private Button btnJogReverse;
     }
 }

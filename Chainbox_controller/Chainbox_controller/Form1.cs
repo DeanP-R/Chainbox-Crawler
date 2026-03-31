@@ -78,7 +78,7 @@ namespace Chainbox_controller
             // reflect simulation checkbox
             this.chkSimulation.CheckedChanged += (s, e) => controller.SimulationMode = this.chkSimulation.Checked;
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object? sender, KeyEventArgs e)
         {
             if (currentInputMode != InputLayer.InputMode.Keyboard)
                 return;
@@ -108,7 +108,7 @@ namespace Chainbox_controller
 
             e.Handled = true;
         }
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object? sender, KeyEventArgs e)
         {
             if (currentInputMode != InputLayer.InputMode.Keyboard)
                 return;
@@ -163,31 +163,44 @@ namespace Chainbox_controller
 
         private void WireUpEvents()
         {
-            // Hook up button events created in designer
             this.btnConnect.Click += BtnConnect_Click;
             this.btnDisconnect.Click += BtnDisconnect_Click;
             this.btnEnableMotors.Click += BtnEnableMotors_Click;
-            this.btnDisableMotors.Click += BtnDisableMotors_Click;
+            // this.btnDisableMotors.Click += BtnDisableMotors_Click;   // remove unless you add the button back
+
             this.btnApplySettings.Click += BtnApplySettings_Click;
-            // when any numeric changes, mark settings pending
+
             this.numMaxSpeed.ValueChanged += (s, e) => MarkSettingsPending();
             this.numAccel.ValueChanged += (s, e) => MarkSettingsPending();
             this.numDecel.ValueChanged += (s, e) => MarkSettingsPending();
             this.numStepsPerMm.ValueChanged += (s, e) => MarkSettingsPending();
+            this.numJogSteps.ValueChanged += (s, e) => MarkSettingsPending();
+
             this.btnForward.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Forward = 1.0 });
             this.btnForward.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnReverse.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Forward = -1.0 });
             this.btnReverse.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Turn = -1.0 });
             this.btnLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnRight.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Turn = 1.0 });
             this.btnRight.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnStop.Click += BtnEmergencyStop_Click;
+
             this.btnProbeLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = -1.0 });
             this.btnProbeLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnProbeRight.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = 1.0 });
             this.btnProbeRight.MouseUp += (s, e) => inputLayer.ClearManualOverride();
+
             this.btnProbeStop.Click += BtnProbeStop_Click;
+
+            this.btnJogForward.Click += BtnJogForward_Click;
+            this.btnJogReverse.Click += BtnJogReverse_Click;
+
             this.btnExportLog.Click += BtnExportLog_Click;
             this.btnCopyLog.Click += BtnCopyLog_Click;
             this.btnClearLog.Click += (s, e) => { this.txtLog.Clear(); };
@@ -216,7 +229,36 @@ namespace Chainbox_controller
             lblMotorsStatus.Text = "Motors: DISABLED";
             AppendLog("Disconnected");
         }
+        private void JogTracksBySteps(double steps)
+        {
+            AppendLog($"Jog button pressed: {steps:0} steps");
 
+            if (!controller.SimulationMode && !controller.IsConnected)
+            {
+                AppendLog("Jog ignored: controller not connected");
+                return;
+            }
+
+            try
+            {
+                inputLayer.ClearManualOverride();
+                controller.MoveRelative(steps, steps, 0);
+                AppendLog($"Jog move issued: {steps:0} steps");
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Jog failed: " + ex.Message);
+            }
+        }
+        private void BtnJogForward_Click(object? sender, EventArgs e)
+        {
+            JogTracksBySteps((double)numJogSteps.Value);
+        }
+
+        private void BtnJogReverse_Click(object? sender, EventArgs e)
+        {
+            JogTracksBySteps(-(double)numJogSteps.Value);
+        }
         private void BtnEnableMotors_Click(object? sender, EventArgs e)
         {
             controller.EnableMotors();
@@ -283,34 +325,29 @@ namespace Chainbox_controller
         {
             try
             {
-                var tickStart = DateTime.UtcNow;
-
                 // refresh currentInputMode from UI control if present
-                try
+                if (this.cmbInputMode != null)
                 {
-                    if (this.cmbInputMode != null)
-                    {
-                        if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Gamepad;
-                        else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
-                        else currentInputMode = InputLayer.InputMode.Gamepad;
+                    if (cmbInputMode.SelectedIndex == 0)
+                        currentInputMode = InputLayer.InputMode.Gamepad;
+                    else
+                        currentInputMode = InputLayer.InputMode.Keyboard;
 
-                        if (this.lblInputMode != null)
-                            this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
-                    }
+                    if (this.lblInputMode != null)
+                        this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
                 }
-                catch { }
 
                 var state = inputLayer.Update(currentInputMode);
                 var outp = mixer.Mix(state.Forward, state.Turn);
 
                 double leftSteps = outp.Left * settings.MaxVelocityStepsPerSec;
                 double rightSteps = outp.Right * settings.MaxVelocityStepsPerSec;
-                double probeSteps = state.Probe * (double)numProbeSpeed.Value;
+                double probeSteps = state.Probe * 20000.0;   // fixed probe speed for now
 
-                if (!controller.SimulationMode)
+                if (!controller.RelativeMoveActive)
+                {
                     controller.JogVelocity(leftSteps, rightSteps, probeSteps);
-                else
-                    controller.LogMessage($"SIM: VA{(int)leftSteps};VB{(int)rightSteps};VC{(int)probeSteps}");
+                }
 
                 double leftMm = settings.StepsPerMm > 0 ? leftSteps / settings.StepsPerMm : 0;
                 double rightMm = settings.StepsPerMm > 0 ? rightSteps / settings.StepsPerMm : 0;
@@ -320,15 +357,22 @@ namespace Chainbox_controller
                 lblProbeInput.Text = $"Probe Input: {state.Probe:0.00}";
                 lblLeftVel.Text = $"Left Track Velocity: {leftSteps:0} steps/s ({leftMm:0.##} mm/s)";
                 lblRightVel.Text = $"Right Track Velocity: {rightSteps:0} steps/s ({rightMm:0.##} mm/s)";
-                lblGamepad.Text = inputLayer.GamepadConnected ? $"Gamepad: CONNECTED (#{inputLayer.GamepadIndex})" : "Gamepad: DISCONNECTED";
+                lblProbeVel.Text = $"Probe Velocity: {probeSteps:0} steps/s";
+
+                lblGamepad.Text = inputLayer.GamepadConnected
+                    ? $"Gamepad: CONNECTED (#{inputLayer.GamepadIndex})"
+                    : "Gamepad: DISCONNECTED";
+
                 lblControllerStatus.Text = controller.IsConnected ? "Controller: CONNECTED" : "Controller: DISCONNECTED";
                 lblControllerStatus.ForeColor = controller.IsConnected ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+
                 lblMotorsStatus.Text = controller.MotorsEnabled ? "Motors: ENABLED" : "Motors: DISABLED";
                 lblMotorsStatus.ForeColor = controller.MotorsEnabled ? System.Drawing.Color.Green : System.Drawing.Color.Orange;
 
                 try
                 {
                     double max = Math.Max(1.0, settings.MaxVelocityStepsPerSec);
+
                     int leftW = (int)((Math.Abs(leftSteps) / max) * (pnlLeftBarBg?.Width ?? 100));
                     int rightW = (int)((Math.Abs(rightSteps) / max) * (pnlRightBarBg?.Width ?? 100));
 
@@ -341,16 +385,13 @@ namespace Chainbox_controller
                 catch { }
 
                 _loopCount++;
-
                 var now = DateTime.UtcNow;
                 var dt = (now - _lastRateCalc).TotalSeconds;
 
-                if (dt >= 0.5) // update at 2 Hz
+                if (dt >= 0.5)
                 {
                     double hz = _loopCount / dt;
-
                     lblLoopRate.Text = $"Loop Rate: {hz:0.0} Hz";
-
                     _loopCount = 0;
                     _lastRateCalc = now;
                 }
