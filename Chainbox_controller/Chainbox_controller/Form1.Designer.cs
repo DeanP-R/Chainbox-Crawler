@@ -33,15 +33,16 @@
             this.Text = "Chainbox Crawler Manual Control";
 
             // Root layout - vertical: status (fixed), main (fill), diagnostics (fixed)
-            var tlpRoot = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpRoot = new System.Windows.Forms.TableLayoutPanel();
 
             tlpRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             tlpRoot.RowCount = 3; tlpRoot.ColumnCount = 1;
             tlpRoot.RowStyles.Clear();
-            tlpRoot.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // header
+            // fixed header height so status bar remains visible on different resolutions
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));      // header
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // main
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F)); // diagnostics
-            tlpRoot.Padding = new System.Windows.Forms.Padding(12);
+            tlpRoot.Padding = new System.Windows.Forms.Padding(8);
             var tlpStatus = new System.Windows.Forms.TableLayoutPanel();
 
             // Status bar (dark header)
@@ -49,7 +50,8 @@
             {
                 Dock = DockStyle.Fill,
                 BackColor = Color.FromArgb(0x2b, 0x2b, 0x2b),
-                Padding = new Padding(8, 2, 8, 2)
+                Padding = new Padding(4, 0, 4, 0),
+                Margin = new Padding(0)
             };
 
             var lblTitle = new Label()
@@ -61,7 +63,7 @@
                 Font = new Font("Segoe UI", 11F, FontStyle.Bold)
             };
 
-            var headerLayout = new TableLayoutPanel()
+            this.headerLayout = new TableLayoutPanel()
             {
                 Dock = DockStyle.Fill,
                 RowCount = 2,
@@ -69,8 +71,9 @@
             };
 
             headerLayout.RowStyles.Clear();
-            headerLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));  // title
-            headerLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));  // status row
+            // reduced title/status spacing
+            headerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));  // title
+            headerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));  // status row
 
             headerLayout.Controls.Add(lblTitle, 0, 0);
             headerLayout.Controls.Add(tlpStatus, 0, 1);
@@ -80,6 +83,8 @@
 
 
             tlpStatus.Dock = System.Windows.Forms.DockStyle.Fill; 
+            tlpStatus.Padding = new Padding(0);
+            tlpStatus.Margin = new Padding(0);
 
             tlpStatus.RowCount = 1;
             tlpStatus.ColumnCount = 4;
@@ -91,11 +96,11 @@
 
             // Controls - keep names used elsewhere to avoid larger refactor
             var headerFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblControllerStatus = new System.Windows.Forms.Label() { Text = "Controller: DISCONNECTED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.FromArgb(0xd4,0xd4,0xd4), Font = headerFont };
+            this.lblControllerStatus = new System.Windows.Forms.Label() { Text = "Controller: DISCONNECTED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.White, Font = headerFont };
             this.lblMotorsStatus = new System.Windows.Forms.Label() { Text = "Motors: DISABLED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.Orange, Font = headerFont };
-            this.lblGamepad = new System.Windows.Forms.Label() { Text = "Gamepad: DISCONNECTED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.FromArgb(0xd4,0xd4,0xd4), Font = headerFont };
-            this.lblLoopRate = new System.Windows.Forms.Label() { Text = "Loop Rate: 0.0 Hz", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.FromArgb(0xd4,0xd4,0xd4), Font = headerFont };
-            this.lblInputMode = new System.Windows.Forms.Label() { Text = "Input Mode: AUTOMATIC", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleRight, ForeColor = System.Drawing.Color.FromArgb(0xd4,0xd4,0xd4), Font = headerFont };
+            this.lblGamepad = new System.Windows.Forms.Label() { Text = "Gamepad: DISCONNECTED", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.White, Font = headerFont };
+            this.lblLoopRate = new System.Windows.Forms.Label() { Text = "Loop Rate: 0.0 Hz", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft, ForeColor = System.Drawing.Color.White, Font = headerFont };
+            this.lblInputMode = new System.Windows.Forms.Label() { Text = "Input Mode: AUTOMATIC", Dock = System.Windows.Forms.DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleRight, ForeColor = System.Drawing.Color.White, Font = headerFont };
 
             if (this.lblControllerStatus != null) tlpStatus.Controls.Add(this.lblControllerStatus, 0, 0);
             if (this.lblMotorsStatus != null) tlpStatus.Controls.Add(this.lblMotorsStatus, 1, 0);
@@ -124,15 +129,16 @@
             //header.Controls.Add(tlpStatus);
 
             // Main two-column panel
-            var tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            tlpMain = this.tlpMain;
             tlpMain.Dock = System.Windows.Forms.DockStyle.Fill; tlpMain.ColumnCount = 2; tlpMain.RowCount = 1;
-            tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            // give more horizontal room to control panels on smaller screens
             tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            tlpMain.Padding = new System.Windows.Forms.Padding(12);
+            tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            tlpMain.Padding = new System.Windows.Forms.Padding(8);
             tlpMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
 
-            // Left: control panel - groupbox with drive + probe + settings ######################################
-            // Left: control panel - drive + probe + settings
+            // Drive controls - full 3x3 grid
             this.gbDrive = new System.Windows.Forms.GroupBox()
             {
                 Text = "Drive Controls",
@@ -141,162 +147,154 @@
                 BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
             };
 
-            // Main 3x3 drive button grid
             var tlpDrive = new System.Windows.Forms.TableLayoutPanel()
             {
-                Dock = System.Windows.Forms.DockStyle.Fill,
+                Dock = DockStyle.Fill,
                 RowCount = 3,
                 ColumnCount = 3,
                 Margin = new Padding(0),
-                Padding = new Padding(0)
+                Padding = new Padding(0),
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
 
             tlpDrive.RowStyles.Clear();
-            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
-            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
-            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
+            // give middle row (stop & turn) a bit more room
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+            tlpDrive.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
 
             tlpDrive.ColumnStyles.Clear();
             tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tlpDrive.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
 
+            // Slightly reduce drive button sizes for 1080p; use AutoScale on font
             this.btnForward = new System.Windows.Forms.Button()
             {
                 Text = "FORWARD",
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold),
-                Margin = new System.Windows.Forms.Padding(8),
-                MinimumSize = new System.Drawing.Size(80, 60)
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
+            };
+
+            this.btnTurn90Left = new System.Windows.Forms.Button()
+            {
+                Text = "90° LEFT",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
+            };
+
+            this.btnTurn90Left = new System.Windows.Forms.Button()
+            {
+                Text = "90° LEFT",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 40)
             };
 
             this.btnLeft = new System.Windows.Forms.Button()
             {
                 Text = "TURN LEFT",
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular),
-                Margin = new System.Windows.Forms.Padding(8),
-                MinimumSize = new System.Drawing.Size(80, 60)
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
             };
 
             this.btnStop = new System.Windows.Forms.Button()
             {
                 Text = "STOP",
-                Dock = System.Windows.Forms.DockStyle.Fill,
+                Dock = DockStyle.Fill,
                 BackColor = System.Drawing.Color.Red,
                 ForeColor = System.Drawing.Color.White,
-                Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold),
-                Margin = new System.Windows.Forms.Padding(8),
-                MinimumSize = new System.Drawing.Size(80, 60)
+                Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(64, 52)
             };
 
             this.btnRight = new System.Windows.Forms.Button()
             {
                 Text = "TURN RIGHT",
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular),
-                Margin = new System.Windows.Forms.Padding(8),
-                MinimumSize = new System.Drawing.Size(80, 60)
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
+            };
+
+            this.btnTurn90Right = new System.Windows.Forms.Button()
+            {
+                Text = "90° RIGHT",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
+            };
+
+            this.btnTurn90Right = new System.Windows.Forms.Button()
+            {
+                Text = "90° RIGHT",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 40)
             };
 
             this.btnReverse = new System.Windows.Forms.Button()
             {
                 Text = "REVERSE",
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold),
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold),
+                Margin = new System.Windows.Forms.Padding(6),
+                MinimumSize = new System.Drawing.Size(60, 48)
+            };
+
+            this.btnJogForward = new System.Windows.Forms.Button()
+            {
+                Text = "JOG FORWARD",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
                 Margin = new System.Windows.Forms.Padding(8),
                 MinimumSize = new System.Drawing.Size(80, 60)
             };
 
-            tlpDrive.Controls.Add(this.btnForward, 1, 0);
-            tlpDrive.Controls.Add(this.btnLeft, 0, 1);
-            tlpDrive.Controls.Add(this.btnStop, 1, 1);
-            tlpDrive.Controls.Add(this.btnRight, 2, 1);
-            tlpDrive.Controls.Add(this.btnReverse, 1, 2);
-
-            // Drive bottom strip: jog left, input mode center, jog right
-            var tlpDriveBottom = new System.Windows.Forms.TableLayoutPanel()
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 3,
-                RowCount = 1,
-                Margin = new Padding(0, 6, 0, 0),
-                Padding = new Padding(0)
-            };
-
-            tlpDriveBottom.ColumnStyles.Clear();
-            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            tlpDriveBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-
-            this.btnJogForward = new System.Windows.Forms.Button()
-            {
-                Text = "Jog Forward",
-                AutoSize = true,
-                Anchor = AnchorStyles.Left,
-                Margin = new Padding(8, 0, 8, 8)
-            };
-
             this.btnJogReverse = new System.Windows.Forms.Button()
             {
-                Text = "Jog Reverse",
-                AutoSize = true,
-                Anchor = AnchorStyles.Right,
-                Margin = new Padding(8, 0, 8, 8)
+                Text = "JOG REVERSE",
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Margin = new System.Windows.Forms.Padding(8),
+                MinimumSize = new System.Drawing.Size(80, 60)
             };
 
-            var flInputMode = new System.Windows.Forms.FlowLayoutPanel()
-            {
-                AutoSize = true,
-                FlowDirection = FlowDirection.LeftToRight,
-                Anchor = AnchorStyles.None,
-                Margin = new Padding(0),
-                Padding = new Padding(0)
-            };
+            // top row
+            // [empty] [FORWARD] [empty]
+            tlpDrive.Controls.Add(this.btnTurn90Left, 0, 0);
+            tlpDrive.Controls.Add(this.btnForward, 1, 0);
+            tlpDrive.Controls.Add(this.btnTurn90Right, 2, 0);
 
-            var lblInputModeSel = new System.Windows.Forms.Label()
-            {
-                Text = "Input Mode:",
-                AutoSize = true,
-                Margin = new Padding(0, 6, 6, 0)
-            };
+            // middle row
+            // [LEFT] [STOP] [RIGHT]
+            tlpDrive.Controls.Add(this.btnLeft, 0, 1); // Adding button for left control
+            tlpDrive.Controls.Add(this.btnStop, 1, 1); // Adding button for stop control
+            tlpDrive.Controls.Add(this.btnRight, 2, 1); // Adding button for right control
 
-            this.cmbInputMode = new System.Windows.Forms.ComboBox()
-            {
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Width = 140,
-                Margin = new Padding(0)
-            };
+            // bottom row
+            // [JOG FWD] [REVERSE] [JOG REV]
+            tlpDrive.Controls.Add(this.btnJogForward, 0, 2); // Adding button for jog forward control
+            tlpDrive.Controls.Add(this.btnReverse, 1, 2); // Adding button for reverse control
+            tlpDrive.Controls.Add(this.btnJogReverse, 2, 2); // Adding button for jog reverse control
 
-            this.cmbInputMode.Items.AddRange(new object[] { "Gamepad", "Keyboard" });
-            this.cmbInputMode.SelectedIndex = 0;
-
-            flInputMode.Controls.Add(lblInputModeSel);
-            flInputMode.Controls.Add(this.cmbInputMode);
-
-            tlpDriveBottom.Controls.Add(this.btnJogForward, 0, 0);
-            tlpDriveBottom.Controls.Add(flInputMode, 1, 0);
-            tlpDriveBottom.Controls.Add(this.btnJogReverse, 2, 0);
-
-            // Full drive group layout
-            var tlpDriveMain = new System.Windows.Forms.TableLayoutPanel()
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                RowCount = 2,
-                ColumnCount = 1,
-                Margin = new Padding(0),
-                Padding = new Padding(0)
-            };
-
-            tlpDriveMain.RowStyles.Clear();
-            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpDriveMain.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-            tlpDriveMain.Controls.Add(tlpDrive, 0, 0);
-            tlpDriveMain.Controls.Add(tlpDriveBottom, 0, 1);
+            // ensure jog buttons wrap properly on small widths
+            this.btnJogForward.AutoSize = true; this.btnJogForward.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.btnJogReverse.AutoSize = true; this.btnJogReverse.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
             this.gbDrive.Controls.Clear();
-            this.gbDrive.Controls.Add(tlpDriveMain);
+            this.gbDrive.Controls.Add(tlpDrive);
 
             // Probe controls
             this.gbProbe = new System.Windows.Forms.GroupBox()
@@ -315,6 +313,7 @@
             };
 
             tlpProbe.ColumnStyles.Clear();
+            // make probe controls compact on smaller screens
             tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tlpProbe.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
@@ -449,9 +448,9 @@
 
             leftCol.RowStyles.Clear();
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // connection
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));  // drive
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));  // drive
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // probe
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));  // settings
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));  // settings
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // simulation
 
             // Connection group at top of left column
@@ -466,51 +465,93 @@
             this.gbConnection.AutoSize = true;
             this.gbConnection.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            var tlpConn = new System.Windows.Forms.TableLayoutPanel()
+            // Use a FlowLayoutPanel for connection row so controls wrap instead of clipping horizontally
+            var tlpConn = new System.Windows.Forms.FlowLayoutPanel()
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 4,
-                RowCount = 1,
-                AutoSize = true
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = true,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
-
-            tlpConn.ColumnStyles.Clear();
-            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
-            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
-            tlpConn.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66F));
 
             this.txtIp = new System.Windows.Forms.TextBox()
             {
                 Text = "192.168.0.101",
-                Dock = DockStyle.Fill
+                Width = 220,
+                Height = 24,
+                Margin = new Padding(6)
             };
 
+            // use smaller button fonts and minimum sizes so layout fits on 1080p
             this.btnConnect = new System.Windows.Forms.Button()
             {
                 Text = "Connect",
-                Dock = DockStyle.Fill,
-                MinimumSize = new Size(80, 32)
+                AutoSize = true,
+                Width = 100,
+                Height = 28,
+                Margin = new Padding(4,6,4,6),
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular)
             };
 
             this.btnDisconnect = new System.Windows.Forms.Button()
             {
                 Text = "Disconnect",
-                Dock = DockStyle.Fill,
-                MinimumSize = new Size(80, 32)
+                AutoSize = true,
+                Width = 100,
+                Height = 28,
+                Margin = new Padding(4,6,4,6),
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular)
             };
 
             this.btnEnableMotors = new System.Windows.Forms.Button()
             {
                 Text = "Enable",
-                Dock = DockStyle.Fill,
-                MinimumSize = new Size(80, 32)
+                AutoSize = true,
+                Width = 100,
+                Height = 28,
+                Margin = new Padding(4,6,4,6),
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular)
             };
 
-            tlpConn.Controls.Add(this.txtIp, 0, 0);
-            tlpConn.Controls.Add(this.btnConnect, 1, 0);
-            tlpConn.Controls.Add(this.btnDisconnect, 2, 0);
-            tlpConn.Controls.Add(this.btnEnableMotors, 3, 0);
+            var pnlInputMode = new System.Windows.Forms.FlowLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                AutoSize = false,
+                Margin = new Padding(0),
+                Padding = new Padding(0)
+            };
+
+            var lblInputModeSel = new System.Windows.Forms.Label()
+            {
+                Text = "Mode",
+                AutoSize = true,
+                Margin = new Padding(0, 8, 6, 0)
+            };
+
+            this.cmbInputMode = new System.Windows.Forms.ComboBox()
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Width = 95,
+                Margin = new Padding(0, 3, 0, 0)
+            };
+
+            this.cmbInputMode.Items.AddRange(new object[] { "Gamepad", "Keyboard" });
+            this.cmbInputMode.SelectedIndex = 0;
+
+            pnlInputMode.Controls.Add(lblInputModeSel);
+            pnlInputMode.Controls.Add(this.cmbInputMode);
+            // Prevent key presses from changing the combo selection after user chooses mode
+            this.cmbInputMode.KeyDown += (s, e) => { e.SuppressKeyPress = true; e.Handled = true; };
+
+            // Add controls to flow panel (they will wrap instead of clipping)
+            tlpConn.Controls.Add(this.txtIp);
+            tlpConn.Controls.Add(this.btnConnect);
+            tlpConn.Controls.Add(this.btnDisconnect);
+            tlpConn.Controls.Add(this.btnEnableMotors);
+            tlpConn.Controls.Add(pnlInputMode);
 
             this.gbConnection.Controls.Add(tlpConn);
 
@@ -612,20 +653,9 @@
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
 
-            var diagnosticsSplit = new System.Windows.Forms.TableLayoutPanel()
-            {
-                Dock = DockStyle.Fill,
-                RowCount = 2,
-                ColumnCount = 1
-            };
-
-            diagnosticsSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));
-            diagnosticsSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));
-
             this.lstCommandStream = new System.Windows.Forms.ListBox()
             {
-                Dock = DockStyle.Fill,
-                Font = mono
+                Visible = false
             };
 
             this.txtLog = new System.Windows.Forms.TextBox()
@@ -637,10 +667,7 @@
                 ScrollBars = System.Windows.Forms.ScrollBars.Vertical
             };
 
-            diagnosticsSplit.Controls.Add(this.lstCommandStream, 0, 0);
-            diagnosticsSplit.Controls.Add(this.txtLog, 0, 1);
-
-            tlpCmd.Controls.Add(diagnosticsSplit, 0, 0);
+            tlpCmd.Controls.Add(this.txtLog, 0, 0);
 
             var tlpButtons = new TableLayoutPanel()
             {
@@ -779,5 +806,11 @@
         private NumericUpDown numJogSteps;
         private Button btnJogForward;
         private Button btnJogReverse;
+        private Button btnTurn90Left;
+        private Button btnTurn90Right;
+        // Layout panels exposed for runtime responsive profile switching
+        private System.Windows.Forms.TableLayoutPanel tlpRoot;
+        private System.Windows.Forms.TableLayoutPanel tlpMain;
+        private System.Windows.Forms.TableLayoutPanel headerLayout;
     }
 }

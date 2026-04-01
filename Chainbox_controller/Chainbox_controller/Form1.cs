@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using gclib;
 
@@ -6,6 +7,14 @@ namespace Chainbox_controller
 {
     public partial class Form1 : Form
     {
+        // Responsive UI state
+        private readonly Dictionary<Control, System.Drawing.Font> _originalFonts = new();
+        private readonly Dictionary<Control, System.Windows.Forms.Padding> _originalPaddings = new();
+        private readonly Dictionary<Control, System.Windows.Forms.Padding> _originalMargins = new();
+        private readonly Dictionary<System.Windows.Forms.Control, System.Drawing.Size> _originalMinSizes = new();
+        private bool _isCompact = false;
+
+        private const int CompactWidthThreshold = 1280; // logical pixels at 96 DPI
         private InputLayer.InputMode currentInputMode = InputLayer.InputMode.Keyboard;
         private DateTime lastUiUpdate = DateTime.MinValue;
         private bool logAutoScroll = true;
@@ -21,6 +30,9 @@ namespace Chainbox_controller
         public Form1()
         {
             InitializeComponent();
+
+            // ensure form receives key events before controls so we can suppress them when input mode forbids keyboard
+            this.KeyPreview = true;
             this.Icon = new Icon("innovair.ico");
             this.KeyPreview = true;
             this.TabStop = false;
@@ -32,6 +44,10 @@ namespace Chainbox_controller
             btnLeft.TabStop = false;
             btnRight.TabStop = false;
             btnStop.TabStop = false;
+
+            // Disable focus on 90° turn buttons
+            btnTurn90Left.TabStop = false;
+            btnTurn90Right.TabStop = false;
 
             // Disable focus on probe buttons
             btnProbeLeft.TabStop = false;
@@ -64,45 +80,96 @@ namespace Chainbox_controller
             // input mode selector
             if (this.cmbInputMode != null) this.cmbInputMode.SelectedIndexChanged += (s, e) =>
             {
-                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Keyboard;
+                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Automatic;
                 else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
                 else currentInputMode = InputLayer.InputMode.Gamepad;
                 // reflect in header label if present
                 if (this.lblInputMode != null) this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
-                // move focus away from combo so subsequent key presses don't re-select items in the combo
-                try { this.ActiveControl = null; this.Focus(); } catch { }
+                // move focus to a non-text control so subsequent key presses don't change the combo
+                try { if (this.btnConnect != null) this.btnConnect.Focus(); else { this.ActiveControl = null; this.Focus(); } } catch { }
             };
             // wire galil console send
             this.btnSendGalil.Click += (s, e) => SendGalilCommand();
-            this.txtGalilCmd.KeyDown += (s, e) => { if (e.KeyCode == System.Windows.Forms.Keys.Enter) { e.SuppressKeyPress = true; SendGalilCommand(); } };
+            //this.txtGalilCmd.KeyDown += (s, e) => { if (e.KeyCode == System.Windows.Forms.Keys.Enter) { e.SuppressKeyPress = true; SendGalilCommand(); } };
             // reflect simulation checkbox
             this.chkSimulation.CheckedChanged += (s, e) => controller.SimulationMode = this.chkSimulation.Checked;
+
+            // Responsive UI: evaluate profile on load/size change/DPI change
+            this.Load += (s, e) => ApplyUiProfileIfNeeded();
+            this.SizeChanged += (s, e) => ApplyUiProfileIfNeeded();
+            this.DpiChanged += (s, e) => ApplyUiProfileIfNeeded();
+
+            // Ensure header status labels are visible on dark background
+            try
+            {
+                if (this.lblControllerStatus != null) this.lblControllerStatus.ForeColor = System.Drawing.Color.White;
+                if (this.lblGamepad != null) this.lblGamepad.ForeColor = System.Drawing.Color.White;
+                if (this.lblLoopRate != null) this.lblLoopRate.ForeColor = System.Drawing.Color.White;
+                if (this.lblInputMode != null) this.lblInputMode.ForeColor = System.Drawing.Color.White;
+                if (this.lblMotorsStatus != null && controller != null)
+                    this.lblMotorsStatus.ForeColor = controller.MotorsEnabled ? System.Drawing.Color.Green : System.Drawing.Color.Orange;
+            }
+            catch { }
         }
+        private void BtnTurn90Left_Click(object? sender, EventArgs e)
+        {
+            // Turn by moving left motor negative, right motor positive for a 90-degree pivot
+            try
+            {
+                double steps = (double)numJogSteps.Value * 5.0; // predefined larger pivot amount (tweak as needed)
+                // left negative, right positive
+                if (!controller.SimulationMode && !controller.IsConnected)
+                {
+                    AppendLog("Pivot ignored: controller not connected");
+                    return;
+                }
+                controller.MoveRelative(-steps, steps, 0);
+                AppendLog($"Pivot 90° left issued: {-steps:0} / {steps:0} steps");
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Pivot failed: " + ex.Message);
+            }
+        }
+
+        private void BtnTurn90Right_Click(object? sender, EventArgs e)
+        {
+            // Turn by moving left motor positive, right motor negative for a 90-degree pivot
+            try
+            {
+                double steps = (double)numJogSteps.Value * 5.0; // predefined larger pivot amount (tweak as needed)
+                if (!controller.SimulationMode && !controller.IsConnected)
+                {
+                    AppendLog("Pivot ignored: controller not connected");
+                    return;
+                }
+                controller.MoveRelative(steps, -steps, 0);
+                AppendLog($"Pivot 90° right issued: {steps:0} / {-steps:0} steps");
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Pivot failed: " + ex.Message);
+            }
+        }
+
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
         {
+            // Only allow probe control via keyboard when in Keyboard input mode.
             if (currentInputMode != InputLayer.InputMode.Keyboard)
                 return;
 
             switch (e.KeyCode)
             {
                 case System.Windows.Forms.Keys.Up:
-                    inputLayer.SetManualOverride(new InputState() { Forward = 1.0 });
+                    // move probe forward/up
+                    inputLayer.SetManualOverride(new InputState() { Probe = 1.0 });
                     break;
-
                 case System.Windows.Forms.Keys.Down:
-                    inputLayer.SetManualOverride(new InputState() { Forward = -1.0 });
+                    // move probe reverse/down
+                    inputLayer.SetManualOverride(new InputState() { Probe = -1.0 });
                     break;
-
-                case System.Windows.Forms.Keys.Left:
-                    inputLayer.SetManualOverride(new InputState() { Turn = -1.0 });
-                    break;
-
-                case System.Windows.Forms.Keys.Right:
-                    inputLayer.SetManualOverride(new InputState() { Turn = 1.0 });
-                    break;
-
-                case System.Windows.Forms.Keys.Space:
-                    controller.StopAll();
+                default:
+                    // ignore other keys here; key handling for pivots/jogs is processed in ProcessCmdKey
                     break;
             }
 
@@ -117,11 +184,61 @@ namespace Chainbox_controller
             {
                 case System.Windows.Forms.Keys.Up:
                 case System.Windows.Forms.Keys.Down:
-                case System.Windows.Forms.Keys.Left:
-                case System.Windows.Forms.Keys.Right:
                     inputLayer.ClearManualOverride();
                     break;
+                default:
+                    break;
             }
+        }
+
+        /// <summary>
+        /// Intercept command keys to prevent keyboard navigation and map keys to drive/probe actions
+        /// when in Keyboard input mode. Always swallow Tab to prevent focus traversal.
+        /// </summary>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Always swallow Tab so the form cannot be navigated via keyboard
+            var key = keyData & Keys.KeyCode;
+            if (key == Keys.Tab)
+                return true;
+
+            // If keyboard input mode, map specific keys to pivot/jog and let probe keys be handled in KeyDown/KeyUp
+            if (currentInputMode == InputLayer.InputMode.Keyboard)
+            {
+                try
+                {
+                    switch (key)
+                    {
+                        case Keys.D4:
+                        case Keys.NumPad4:
+                            BtnTurn90Left_Click(this, EventArgs.Empty);
+                            return true;
+                        case Keys.D6:
+                        case Keys.NumPad6:
+                            BtnTurn90Right_Click(this, EventArgs.Empty);
+                            return true;
+                        case Keys.D8:
+                        case Keys.NumPad8:
+                            BtnJogForward_Click(this, EventArgs.Empty);
+                            return true;
+                        case Keys.D5:
+                        case Keys.NumPad5:
+                            BtnJogReverse_Click(this, EventArgs.Empty);
+                            return true;
+                        // Swallow Enter/Escape/Space so they don't activate controls
+                        case Keys.Enter:
+                        case Keys.Escape:
+                        case Keys.Space:
+                            return true;
+                        default:
+                            // swallow other keys to prevent changing focus or interacting with controls
+                            return true;
+                    }
+                }
+                catch { }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void SendGalilCommand()
@@ -132,16 +249,16 @@ namespace Chainbox_controller
                 return;
             }
 
-            var cmd = this.txtGalilCmd.Text?.Trim();
-            if (string.IsNullOrEmpty(cmd)) return;
-            var resp = controller.SendRawCommand(cmd);
-            this.lstGalilHistory.Items.Add($"> {cmd}");
-            if (!string.IsNullOrEmpty(resp)) this.lstGalilHistory.Items.Add(resp);
-            if (this.lstGalilHistory.Items.Count > 2000) this.lstGalilHistory.Items.RemoveAt(0);
-            AppendLog($"GALIL: {cmd} -> {resp}");
-            this.txtGalilCmd.Clear();
+            //var cmd = this.txtGalilCmd.Text?.Trim();
+            //if (string.IsNullOrEmpty(cmd)) return;
+            //var resp = controller.SendRawCommand(cmd);
+            //this.lstGalilHistory.Items.Add($"> {cmd}");
+            //if (!string.IsNullOrEmpty(resp)) this.lstGalilHistory.Items.Add(resp);
+            //if (this.lstGalilHistory.Items.Count > 2000) this.lstGalilHistory.Items.RemoveAt(0);
+            //AppendLog($"GALIL: {cmd} -> {resp}");
+            //this.txtGalilCmd.Clear();
             // keep auto-scroll
-            this.lstGalilHistory.TopIndex = Math.Max(0, this.lstGalilHistory.Items.Count - 1);
+            //this.lstGalilHistory.TopIndex = Math.Max(0, this.lstGalilHistory.Items.Count - 1);
         }
 
         private void Controller_OnLog(string obj)
@@ -189,6 +306,8 @@ namespace Chainbox_controller
             this.btnRight.MouseUp += (s, e) => inputLayer.ClearManualOverride();
 
             this.btnStop.Click += BtnEmergencyStop_Click;
+            this.btnTurn90Left.Click += BtnTurn90Left_Click;
+            this.btnTurn90Right.Click += BtnTurn90Right_Click;
 
             this.btnProbeLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = -1.0 });
             this.btnProbeLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
@@ -317,8 +436,21 @@ namespace Chainbox_controller
 
         private void BtnCopyLog_Click(object? sender, EventArgs e)
         {
-            Clipboard.SetText(txtLog.Text);
-            AppendLog("Log copied to clipboard");
+            try
+            {
+                var text = this.txtLog?.Text ?? string.Empty;
+                if (string.IsNullOrEmpty(text))
+                {
+                    AppendLog("Copy skipped: log is empty");
+                    return;
+                }
+                Clipboard.SetText(text);
+                AppendLog("Log copied to clipboard");
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Copy failed: " + ex.Message);
+            }
         }
 
         private void ControlTimer_Tick(object? sender, EventArgs e)
@@ -403,6 +535,306 @@ namespace Chainbox_controller
             {
                 controlTimer.Stop();
                 AppendLog("Control loop crashed: " + ex.Message);
+            }
+        }
+
+        private void ApplyUiProfileIfNeeded()
+        {
+            try
+            {
+                // Compute logical width at 96 DPI reference
+                var dpi = this.DeviceDpi; // current DPI
+                double logicalWidth = (this.ClientSize.Width * 96.0) / Math.Max(1, dpi);
+                bool shouldCompact = logicalWidth < CompactWidthThreshold;
+
+                // If the main content prefers more width than available, force compact/stacked layout
+                try
+                {
+                    if (this.tlpMain != null)
+                    {
+                        var preferred = this.tlpMain.GetPreferredSize(new System.Drawing.Size(0, 0)).Width;
+                        if (preferred > this.ClientSize.Width)
+                            shouldCompact = true;
+                    }
+                }
+                catch { }
+                // If user target is a 1920-wide monitor at 100% scale, force compact stacked layout to guarantee fit
+                try
+                {
+                    var screenWidth = System.Windows.Forms.Screen.PrimaryScreen?.Bounds.Width ?? 0;
+                    if (screenWidth > 0 && screenWidth <= 1920 && dpi == 96)
+                    {
+                        shouldCompact = true;
+                    }
+                }
+                catch { }
+
+                SetUiProfile(shouldCompact);
+            }
+            catch { }
+        }
+
+        private void SetUiProfile(bool compact)
+        {
+            if (_isCompact == compact) return;
+
+            // Capture originals on first use
+            if (_originalFonts.Count == 0)
+            {
+                foreach (var c in GetAllControls(this))
+                {
+                    try
+                    {
+                        _originalFonts[c] = c.Font;
+                        _originalPaddings[c] = c.Padding;
+                        _originalMargins[c] = c.Margin;
+                        if (c is Button || c is TextBox || c is NumericUpDown)
+                        {
+                            _originalMinSizes[c] = c.MinimumSize;
+                        }
+                    }
+                    catch { }
+                }
+            }
+
+            float fontScale = compact ? 0.75f : 1.0f;
+            float paddingScale = compact ? 0.5f : 1.0f;
+            float minSizeScale = compact ? 0.6f : 1.0f;
+
+            foreach (var kv in _originalFonts)
+            {
+                var ctrl = kv.Key;
+                var origFont = kv.Value;
+                try
+                {
+                    if (compact)
+                        ctrl.Font = new System.Drawing.Font(origFont.FontFamily, Math.Max(6F, origFont.Size * fontScale), origFont.Style);
+                    else
+                        ctrl.Font = origFont;
+                }
+                catch { }
+
+                try
+                {
+                    var origPad = _originalPaddings[ctrl];
+                    if (compact)
+                        ctrl.Padding = new System.Windows.Forms.Padding((int)(origPad.Left * paddingScale), (int)(origPad.Top * paddingScale), (int)(origPad.Right * paddingScale), (int)(origPad.Bottom * paddingScale));
+                    else
+                        ctrl.Padding = origPad;
+                }
+                catch { }
+
+                try
+                {
+                    var origMarg = _originalMargins[ctrl];
+                    if (compact)
+                        ctrl.Margin = new System.Windows.Forms.Padding((int)(origMarg.Left * paddingScale), (int)(origMarg.Top * paddingScale), (int)(origMarg.Right * paddingScale), (int)(origMarg.Bottom * paddingScale));
+                    else
+                        ctrl.Margin = origMarg;
+                }
+                catch { }
+
+                try
+                {
+                    if (_originalMinSizes.ContainsKey(ctrl))
+                    {
+                        var origMin = _originalMinSizes[ctrl];
+                        if (compact)
+                            ctrl.MinimumSize = new System.Drawing.Size((int)(origMin.Width * minSizeScale), (int)(origMin.Height * minSizeScale));
+                        else
+                            ctrl.MinimumSize = origMin;
+                    }
+                }
+                catch { }
+            }
+
+            // Slightly tighten main layout padding
+            try
+            {
+                if (this.tlpMain != null)
+                {
+                    if (compact)
+                        this.tlpMain.Padding = new Padding(4);
+                    else
+                        this.tlpMain.Padding = new Padding(8);
+                }
+                if (this.tlpRoot != null)
+                {
+                    if (compact)
+                        this.tlpRoot.Padding = new Padding(4);
+                    else
+                        this.tlpRoot.Padding = new Padding(8);
+                }
+            }
+            catch { }
+
+            // Rearrange main columns: stack left/right when compact to avoid horizontal clipping
+            try
+            {
+                if (this.tlpMain != null)
+                {
+                    Control left = null, right = null;
+                    try
+                    {
+                        left = this.tlpMain.GetControlFromPosition(0, 0);
+                        right = this.tlpMain.GetControlFromPosition(1, 0);
+                    }
+                    catch { }
+
+                    if (left == null || right == null)
+                    {
+                        // fallback: identify by known group boxes
+                        foreach (Control c in this.tlpMain.Controls)
+                        {
+                            try
+                            {
+                                if (c.Controls.Contains(this.gbDrive) || c.Controls.Contains(this.gbConnection) || c.Controls.Contains(this.gbSettings))
+                                    left = c;
+                                if (c.Controls.Contains(this.gbTelemetry) || c.Controls.Contains(this.gbDebug))
+                                    right = c;
+                            }
+                            catch { }
+                        }
+                    }
+
+                    if (compact)
+                    {
+                        // move to stacked layout
+                        this.tlpMain.SuspendLayout();
+                        var savedLeft = left;
+                        var savedRight = right;
+                        this.tlpMain.Controls.Clear();
+                        this.tlpMain.ColumnStyles.Clear();
+                        this.tlpMain.RowStyles.Clear();
+                        this.tlpMain.ColumnCount = 1;
+                        this.tlpMain.RowCount = 2;
+                        this.tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 72F));
+                        this.tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+                        if (savedLeft != null) { if (!this.tlpMain.Controls.Contains(savedLeft)) this.tlpMain.Controls.Add(savedLeft, 0, 0); savedLeft.Dock = DockStyle.Fill; }
+                        if (savedRight != null) { if (!this.tlpMain.Controls.Contains(savedRight)) this.tlpMain.Controls.Add(savedRight, 0, 1); savedRight.Dock = DockStyle.Fill; }
+                        this.tlpMain.ResumeLayout();
+                    }
+                    else
+                    {
+                        // restore two-column layout
+                        this.tlpMain.SuspendLayout();
+                        var savedLeft = left;
+                        var savedRight = right;
+                        this.tlpMain.Controls.Clear();
+                        this.tlpMain.ColumnStyles.Clear();
+                        this.tlpMain.RowStyles.Clear();
+                        this.tlpMain.ColumnCount = 2;
+                        this.tlpMain.RowCount = 1;
+                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
+                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                        if (savedLeft != null) { if (!this.tlpMain.Controls.Contains(savedLeft)) this.tlpMain.Controls.Add(savedLeft, 0, 0); savedLeft.Dock = DockStyle.Fill; }
+                        if (savedRight != null) { if (!this.tlpMain.Controls.Contains(savedRight)) this.tlpMain.Controls.Add(savedRight, 1, 0); savedRight.Dock = DockStyle.Fill; }
+                        this.tlpMain.ResumeLayout();
+
+                        // If the restored two-column layout still doesn't fit, keep stacked layout to avoid horizontal clipping
+                        try
+                        {
+                            var preferred = this.tlpMain.GetPreferredSize(new System.Drawing.Size(0, 0)).Width;
+                            if (preferred > this.ClientSize.Width)
+                            {
+                                // fallback to stacked
+                                this.tlpMain.SuspendLayout();
+                                this.tlpMain.Controls.Clear();
+                                this.tlpMain.ColumnStyles.Clear();
+                                this.tlpMain.RowStyles.Clear();
+                                this.tlpMain.ColumnCount = 1;
+                                this.tlpMain.RowCount = 2;
+                                this.tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+                                this.tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+                                if (savedLeft != null) { if (!this.tlpMain.Controls.Contains(savedLeft)) this.tlpMain.Controls.Add(savedLeft, 0, 0); savedLeft.Dock = DockStyle.Fill; }
+                                if (savedRight != null) { if (!this.tlpMain.Controls.Contains(savedRight)) this.tlpMain.Controls.Add(savedRight, 0, 1); savedRight.Dock = DockStyle.Fill; }
+                                this.tlpMain.ResumeLayout();
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch { }
+
+            // Reduce minimum sizes for common container controls to improve fit
+            try
+            {
+                foreach (Control c in GetAllControls(this))
+                {
+                    try
+                    {
+                        if (compact)
+                        {
+                            if (c is GroupBox || c is TableLayoutPanel || c is Panel)
+                            {
+                                c.MinimumSize = new System.Drawing.Size(20, 20);
+                            }
+                            // reduce jog button autosize to avoid wrapping
+                            if (c == this.btnJogForward || c == this.btnJogReverse)
+                            {
+                                c.AutoSize = false;
+                                c.MinimumSize = new System.Drawing.Size(40, 28);
+                            }
+                        }
+                        else
+                        {
+                            // restore if we stored an original min size
+                            if (_originalMinSizes.ContainsKey(c))
+                                c.MinimumSize = _originalMinSizes[c];
+                            else
+                                c.MinimumSize = new System.Drawing.Size(0, 0);
+                            if (c == this.btnJogForward || c == this.btnJogReverse)
+                            {
+                                c.AutoSize = true;
+                                // restore min if available
+                                if (_originalMinSizes.ContainsKey(c)) c.MinimumSize = _originalMinSizes[c];
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                // Adjust root row fixed heights to free vertical space in compact mode
+                if (this.tlpRoot != null && this.tlpRoot.RowStyles.Count >= 3)
+                {
+                    if (compact)
+                    {
+                        // reduce header height to prevent pushing status off-screen
+                        this.tlpRoot.RowStyles[0].SizeType = SizeType.Absolute;
+                        this.tlpRoot.RowStyles[0].Height = 56F;
+                        // reduce diagnostics height to give more space for main/drive area
+                        this.tlpRoot.RowStyles[2].SizeType = SizeType.Absolute;
+                        this.tlpRoot.RowStyles[2].Height = 90F;
+                    }
+                    else
+                    {
+                        this.tlpRoot.RowStyles[0].SizeType = SizeType.Absolute;
+                        this.tlpRoot.RowStyles[0].Height = 88F;
+                        this.tlpRoot.RowStyles[2].SizeType = SizeType.Absolute;
+                        this.tlpRoot.RowStyles[2].Height = 250F;
+                    }
+                }
+
+                // Ensure form allows scrolling as a last resort so controls are never completely inaccessible
+                this.AutoScroll = true;
+            }
+            catch { }
+
+            _isCompact = compact;
+        }
+
+        private IEnumerable<Control> GetAllControls(Control root)
+        {
+            if (root == null) yield break;
+            var stack = new Stack<Control>();
+            stack.Push(root);
+            while (stack.Count > 0)
+            {
+                var c = stack.Pop();
+                yield return c;
+                foreach (Control child in c.Controls)
+                    stack.Push(child);
             }
         }
 

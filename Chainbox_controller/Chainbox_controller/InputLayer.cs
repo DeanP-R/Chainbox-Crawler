@@ -7,9 +7,9 @@ namespace Chainbox_controller
     {
         public enum InputMode
         {
-            //Automatic,
-            Gamepad,
-            Keyboard
+            Automatic,
+            Keyboard,
+            Gamepad
         }
 
         public bool GamepadConnected { get; private set; }
