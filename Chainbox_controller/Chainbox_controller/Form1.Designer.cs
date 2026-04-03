@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+
             }
             base.Dispose(disposing);
         }
@@ -30,19 +31,25 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            // subtle off-white form background for a cleaner dashboard look
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
             this.Text = "Chainbox Crawler Manual Control";
 
             // Root layout - vertical: status (fixed), main (fill), diagnostics (fixed)
             this.tlpRoot = new System.Windows.Forms.TableLayoutPanel();
 
+            // Use a two-column root so the app feels like a professional two-pane dashboard.
             tlpRoot.Dock = System.Windows.Forms.DockStyle.Fill;
-            tlpRoot.RowCount = 3; tlpRoot.ColumnCount = 1;
-            tlpRoot.RowStyles.Clear();
-            // fixed header height so status bar remains visible on different resolutions
+            tlpRoot.RowCount = 2; tlpRoot.ColumnCount = 2;
+            tlpRoot.RowStyles.Clear(); tlpRoot.ColumnStyles.Clear();
+            // fixed header height, main row fills remaining space
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));      // header
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // main
-            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F)); // diagnostics
-            tlpRoot.Padding = new System.Windows.Forms.Padding(8);
+            // Slightly adjusted proportions for a balanced dashboard
+            tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            // use slightly larger outer padding for breathing room
+            tlpRoot.Padding = new System.Windows.Forms.Padding(12);
             var tlpStatus = new System.Windows.Forms.TableLayoutPanel();
 
             // Status bar (dark header)
@@ -131,21 +138,31 @@
             // Main two-column panel
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             tlpMain = this.tlpMain;
-            tlpMain.Dock = System.Windows.Forms.DockStyle.Fill; tlpMain.ColumnCount = 2; tlpMain.RowCount = 1;
-            // give more horizontal room to control panels on smaller screens
-            tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            tlpMain.Padding = new System.Windows.Forms.Padding(8);
-            tlpMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
+            tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tlpMain.ColumnCount = 1;
+            tlpMain.RowCount = 1;
+            tlpMain.RowStyles.Clear();
+            tlpMain.ColumnStyles.Clear();
+            tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlpMain.Padding = new Padding(0);
+            tlpMain.Margin = new Padding(0);
+            tlpMain.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+            // Standardized fonts for drive buttons
+            var driveButtonFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            var auxButtonFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
+            var stopButtonFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
 
             // Drive controls - full 3x3 grid
             this.gbDrive = new System.Windows.Forms.GroupBox()
             {
                 Text = "Drive Controls",
                 Dock = System.Windows.Forms.DockStyle.Fill,
-                Padding = new System.Windows.Forms.Padding(12),
-                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
+                Padding = new System.Windows.Forms.Padding(12)
             };
+            // group boxes use a consistent margin and bolder title font
+            this.gbDrive.Margin = new Padding(8);
+            this.gbDrive.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
 
             var tlpDrive = new System.Windows.Forms.TableLayoutPanel()
             {
@@ -174,7 +191,7 @@
             {
                 Text = "FORWARD",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
             };
@@ -183,25 +200,16 @@
             {
                 Text = "90° LEFT",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
-            };
-
-            this.btnTurn90Left = new System.Windows.Forms.Button()
-            {
-                Text = "90° LEFT",
-                Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular),
-                Margin = new System.Windows.Forms.Padding(6),
-                MinimumSize = new System.Drawing.Size(60, 40)
             };
 
             this.btnLeft = new System.Windows.Forms.Button()
             {
                 Text = "TURN LEFT",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
             };
@@ -212,7 +220,7 @@
                 Dock = DockStyle.Fill,
                 BackColor = System.Drawing.Color.Red,
                 ForeColor = System.Drawing.Color.White,
-                Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold),
+                Font = stopButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(64, 52)
             };
@@ -221,7 +229,7 @@
             {
                 Text = "TURN RIGHT",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
             };
@@ -230,25 +238,16 @@
             {
                 Text = "90° RIGHT",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
-            };
-
-            this.btnTurn90Right = new System.Windows.Forms.Button()
-            {
-                Text = "90° RIGHT",
-                Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular),
-                Margin = new System.Windows.Forms.Padding(6),
-                MinimumSize = new System.Drawing.Size(60, 40)
             };
 
             this.btnReverse = new System.Windows.Forms.Button()
             {
                 Text = "REVERSE",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(6),
                 MinimumSize = new System.Drawing.Size(60, 48)
             };
@@ -257,7 +256,7 @@
             {
                 Text = "JOG FORWARD",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(8),
                 MinimumSize = new System.Drawing.Size(80, 60)
             };
@@ -266,7 +265,7 @@
             {
                 Text = "JOG REVERSE",
                 Dock = DockStyle.Fill,
-                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular),
+                Font = driveButtonFont,
                 Margin = new System.Windows.Forms.Padding(8),
                 MinimumSize = new System.Drawing.Size(80, 60)
             };
@@ -301,9 +300,10 @@
             {
                 Text = "Probe Controls",
                 Dock = System.Windows.Forms.DockStyle.Fill,
-                Padding = new System.Windows.Forms.Padding(12),
-                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
+                Padding = new System.Windows.Forms.Padding(12)
             };
+            this.gbProbe.Margin = new Padding(8);
+            this.gbProbe.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
 
             var tlpProbe = new System.Windows.Forms.TableLayoutPanel()
             {
@@ -333,9 +333,11 @@
             {
                 Text = "Drive Settings",
                 Dock = System.Windows.Forms.DockStyle.Fill,
-                Padding = new System.Windows.Forms.Padding(6),
-                BackColor = System.Drawing.Color.FromArgb(0xf4, 0xf4, 0xf4)
+                Padding = new System.Windows.Forms.Padding(6)
             };
+            // Slightly larger, consistent bold font for group titles
+            this.gbSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.gbSettings.Margin = new Padding(8);
 
             var settingsScroll = new System.Windows.Forms.Panel()
             {
@@ -368,20 +370,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numJogSteps)).BeginInit();
 
-            this.numMaxSpeed.Maximum = 1000000m;
-            this.numMaxSpeed.Value = 10000m;
+            this.numMaxSpeed.Maximum = 640000m;
+            this.numMaxSpeed.Value = 320000m;
 
-            this.numAccel.Maximum = 100000m;
-            this.numAccel.Value = 1000m;
+            this.numAccel.Maximum = 640000m;
+            this.numAccel.Value = 320000m;
 
-            this.numDecel.Maximum = 100000m;
-            this.numDecel.Value = 1000m;
+            this.numDecel.Maximum = 640000m;
+            this.numDecel.Value = 320000m;
 
-            this.numStepsPerMm.Maximum = 10000m;
+            this.numStepsPerMm.Maximum = 1280000m;
             this.numStepsPerMm.Value = 100m;
 
-            this.numJogSteps.Maximum = 1000000m;
-            this.numJogSteps.Value = 1000m;
+            this.numJogSteps.Maximum = 5000000m;
+            this.numJogSteps.Value = 640000m;
 
             ((System.ComponentModel.ISupportInitialize)(this.numMaxSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAccel)).EndInit();
@@ -393,7 +395,7 @@
             for (int i = 0; i < 6; i++)
                 tlpSettings.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
-            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Max Speed", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 0);
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Max Speed (steps/s)", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 0);
             tlpSettings.Controls.Add(this.numMaxSpeed, 1, 0);
 
             tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Accel (steps/s²)", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 1);
@@ -442,16 +444,17 @@
             var leftCol = new System.Windows.Forms.TableLayoutPanel()
             {
                 Dock = DockStyle.Fill,
-                RowCount = 5,
+                RowCount = 6,
                 ColumnCount = 1
             };
 
             leftCol.RowStyles.Clear();
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // connection
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));  // drive
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));  // drive (slightly reduced)
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // probe
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));  // settings
-            leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // simulation
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));  // settings (increased)
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F)); // simulation (small fixed height)
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));  // spacer / flexible
 
             // Connection group at top of left column
             this.gbConnection = new System.Windows.Forms.GroupBox()
@@ -560,13 +563,19 @@
             leftCol.Controls.Add(this.gbDrive, 0, 1);
             leftCol.Controls.Add(this.gbProbe, 0, 2);
             leftCol.Controls.Add(this.gbSettings, 0, 3);
-            leftCol.Controls.Add(this.chkSimulation, 0, 4);
+            // diagnostics/logs (gbCmd) are added later into row 4
+            // NOTE: simulation checkbox moved to the right column (between telemetry and console)
 
 
             // Right: telemetry and debug
-            var rightCol = new System.Windows.Forms.TableLayoutPanel(); rightCol.Dock = System.Windows.Forms.DockStyle.Fill; rightCol.RowCount = 2; rightCol.ColumnCount = 1;
-            rightCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            rightCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            var rightCol = new System.Windows.Forms.TableLayoutPanel();
+            rightCol.Dock = System.Windows.Forms.DockStyle.Fill;
+            rightCol.RowCount = 3; rightCol.ColumnCount = 1;
+            rightCol.RowStyles.Clear();
+            // telemetry (top), diagnostics/logs (middle), console (bottom)
+            rightCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            rightCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            rightCol.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
 
             this.gbTelemetry = new System.Windows.Forms.GroupBox() { Text = "Telemetry", Dock = System.Windows.Forms.DockStyle.Fill };
             this.gbTelemetry.Padding = new System.Windows.Forms.Padding(12);
@@ -587,12 +596,12 @@
             this.lblProbeVel = new System.Windows.Forms.Label() { Text = "Probe Velocity: 0 steps/s", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
 
             // Live velocity bars
-            this.pnlLeftBarBg = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, Height = 16, BackColor = System.Drawing.Color.LightGray, Margin = new System.Windows.Forms.Padding(4) };
-            this.pnlLeftBarFill = new System.Windows.Forms.Panel() { BackColor = System.Drawing.Color.Green, Width = 0, Height = 16, Dock = System.Windows.Forms.DockStyle.Left };
+            this.pnlLeftBarBg = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.LightGray, Margin = new System.Windows.Forms.Padding(4), Padding = new System.Windows.Forms.Padding(0) };
+            this.pnlLeftBarFill = new System.Windows.Forms.Panel() { BackColor = System.Drawing.Color.FromArgb(0x1b, 0xa1, 0x1b), Width = 0, Dock = System.Windows.Forms.DockStyle.Left, Margin = new System.Windows.Forms.Padding(0) };
             this.pnlLeftBarBg.Controls.Add(this.pnlLeftBarFill);
 
-            this.pnlRightBarBg = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, Height = 16, BackColor = System.Drawing.Color.LightGray, Margin = new System.Windows.Forms.Padding(4) };
-            this.pnlRightBarFill = new System.Windows.Forms.Panel() { BackColor = System.Drawing.Color.Green, Width = 0, Height = 16, Dock = System.Windows.Forms.DockStyle.Left };
+            this.pnlRightBarBg = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.LightGray, Margin = new System.Windows.Forms.Padding(4), Padding = new System.Windows.Forms.Padding(0) };
+            this.pnlRightBarFill = new System.Windows.Forms.Panel() { BackColor = System.Drawing.Color.FromArgb(0x1b, 0xa1, 0x1b), Width = 0, Dock = System.Windows.Forms.DockStyle.Left, Margin = new System.Windows.Forms.Padding(0) };
             this.pnlRightBarBg.Controls.Add(this.pnlRightBarFill);
 
             tlpTel.Controls.Add(this.lblForwardInput);
@@ -607,47 +616,19 @@
             tlpTel.Controls.Add(this.lblProbeVel);
             this.gbTelemetry.Controls.Add(tlpTel);
 
-            // Debug signals box
-            this.gbDebug = new System.Windows.Forms.GroupBox() { Text = "Debug Signals", Dock = System.Windows.Forms.DockStyle.Fill };
-            this.gbDebug.Padding = new System.Windows.Forms.Padding(12);
-            this.gbDebug.Margin = new System.Windows.Forms.Padding(8);
-            var tlpDebug = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 1, RowCount = 8 };
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            tlpDebug.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-
-            this.lblDbgInputFwd = new System.Windows.Forms.Label() { Text = "Input Forward: 0.000", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgInputTurn = new System.Windows.Forms.Label() { Text = "Input Turn: 0.000", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgInputProbe = new System.Windows.Forms.Label() { Text = "Input Probe: 0.000", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgMixerLeft = new System.Windows.Forms.Label() { Text = "Mixer Left: 0.000", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgMixerRight = new System.Windows.Forms.Label() { Text = "Mixer Right: 0.000", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgCmdLeft = new System.Windows.Forms.Label() { Text = "Cmd Left: 0", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgCmdRight = new System.Windows.Forms.Label() { Text = "Cmd Right: 0", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            this.lblDbgCmdProbe = new System.Windows.Forms.Label() { Text = "Cmd Probe: 0", Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-
-            tlpDebug.Controls.Add(this.lblDbgInputFwd);
-            tlpDebug.Controls.Add(this.lblDbgInputTurn);
-            tlpDebug.Controls.Add(this.lblDbgInputProbe);
-            tlpDebug.Controls.Add(this.lblDbgMixerLeft);
-            tlpDebug.Controls.Add(this.lblDbgMixerRight);
-            tlpDebug.Controls.Add(this.lblDbgCmdLeft);
-            tlpDebug.Controls.Add(this.lblDbgCmdRight);
-            tlpDebug.Controls.Add(this.lblDbgCmdProbe);
-            this.gbDebug.Controls.Add(tlpDebug);
-
+            // Right column: telemetry at top; console will be added below after it is created
             rightCol.Controls.Add(this.gbTelemetry, 0, 0);
-            rightCol.Controls.Add(this.gbDebug, 0, 1);
+
+            // Simulation checkbox panel created here; it will be placed into the left column below settings
+            var simPanelWrap = new FlowLayoutPanel() { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, Padding = new Padding(8), Margin = new Padding(0) };
+            this.chkSimulation.Dock = DockStyle.Left;
+            simPanelWrap.Controls.Add(this.chkSimulation);
 
             tlpMain.Controls.Add(leftCol, 0, 0);
-            tlpMain.Controls.Add(rightCol, 1, 0);
 
             // Command stream / diagnostics area
             var gbCmd = new System.Windows.Forms.GroupBox() { Text = "Controller Command Stream / Diagnostics", Dock = System.Windows.Forms.DockStyle.Fill };
+            gbCmd.Margin = new System.Windows.Forms.Padding(8);
             gbCmd.Padding = new System.Windows.Forms.Padding(12);
             var tlpCmd = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, RowCount = 2, ColumnCount = 1 };
             tlpCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
@@ -701,7 +682,13 @@
 
             gbCmd.Controls.Add(tlpCmd);
 
-            // Galil console (manual commands)
+            // Place the simulation panel into the left column below settings (swapped with diagnostics)
+            leftCol.Controls.Add(simPanelWrap, 0, 4);
+
+            // Place the command stream / diagnostics box into the right column (middle row)
+            rightCol.Controls.Add(gbCmd, 0, 1);
+
+            // Galil console (manual commands) - place into right column under telemetry
             var gbConsole = new GroupBox() { Dock = DockStyle.Fill };
             gbConsole.Padding = new System.Windows.Forms.Padding(12);
             gbConsole.Margin = new System.Windows.Forms.Padding(8);
@@ -711,21 +698,24 @@
             this.txtGalilCmd = new System.Windows.Forms.TextBox() { Dock = System.Windows.Forms.DockStyle.Fill };
             this.btnSendGalil = new System.Windows.Forms.Button() { Text = "Send", Dock = System.Windows.Forms.DockStyle.Fill };
             this.lstGalilHistory = new System.Windows.Forms.ListBox() { Dock = System.Windows.Forms.DockStyle.Fill, Font = mono };
-            tlpConsole.Controls.Add(this.txtGalilCmd, 0, 0); tlpConsole.Controls.Add(this.btnSendGalil, 1, 0); tlpConsole.Controls.Add(this.lstGalilHistory, 0, 1); gbConsole.Controls.Add(tlpConsole);
+            tlpConsole.Controls.Add(this.txtGalilCmd, 0, 0);
+            tlpConsole.Controls.Add(this.btnSendGalil, 1, 0);
+            tlpConsole.Controls.Add(this.lstGalilHistory, 0, 1);
+            gbConsole.Controls.Add(tlpConsole);
 
-            // Put controls into root
+            // add console to right column under diagnostics (rightCol defined earlier)
+            rightCol.Controls.Add(gbConsole, 0, 2);
+
+            // Put controls into root: header across top, left content (tlpMain) in left column, rightCol in right column
             tlpRoot.Controls.Add(header, 0, 0);
-            tlpRoot.Controls.Add(tlpMain, 0, 1);
-            var bottomRow = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 2 };
-            bottomRow.ColumnStyles.Clear();
-            bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-            bottomRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            //bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            //bottomRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            bottomRow.Controls.Add(gbCmd, 0, 0);
-            bottomRow.Controls.Add(gbConsole, 1, 0);
-            tlpRoot.Controls.Add(bottomRow, 0, 2);
+            // header should span both columns
+            tlpRoot.SetColumnSpan(header, 2);
 
+            // left main column (tlpMain)
+            tlpRoot.Controls.Add(tlpMain, 0, 1);
+
+            // right column content
+            tlpRoot.Controls.Add(rightCol, 1, 1);
             this.Controls.Add(tlpRoot);
         }
 
@@ -780,15 +770,7 @@
         private System.Windows.Forms.Button btnSendGalil;
         private System.Windows.Forms.ListBox lstGalilHistory;
 
-        private GroupBox gbDebug;
-        private Label lblDbgInputFwd;
-        private Label lblDbgInputTurn;
-        private Label lblDbgInputProbe;
-        private Label lblDbgMixerLeft;
-        private Label lblDbgMixerRight;
-        private Label lblDbgCmdLeft;
-        private Label lblDbgCmdRight;
-        private Label lblDbgCmdProbe;
+        // debug signals removed - declarations removed
 
         private TextBox txtLog;
         private Button btnExportLog;

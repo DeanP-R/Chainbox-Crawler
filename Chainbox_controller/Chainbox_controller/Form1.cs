@@ -27,6 +27,8 @@ namespace Chainbox_controller
         private DateTime _lastRateCalc = DateTime.UtcNow;
         private System.Windows.Forms.Timer controlTimer;
 
+        private double leftDir = 1.0;
+        private double rightDir = -1.0; // flip this motor
         public Form1()
         {
             InitializeComponent();
@@ -80,9 +82,9 @@ namespace Chainbox_controller
             // input mode selector
             if (this.cmbInputMode != null) this.cmbInputMode.SelectedIndexChanged += (s, e) =>
             {
-                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Automatic;
+                // Combo items: 0 = Gamepad, 1 = Keyboard
+                if (cmbInputMode.SelectedIndex == 0) currentInputMode = InputLayer.InputMode.Gamepad;
                 else if (cmbInputMode.SelectedIndex == 1) currentInputMode = InputLayer.InputMode.Keyboard;
-                else currentInputMode = InputLayer.InputMode.Gamepad;
                 // reflect in header label if present
                 if (this.lblInputMode != null) this.lblInputMode.Text = "Input Mode: " + currentInputMode.ToString().ToUpper();
                 // move focus to a non-text control so subsequent key presses don't change the combo
@@ -94,10 +96,11 @@ namespace Chainbox_controller
             // reflect simulation checkbox
             this.chkSimulation.CheckedChanged += (s, e) => controller.SimulationMode = this.chkSimulation.Checked;
 
-            // Responsive UI: evaluate profile on load/size change/DPI change
-            this.Load += (s, e) => ApplyUiProfileIfNeeded();
-            this.SizeChanged += (s, e) => ApplyUiProfileIfNeeded();
-            this.DpiChanged += (s, e) => ApplyUiProfileIfNeeded();
+            // Responsive UI hooks (temporarily disabled to preserve designer layout).
+            // These can be re-enabled after responsive logic is aligned with the designer.
+            // this.Load += (s, e) => ApplyUiProfileIfNeeded();
+            // this.SizeChanged += (s, e) => ApplyUiProfileIfNeeded();
+            // this.DpiChanged += (s, e) => ApplyUiProfileIfNeeded();
 
             // Ensure header status labels are visible on dark background
             try
@@ -113,17 +116,17 @@ namespace Chainbox_controller
         }
         private void BtnTurn90Left_Click(object? sender, EventArgs e)
         {
-            // Turn by moving left motor negative, right motor positive for a 90-degree pivot
             try
             {
-                double steps = (double)numJogSteps.Value * 5.0; // predefined larger pivot amount (tweak as needed)
-                // left negative, right positive
+                double steps = (double)numJogSteps.Value * 5.0;
+
                 if (!controller.SimulationMode && !controller.IsConnected)
                 {
                     AppendLog("Pivot ignored: controller not connected");
                     return;
                 }
-                controller.MoveRelative(-steps, steps, 0);
+
+                MoveTracksRelative(-steps, steps, 0);
                 AppendLog($"Pivot 90° left issued: {-steps:0} / {steps:0} steps");
             }
             catch (Exception ex)
@@ -134,16 +137,17 @@ namespace Chainbox_controller
 
         private void BtnTurn90Right_Click(object? sender, EventArgs e)
         {
-            // Turn by moving left motor positive, right motor negative for a 90-degree pivot
             try
             {
-                double steps = (double)numJogSteps.Value * 5.0; // predefined larger pivot amount (tweak as needed)
+                double steps = (double)numJogSteps.Value * 5.0;
+
                 if (!controller.SimulationMode && !controller.IsConnected)
                 {
                     AppendLog("Pivot ignored: controller not connected");
                     return;
                 }
-                controller.MoveRelative(steps, -steps, 0);
+
+                MoveTracksRelative(steps, -steps, 0);
                 AppendLog($"Pivot 90° right issued: {steps:0} / {-steps:0} steps");
             }
             catch (Exception ex)
@@ -243,22 +247,47 @@ namespace Chainbox_controller
 
         private void SendGalilCommand()
         {
-            if (!controller.IsConnected)
+            try
             {
-                AppendLog("Cannot send: controller not connected");
-                return;
-            }
+                var cmd = this.txtGalilCmd?.Text?.Trim();
+                if (string.IsNullOrEmpty(cmd))
+                {
+                    // nothing to send
+                    return;
+                }
 
-            //var cmd = this.txtGalilCmd.Text?.Trim();
-            //if (string.IsNullOrEmpty(cmd)) return;
-            //var resp = controller.SendRawCommand(cmd);
-            //this.lstGalilHistory.Items.Add($"> {cmd}");
-            //if (!string.IsNullOrEmpty(resp)) this.lstGalilHistory.Items.Add(resp);
-            //if (this.lstGalilHistory.Items.Count > 2000) this.lstGalilHistory.Items.RemoveAt(0);
-            //AppendLog($"GALIL: {cmd} -> {resp}");
-            //this.txtGalilCmd.Clear();
-            // keep auto-scroll
-            //this.lstGalilHistory.TopIndex = Math.Max(0, this.lstGalilHistory.Items.Count - 1);
+                if (!controller.IsConnected && !controller.SimulationMode)
+                {
+                    AppendLog("Cannot send: controller not connected");
+                    return;
+                }
+
+                string resp = string.Empty;
+                try
+                {
+                    resp = controller.SendRawCommand(cmd) ?? string.Empty;
+                }
+                catch (Exception ex)
+                {
+                    AppendLog("Send failed: " + ex.Message);
+                    return;
+                }
+
+                if (this.lstGalilHistory != null)
+                {
+                    this.lstGalilHistory.Items.Add($"> {cmd}");
+                    if (!string.IsNullOrEmpty(resp)) this.lstGalilHistory.Items.Add(resp.Trim());
+                    if (this.lstGalilHistory.Items.Count > 2000) this.lstGalilHistory.Items.RemoveAt(0);
+                    try { this.lstGalilHistory.TopIndex = Math.Max(0, this.lstGalilHistory.Items.Count - 1); } catch { }
+                }
+
+                AppendLog($"GALIL: {cmd} -> {resp}");
+                if (this.txtGalilCmd != null) this.txtGalilCmd.Clear();
+            }
+            catch (Exception ex)
+            {
+                AppendLog("SendGalilCommand error: " + ex.Message);
+            }
         }
 
         private void Controller_OnLog(string obj)
@@ -361,7 +390,7 @@ namespace Chainbox_controller
             try
             {
                 inputLayer.ClearManualOverride();
-                controller.MoveRelative(steps, steps, 0);
+                MoveTracksRelative(steps, steps, 0);
                 AppendLog($"Jog move issued: {steps:0} steps");
             }
             catch (Exception ex)
@@ -462,7 +491,7 @@ namespace Chainbox_controller
                 {
                     if (cmbInputMode.SelectedIndex == 0)
                         currentInputMode = InputLayer.InputMode.Gamepad;
-                    else
+                    else if (cmbInputMode.SelectedIndex == 1)
                         currentInputMode = InputLayer.InputMode.Keyboard;
 
                     if (this.lblInputMode != null)
@@ -472,9 +501,9 @@ namespace Chainbox_controller
                 var state = inputLayer.Update(currentInputMode);
                 var outp = mixer.Mix(state.Forward, state.Turn);
 
-                double leftSteps = outp.Left * settings.MaxVelocityStepsPerSec;
-                double rightSteps = outp.Right * settings.MaxVelocityStepsPerSec;
-                double probeSteps = state.Probe * 20000.0;   // fixed probe speed for now
+                double leftSteps = leftDir * outp.Left * settings.MaxVelocityStepsPerSec;
+                double rightSteps = rightDir * outp.Right * settings.MaxVelocityStepsPerSec;
+                double probeSteps = state.Probe * 20000.0;
 
                 if (!controller.RelativeMoveActive)
                 {
@@ -558,16 +587,7 @@ namespace Chainbox_controller
                     }
                 }
                 catch { }
-                // If user target is a 1920-wide monitor at 100% scale, force compact stacked layout to guarantee fit
-                try
-                {
-                    var screenWidth = System.Windows.Forms.Screen.PrimaryScreen?.Bounds.Width ?? 0;
-                    if (screenWidth > 0 && screenWidth <= 1920 && dpi == 96)
-                    {
-                        shouldCompact = true;
-                    }
-                }
-                catch { }
+                // NOTE: removed forced compact rule for typical 1920 displays. Let preferred sizing decide.
 
                 SetUiProfile(shouldCompact);
             }
@@ -683,15 +703,37 @@ namespace Chainbox_controller
 
                     if (left == null || right == null)
                     {
-                        // fallback: identify by known group boxes
+                        // fallback: identify by known group boxes within tlpMain
                         foreach (Control c in this.tlpMain.Controls)
                         {
                             try
                             {
                                 if (c.Controls.Contains(this.gbDrive) || c.Controls.Contains(this.gbConnection) || c.Controls.Contains(this.gbSettings))
                                     left = c;
-                                if (c.Controls.Contains(this.gbTelemetry) || c.Controls.Contains(this.gbDebug))
+                                if (c.Controls.Contains(this.gbTelemetry))
                                     right = c;
+                            }
+                            catch { }
+                        }
+
+                        // If right isn't in tlpMain, attempt to locate it on tlpRoot (some designer versions added it there)
+                        if (right == null && this.tlpRoot != null)
+                        {
+                            try
+                            {
+                                for (int r = 0; r < this.tlpRoot.RowCount; r++)
+                                {
+                                    for (int c = 0; c < this.tlpRoot.ColumnCount; c++)
+                                    {
+                                        var ctrl = this.tlpRoot.GetControlFromPosition(c, r);
+                                        if (ctrl != null && ctrl.Controls.Contains(this.gbTelemetry))
+                                        {
+                                            right = ctrl;
+                                            break;
+                                        }
+                                    }
+                                    if (right != null) break;
+                                }
                             }
                             catch { }
                         }
@@ -725,8 +767,8 @@ namespace Chainbox_controller
                         this.tlpMain.RowStyles.Clear();
                         this.tlpMain.ColumnCount = 2;
                         this.tlpMain.RowCount = 1;
-                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66F));
+                        this.tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
                         if (savedLeft != null) { if (!this.tlpMain.Controls.Contains(savedLeft)) this.tlpMain.Controls.Add(savedLeft, 0, 0); savedLeft.Dock = DockStyle.Fill; }
                         if (savedRight != null) { if (!this.tlpMain.Controls.Contains(savedRight)) this.tlpMain.Controls.Add(savedRight, 1, 0); savedRight.Dock = DockStyle.Fill; }
                         this.tlpMain.ResumeLayout();
@@ -837,7 +879,10 @@ namespace Chainbox_controller
                     stack.Push(child);
             }
         }
-
+        private void MoveTracksRelative(double leftSteps, double rightSteps, double probeSteps = 0)
+        {
+            controller.MoveRelative(leftDir * leftSteps, rightDir * rightSteps, probeSteps);
+        }
         private void AppendLog(string s)
         {
             if (txtLog.InvokeRequired)
