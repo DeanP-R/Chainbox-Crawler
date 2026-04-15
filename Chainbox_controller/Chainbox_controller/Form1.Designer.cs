@@ -43,7 +43,7 @@
             tlpRoot.RowCount = 2; tlpRoot.ColumnCount = 2;
             tlpRoot.RowStyles.Clear(); tlpRoot.ColumnStyles.Clear();
             // fixed header height, main row fills remaining space
-            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));      // header
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));      // header (taller to fit status)
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // main
             // Slightly adjusted proportions for a balanced dashboard
             tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
@@ -78,8 +78,8 @@
             };
 
             headerLayout.RowStyles.Clear();
-            // reduced title/status spacing
-            headerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));  // title
+            // align title/status to match header height (64px)
+            headerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));  // title
             headerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));  // status row
 
             headerLayout.Controls.Add(lblTitle, 0, 0);
@@ -139,13 +139,15 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             tlpMain = this.tlpMain;
             tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tlpMain.ColumnCount = 1;
+            tlpMain.ColumnCount = 2;
             tlpMain.RowCount = 1;
             tlpMain.RowStyles.Clear();
             tlpMain.ColumnStyles.Clear();
             tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tlpMain.Padding = new Padding(0);
+            // left/right proportions
+            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
+            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            tlpMain.Padding = new Padding(8);
             tlpMain.Margin = new Padding(0);
             tlpMain.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
             // Standardized fonts for drive buttons
@@ -517,6 +519,14 @@
                 Font = new Font("Segoe UI", 9F, FontStyle.Regular)
             };
 
+            // Add simulation toggle inline with connection controls (compact)
+            this.chkSimulation = new System.Windows.Forms.CheckBox()
+            {
+                Text = "Simulation",
+                AutoSize = true,
+                Margin = new Padding(6, 8, 6, 6)
+            };
+
             var pnlInputMode = new System.Windows.Forms.FlowLayoutPanel()
             {
                 Dock = DockStyle.Fill,
@@ -554,6 +564,7 @@
             tlpConn.Controls.Add(this.btnConnect);
             tlpConn.Controls.Add(this.btnDisconnect);
             tlpConn.Controls.Add(this.btnEnableMotors);
+            tlpConn.Controls.Add(this.chkSimulation);
             tlpConn.Controls.Add(pnlInputMode);
 
             this.gbConnection.Controls.Add(tlpConn);
@@ -619,12 +630,9 @@
             // Right column: telemetry at top; console will be added below after it is created
             rightCol.Controls.Add(this.gbTelemetry, 0, 0);
 
-            // Simulation checkbox panel created here; it will be placed into the left column below settings
-            var simPanelWrap = new FlowLayoutPanel() { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, Padding = new Padding(8), Margin = new Padding(0) };
-            this.chkSimulation.Dock = DockStyle.Left;
-            simPanelWrap.Controls.Add(this.chkSimulation);
-
+            // Add left and right columns into tlpMain so tlpMain owns both panes
             tlpMain.Controls.Add(leftCol, 0, 0);
+            tlpMain.Controls.Add(rightCol, 1, 0);
 
             // Command stream / diagnostics area
             var gbCmd = new System.Windows.Forms.GroupBox() { Text = "Controller Command Stream / Diagnostics", Dock = System.Windows.Forms.DockStyle.Fill };
@@ -682,9 +690,7 @@
 
             gbCmd.Controls.Add(tlpCmd);
 
-            // Place the simulation panel into the left column below settings (swapped with diagnostics)
-            leftCol.Controls.Add(simPanelWrap, 0, 4);
-
+            // Place the simulation checkbox inline is already in the connection flow
             // Place the command stream / diagnostics box into the right column (middle row)
             rightCol.Controls.Add(gbCmd, 0, 1);
 
@@ -713,9 +719,6 @@
 
             // left main column (tlpMain)
             tlpRoot.Controls.Add(tlpMain, 0, 1);
-
-            // right column content
-            tlpRoot.Controls.Add(rightCol, 1, 1);
             this.Controls.Add(tlpRoot);
         }
 

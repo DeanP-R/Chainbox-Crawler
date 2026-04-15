@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Chainbox_controller")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9074eba3b2045eecf9b7a142367e34971ba3f887")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb65018e259376e7f8d22a7a0b8f26b6b6ac64d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Chainbox_controller")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Chainbox_controller")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
