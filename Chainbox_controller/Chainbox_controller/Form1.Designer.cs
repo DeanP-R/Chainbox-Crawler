@@ -38,16 +38,15 @@
             // Root layout - vertical: status (fixed), main (fill), diagnostics (fixed)
             this.tlpRoot = new System.Windows.Forms.TableLayoutPanel();
 
-            // Use a two-column root so the app feels like a professional two-pane dashboard.
+            // Use a single-column root with a two-column main panel so the app fills the window reliably.
             tlpRoot.Dock = System.Windows.Forms.DockStyle.Fill;
-            tlpRoot.RowCount = 2; tlpRoot.ColumnCount = 2;
+            tlpRoot.RowCount = 2; tlpRoot.ColumnCount = 1;
             tlpRoot.RowStyles.Clear(); tlpRoot.ColumnStyles.Clear();
             // fixed header height, main row fills remaining space
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));      // header (taller to fit status)
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F)); // main
-            // Slightly adjusted proportions for a balanced dashboard
-            tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62F));
-            tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38F));
+            // single full-width column
+            tlpRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             // use slightly larger outer padding for breathing room
             tlpRoot.Padding = new System.Windows.Forms.Padding(12);
             var tlpStatus = new System.Windows.Forms.TableLayoutPanel();
@@ -431,7 +430,26 @@
             tlpSettings.Controls.Add(this.lblSettingsStatus, 1, 5);
 
             settingsScroll.Controls.Add(tlpSettings);
-            this.gbSettings.Controls.Add(settingsScroll);
+            // Create an outer layout to host settings controls on the left and a live coverage map on the right
+            var tlpSettingsOuter = new System.Windows.Forms.TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 2,
+                RowCount = 1,
+                Margin = new Padding(0),
+                Padding = new Padding(0)
+            };
+            tlpSettingsOuter.ColumnStyles.Clear();  
+            tlpSettingsOuter.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 360F)); // settings column width
+            tlpSettingsOuter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // map fills remaining
+
+            // coverage map control (created as a field below)
+            this.coverageMapControl = new CoverageMapControl() { Dock = DockStyle.Fill, Margin = new Padding(6) };
+
+            tlpSettingsOuter.Controls.Add(settingsScroll, 0, 0);
+            tlpSettingsOuter.Controls.Add(this.coverageMapControl, 1, 0);
+
+            this.gbSettings.Controls.Add(tlpSettingsOuter);
 
             // Simulation checkbox
             this.chkSimulation = new System.Windows.Forms.CheckBox()
@@ -591,10 +609,11 @@
             this.gbTelemetry = new System.Windows.Forms.GroupBox() { Text = "Telemetry", Dock = System.Windows.Forms.DockStyle.Fill };
             this.gbTelemetry.Padding = new System.Windows.Forms.Padding(12);
             this.gbTelemetry.Margin = new System.Windows.Forms.Padding(8);
-            var tlpTel = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 1, RowCount = 10 };
+            var tlpTel = new System.Windows.Forms.TableLayoutPanel() { Dock = System.Windows.Forms.DockStyle.Fill, ColumnCount = 1, RowCount = 12 };
             tlpTel.RowStyles.Clear();
-            for (int i = 0; i < 10; i++)
-                tlpTel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            // allocate rows evenly (12 rows to accommodate pose + reset control)
+            for (int i = 0; i < 12; i++)
+                tlpTel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F / 12F));
 
             var mono = new System.Drawing.Font("Consolas", 10);
             this.lblForwardInput = new System.Windows.Forms.Label() { Text = "Forward Input: 0.00", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
@@ -605,6 +624,7 @@
             this.lblLeftVel = new System.Windows.Forms.Label() { Text = "Left Track Velocity: 0 steps/s (0 mm/s)", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
             this.lblRightVel = new System.Windows.Forms.Label() { Text = "Right Track Velocity: 0 steps/s (0 mm/s)", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
             this.lblProbeVel = new System.Windows.Forms.Label() { Text = "Probe Velocity: 0 steps/s", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
+            this.lblPose = new System.Windows.Forms.Label() { Text = "Pose: X=0.00 mm Y=0.00 mm Θ=0.00°", Font = mono, Dock = System.Windows.Forms.DockStyle.Fill };
 
             // Live velocity bars
             this.pnlLeftBarBg = new System.Windows.Forms.Panel() { Dock = System.Windows.Forms.DockStyle.Fill, BackColor = System.Drawing.Color.LightGray, Margin = new System.Windows.Forms.Padding(4), Padding = new System.Windows.Forms.Padding(0) };
@@ -625,7 +645,14 @@
             tlpTel.Controls.Add(this.lblRightVel);
             tlpTel.Controls.Add(this.pnlRightBarBg);
             tlpTel.Controls.Add(this.lblProbeVel);
+            tlpTel.Controls.Add(this.lblPose);
+            // small reset control row
+            this.btnResetPose = new System.Windows.Forms.Button() { Text = "Reset Pose", Dock = System.Windows.Forms.DockStyle.Right, AutoSize = true };
+            // place reset button spanning remaining columns (add to telemetry group but docked right)
+            tlpTel.Controls.Add(this.btnResetPose);
             this.gbTelemetry.Controls.Add(tlpTel);
+            // coverageMapControl placeholder (added as field for compatibility with earlier UI code)
+            this.coverageMapControl = new Chainbox_controller.CoverageMapControl() { Dock = DockStyle.Fill, Margin = new Padding(8) };
 
             // Right column: telemetry at top; console will be added below after it is created
             rightCol.Controls.Add(this.gbTelemetry, 0, 0);
@@ -750,6 +777,8 @@
         private Label lblMixerLeft;
         private Label lblMixerRight;
         private Label lblProbeVel;
+        private Label lblPose;
+        private Button btnResetPose;
         private Label lblLoopRate;
         private Label lblGamepad;
         private Label lblInputMode;
@@ -797,5 +826,6 @@
         private System.Windows.Forms.TableLayoutPanel tlpRoot;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.TableLayoutPanel headerLayout;
+        private CoverageMapControl coverageMapControl;
     }
 }

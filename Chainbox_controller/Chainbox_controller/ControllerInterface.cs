@@ -51,6 +51,11 @@ namespace Chainbox_controller
         private double _lastLeftSteps;
         private double _lastRightSteps;
         private double _lastProbeSteps;
+        // Simulated absolute positions (counts) for A/B/C when in SimulationMode
+        private long _simPosA = 0;
+        private long _simPosB = 0;
+        private long _simPosC = 0;
+        private DateTime _simLastUpdate = DateTime.UtcNow;
 
         // ─────────────────────────────────────────────────────────────────────
         // Connection
@@ -218,6 +223,26 @@ namespace Chainbox_controller
         {
             if (SimulationMode)
             {
+                // In simulation mode, integrate commanded counts/s into simulated absolute positions
+                try
+                {
+                    var now = DateTime.UtcNow;
+                    double dt = (now - _simLastUpdate).TotalSeconds;
+                    if (dt < 0) dt = 0;
+
+                    // leftStepsPerSec/rightStepsPerSec are counts per second
+                    long dA = (long)Math.Round(leftStepsPerSec * dt);
+                    long dB = (long)Math.Round(rightStepsPerSec * dt);
+                    _simPosA += dA;
+                    _simPosB += dB;
+                    _simLastUpdate = now;
+                }
+                catch { _simLastUpdate = DateTime.UtcNow; }
+
+                _lastLeftSteps = leftStepsPerSec;
+                _lastRightSteps = rightStepsPerSec;
+                _lastProbeSteps = probeStepsPerSec;
+
                 SimLog($"JG {(int)Math.Round(leftStepsPerSec)},{(int)Math.Round(rightStepsPerSec)},{(int)Math.Round(probeStepsPerSec)}");
                 return;
             }
@@ -347,7 +372,10 @@ namespace Chainbox_controller
         public (double left, double right, double probe) QueryVelocity()
         {
             if (!IsConnected || SimulationMode)
+            {
+                // In simulation return last commanded velocities (converted from stored values)
                 return (_lastLeftSteps, _lastRightSteps, _lastProbeSteps);
+            }
 
             try
             {
@@ -379,6 +407,33 @@ namespace Chainbox_controller
             {
                 string resp = GCommand($"MG _TS{axis}{axis}");
                 return (int)ParseDouble(resp);
+            }
+            catch { return 0; }
+        }
+
+        /// <summary>
+        /// Query absolute encoder position (TP) for axis A/B/C. In simulation mode
+        /// returns internal simulated positions.
+        /// </summary>
+        public long QueryPosition(char axis)
+        {
+            if (SimulationMode)
+            {
+                switch (char.ToUpper(axis))
+                {
+                    case 'A': return _simPosA;
+                    case 'B': return _simPosB;
+                    case 'C': return _simPosC;
+                    default: return 0;
+                }
+            }
+
+            if (!IsConnected || _galil == null) return 0;
+
+            try
+            {
+                string resp = GCommand($"MG _TP{char.ToUpper(axis)}");
+                return (long)ParseDouble(resp);
             }
             catch { return 0; }
         }
@@ -425,6 +480,15 @@ namespace Chainbox_controller
             if (SimulationMode)
             {
                 _relativeMoveActive = true;
+                // update simulated positions so QueryPosition can return meaningful values
+                try
+                {
+                    _simPosA += (long)Math.Round(leftSteps);
+                    _simPosB += (long)Math.Round(rightSteps);
+                    _simPosC += (long)Math.Round(probeSteps);
+                }
+                catch { }
+
                 SimLog("ST ABC");
                 SimLog($"PR {(int)Math.Round(leftSteps)},{(int)Math.Round(rightSteps)},{(int)Math.Round(probeSteps)}");
                 SimLog("BG ABC");
