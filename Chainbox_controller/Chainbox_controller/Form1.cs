@@ -41,7 +41,7 @@ namespace Chainbox_controller
 
             // ensure form receives key events before controls so we can suppress them when input mode forbids keyboard
             this.KeyPreview = true;
-            this.Icon = new Icon("innovair.ico");
+            this.Icon = new Icon("../../../innovair.ico");
             this.KeyPreview = true;
             this.TabStop = false;
             this.KeyDown += Form1_KeyDown;
