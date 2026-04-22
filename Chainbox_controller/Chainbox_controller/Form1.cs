@@ -23,6 +23,12 @@ namespace Chainbox_controller
         private DriveMixer mixer;
         private ControllerInterface controller;
         private ControllerSettings settings;
+        private DeadReckoner deadReckoner = new DeadReckoner();
+        private EstimatorParameters estParams = new EstimatorParameters();
+        private DateTime _lastEstimatorUpdate = DateTime.UtcNow;
+        private DateTime _lastDiagLog = DateTime.MinValue;
+        private long? _lastTpA = null;
+        private long? _lastTpB = null;
         private int _loopCount = 0;
         private DateTime _lastRateCalc = DateTime.UtcNow;
         private System.Windows.Forms.Timer controlTimer;
@@ -93,8 +99,20 @@ namespace Chainbox_controller
             // wire galil console send
             this.btnSendGalil.Click += (s, e) => SendGalilCommand();
             //this.txtGalilCmd.KeyDown += (s, e) => { if (e.KeyCode == System.Windows.Forms.Keys.Enter) { e.SuppressKeyPress = true; SendGalilCommand(); } };
-            // reflect simulation checkbox
-            this.chkSimulation.CheckedChanged += (s, e) => controller.SimulationMode = this.chkSimulation.Checked;
+            // reflect simulation checkbox and reset TP baseline when mode changes
+            this.chkSimulation.CheckedChanged += (s, e) =>
+            {
+                controller.SimulationMode = this.chkSimulation.Checked;
+                try
+                {
+                    _lastTpA = controller.QueryPosition('A');
+                    _lastTpB = controller.QueryPosition('B');
+                }
+                catch { }
+            };
+
+            // reset pose button
+            try { if (this.btnResetPose != null) this.btnResetPose.Click += (s, e) => { deadReckoner.Reset(); AppendLog("Pose reset"); }; } catch { }
 
             // Responsive UI hooks (temporarily disabled to preserve designer layout).
             // These can be re-enabled after responsive logic is aligned with the designer.
@@ -114,20 +132,37 @@ namespace Chainbox_controller
             }
             catch { }
         }
+
+        // Compute approximate encoder counts required for an in-place rotation
+        // by given degrees. Uses estimator parameters (effective track width and counts per mm).
+        private double RotationCountsForDegrees(double degrees)
+        {
+            // distance each wheel must travel (mm) for in-place rotation: arc length = (π * trackWidth) * (degrees/360)
+            double arcMm = Math.PI * estParams.EffectiveTrackWidthMm * (degrees / 360.0);
+            // convert mm to encoder counts using estimated counts per mm
+            double counts = arcMm * estParams.EstimatedCountsPerMm;
+            return counts;
+        }
         private void BtnTurn90Left_Click(object? sender, EventArgs e)
         {
             try
             {
-                double steps = (double)numJogSteps.Value * 5.0;
-
                 if (!controller.SimulationMode && !controller.IsConnected)
                 {
                     AppendLog("Pivot ignored: controller not connected");
                     return;
                 }
 
-                MoveTracksRelative(-steps, steps, 0);
-                AppendLog($"Pivot 90° left issued: {-steps:0} / {steps:0} steps");
+                // compute counts required for 90° rotation using geometry parameters
+                double counts = RotationCountsForDegrees(90.0);
+                double desiredLeftCounts = -counts;   // left wheel backward for left pivot
+                double desiredRightCounts = counts;   // right wheel forward
+
+                double axisLeft = leftDir * desiredLeftCounts;
+                double axisRight = rightDir * desiredRightCounts;
+
+                MoveTracksRelative(axisLeft, axisRight, 0);
+                AppendLog($"Pivot 90° left issued: axisLeft={axisLeft:0} axisRight={axisRight:0} counts={counts:0}");
             }
             catch (Exception ex)
             {
@@ -139,16 +174,21 @@ namespace Chainbox_controller
         {
             try
             {
-                double steps = (double)numJogSteps.Value * 5.0;
-
                 if (!controller.SimulationMode && !controller.IsConnected)
                 {
                     AppendLog("Pivot ignored: controller not connected");
                     return;
                 }
 
-                MoveTracksRelative(steps, -steps, 0);
-                AppendLog($"Pivot 90° right issued: {steps:0} / {-steps:0} steps");
+                double counts = RotationCountsForDegrees(90.0);
+                double desiredLeftCounts = counts;    // left forward
+                double desiredRightCounts = -counts;  // right backward
+
+                double axisLeft = leftDir * desiredLeftCounts;
+                double axisRight = rightDir * desiredRightCounts;
+
+                MoveTracksRelative(axisLeft, axisRight, 0);
+                AppendLog($"Pivot 90° right issued: axisLeft={axisLeft:0} axisRight={axisRight:0} counts={counts:0}");
             }
             catch (Exception ex)
             {
@@ -518,6 +558,50 @@ namespace Chainbox_controller
                 lblProbeInput.Text = $"Probe Input: {state.Probe:0.00}";
                 lblLeftVel.Text = $"Left Track Velocity: {leftSteps:0} steps/s ({leftMm:0.##} mm/s)";
                 lblRightVel.Text = $"Right Track Velocity: {rightSteps:0} steps/s ({rightMm:0.##} mm/s)";
+                // Update dead-reckoning pose using absolute TP encoder deltas (recommended)
+                try
+                {
+                    var nowEst = DateTime.UtcNow;
+                    double estDt = (nowEst - _lastEstimatorUpdate).TotalSeconds;
+                    if (estDt <= 0) estDt = 0.02; // fallback
+
+                    // Read absolute encoder positions (TP) for A/B. Allow swapping axes if hardware mapping differs.
+                    long tpA = controller.QueryPosition(estParams.SwapAxes ? 'B' : 'A');
+                    long tpB = controller.QueryPosition(estParams.SwapAxes ? 'A' : 'B');
+
+                    // Compute deltas since last sample
+                    if (_lastTpA == null) _lastTpA = tpA;
+                    if (_lastTpB == null) _lastTpB = tpB;
+
+                    long dA = tpA - _lastTpA.Value;
+                    long dB = tpB - _lastTpB.Value;
+
+                    // Convert counts to mm using per-side calibration
+                    double dLeftMm = (leftDir * dA) * estParams.LeftMmPerCount;
+                    double dRightMm = (rightDir * dB) * estParams.RightMmPerCount;
+
+                    // Diagnostics logging of raw TP values (throttled)
+                    if ((DateTime.UtcNow - _lastDiagLog).TotalMilliseconds > 250)
+                    {
+                        _lastDiagLog = DateTime.UtcNow;
+                        AppendLog($"TP: A={tpA} dA={dA} B={tpB} dB={dB} dL={dLeftMm:0.###}mm dR={dRightMm:0.###}mm");
+                    }
+
+                    // Integrate displacements
+                    deadReckoner.IntegrateDisplacement(dLeftMm, dRightMm, estParams.EffectiveTrackWidthMm);
+                    _lastEstimatorUpdate = nowEst;
+                    _lastTpA = tpA; _lastTpB = tpB;
+
+                    if (this.lblPose != null)
+                    {
+                        double thetaDeg = deadReckoner.Theta * (180.0 / Math.PI);
+                        this.lblPose.Text = $"Pose: X={deadReckoner.X:0.##} mm Y={deadReckoner.Y:0.##} mm Θ={thetaDeg:0.##}°";
+                    }
+
+                    // update coverage map
+                    try { this.coverageMapControl?.SetPose(deadReckoner.X, deadReckoner.Y, deadReckoner.Theta); } catch { }
+                }
+                catch { }
                 lblProbeVel.Text = $"Probe Velocity: {probeSteps:0} steps/s";
 
                 lblGamepad.Text = inputLayer.GamepadConnected
@@ -881,7 +965,74 @@ namespace Chainbox_controller
         }
         private void MoveTracksRelative(double leftSteps, double rightSteps, double probeSteps = 0)
         {
-            controller.MoveRelative(leftDir * leftSteps, rightDir * rightSteps, probeSteps);
+            // Send relative motion to controller. Caller provides motor-step deltas
+            // in controller axis sign. We do NOT update estimator optimistically here.
+            controller.MoveRelative(leftSteps, rightSteps, probeSteps);
+
+            // Start a background monitor task that waits for the controller to finish
+            // the relative move (or the motion to settle) and then reads TP to compute
+            // the actual displacement. This allows user to stop mid-move and ensures
+            // estimator uses controller-reported positions.
+            _ = System.Threading.Tasks.Task.Run(async () =>
+            {
+                try
+                {
+                    // initial readings
+                    long startA = controller.QueryPosition('A');
+                    long startB = controller.QueryPosition('B');
+                    long prevA = startA, prevB = startB;
+                    int stable = 0;
+                    var sw = System.Diagnostics.Stopwatch.StartNew();
+
+                    while (true)
+                    {
+                        await System.Threading.Tasks.Task.Delay(100);
+                        long a = controller.QueryPosition('A');
+                        long b = controller.QueryPosition('B');
+
+                        // if values unchanged for a few samples, assume motion settled
+                        if (a == prevA && b == prevB)
+                            stable++;
+                        else
+                            stable = 0;
+
+                        prevA = a; prevB = b;
+
+                        // stop if controller relative move flag cleared, or values stable for 3 samples, or timeout
+                        if (!controller.RelativeMoveActive || stable >= 3 || sw.ElapsedMilliseconds > 30000)
+                            break;
+                    }
+
+                    long endA = prevA;
+                    long endB = prevB;
+                    long dA = endA - startA;
+                    long dB = endB - startB;
+
+                    double dLeftMm = (leftDir * dA) * estParams.LeftMmPerCount;
+                    double dRightMm = (rightDir * dB) * estParams.RightMmPerCount;
+
+                    // integrate into dead reckoner on UI thread
+                    try
+                    {
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            try
+                            {
+                                deadReckoner.IntegrateDisplacement(dLeftMm, dRightMm, estParams.EffectiveTrackWidthMm);
+                                if (this.lblPose != null)
+                                {
+                                    double thetaDeg = deadReckoner.Theta * (180.0 / Math.PI);
+                                    this.lblPose.Text = $"Pose: X={deadReckoner.X:0.##} mm Y={deadReckoner.Y:0.##} mm Θ={thetaDeg:0.##}°";
+                                }
+                                try { this.coverageMapControl?.SetPose(deadReckoner.X, deadReckoner.Y, deadReckoner.Theta); } catch { }
+                            }
+                            catch { }
+                        }));
+                    }
+                    catch { }
+                }
+                catch { }
+            });
         }
         private void AppendLog(string s)
         {

@@ -12,5 +12,7 @@ namespace Chainbox_controller
         public double AccelStepsPerSec2 { get; set; } = 1000;
         public double DecelStepsPerSec2 { get; set; } = 1000;
         public double StepsPerMm { get; set; } = 100;
+        // Distance between left and right tracks in millimeters — used for dead-reckoning
+        public double TrackWidthMm { get; set; } = 150.0;
     }
 }
