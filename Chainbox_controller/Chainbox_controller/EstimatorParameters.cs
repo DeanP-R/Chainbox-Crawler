@@ -76,7 +76,7 @@ namespace Chainbox_controller
         /// <summary>
         /// Map resolution [mm per cell]
         /// </summary>
-        public double GridResolutionMm { get; set; } = 10.0;
+        public double GridResolutionMm { get; set; } = 1.0;
 
         /// <summary>
         /// Initial grid size [mm]

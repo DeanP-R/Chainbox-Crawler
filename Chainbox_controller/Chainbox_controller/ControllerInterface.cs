@@ -325,10 +325,18 @@ namespace Chainbox_controller
         /// </summary>
         public void AbortMotion()
         {
-            if (SimulationMode) { LogMessage("SIM: AB 1"); return; }
+            if (SimulationMode)
+            {
+                _relativeMoveActive = false;
+                _lastLeftSteps = _lastRightSteps = _lastProbeSteps = 0;
+                LogMessage("SIM: AB 1");
+                return;
+            }
+
             if (!IsConnected) return;
 
             GCommandNoReply("AB 1");
+            _relativeMoveActive = false;
             _lastLeftSteps = _lastRightSteps = _lastProbeSteps = 0;
             LogMessage("AB 1 — motion aborted");
         }
@@ -480,7 +488,7 @@ namespace Chainbox_controller
             if (SimulationMode)
             {
                 _relativeMoveActive = true;
-                // update simulated positions so QueryPosition can return meaningful values
+
                 try
                 {
                     _simPosA += (long)Math.Round(leftSteps);
@@ -488,6 +496,11 @@ namespace Chainbox_controller
                     _simPosC += (long)Math.Round(probeSteps);
                 }
                 catch { }
+
+                _lastLeftSteps = 0;
+                _lastRightSteps = 0;
+                _lastProbeSteps = 0;
+                _simLastUpdate = DateTime.UtcNow;
 
                 SimLog("ST ABC");
                 SimLog($"PR {(int)Math.Round(leftSteps)},{(int)Math.Round(rightSteps)},{(int)Math.Round(probeSteps)}");
@@ -517,10 +530,6 @@ namespace Chainbox_controller
                 _relativeMoveActive = false;
                 LogMessage("Relative move failed: " + ex.Message);
             }
-        }
-        public void ClearRelativeMoveFlag()
-        {
-            _relativeMoveActive = false;
         }
         /// <summary>Fires OnLog event and updates LastLog.</summary>
         public void LogMessage(string msg)
@@ -575,7 +584,10 @@ namespace Chainbox_controller
             if (!setP) return $"JG {sa},{sb}";
             return $"JG {sa},{sb},{sc}";
         }
-
+        public void ClearRelativeMoveFlag()
+        {
+            _relativeMoveActive = false;
+        }
         private static double ParseDouble(string s)
         {
             if (double.TryParse(s.Trim(),

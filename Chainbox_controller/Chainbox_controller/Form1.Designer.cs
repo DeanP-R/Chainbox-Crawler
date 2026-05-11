@@ -351,7 +351,7 @@
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 2,
-                RowCount = 6,
+                RowCount = 9,
                 Dock = DockStyle.Top
             };
 
@@ -391,9 +391,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDecel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStepsPerMm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numJogSteps)).EndInit();
+            this.chkUseCustomTurn90 = new System.Windows.Forms.CheckBox()
+            {
+                Text = "Use custom 90° turn counts",
+                AutoSize = true,
+                Anchor = AnchorStyles.Left
+            };
 
+            this.numTurn90Steps = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numTurn90Steps)).BeginInit();
+            this.numTurn90Steps.Maximum = 10000000m;
+            this.numTurn90Steps.Value = 2986068m;
+            ((System.ComponentModel.ISupportInitialize)(this.numTurn90Steps)).EndInit();
+
+            this.btnSaveSettings = new System.Windows.Forms.Button()
+            {
+                Text = "Save Settings",
+                AutoSize = true,
+                Anchor = AnchorStyles.Left
+            };
+            this.btnAdvancedSettings = new System.Windows.Forms.Button()
+            {
+                Text = "Advanced Settings...",
+                AutoSize = true,
+                Anchor = AnchorStyles.Left
+            };
             tlpSettings.RowStyles.Clear();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 9; i++)
                 tlpSettings.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Max Speed (steps/s)", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 0);
@@ -411,6 +435,15 @@
             tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "Jog steps", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 4);
             tlpSettings.Controls.Add(this.numJogSteps, 1, 4);
 
+            tlpSettings.Controls.Add(this.chkUseCustomTurn90, 0, 5);
+            tlpSettings.SetColumnSpan(this.chkUseCustomTurn90, 2);
+
+            tlpSettings.Controls.Add(new System.Windows.Forms.Label() { Text = "90° turn counts", Anchor = AnchorStyles.Left, AutoSize = true }, 0, 6);
+            tlpSettings.Controls.Add(this.numTurn90Steps, 1, 6);
+
+            tlpSettings.Controls.Add(this.btnAdvancedSettings, 0, 8);
+            tlpSettings.SetColumnSpan(this.btnAdvancedSettings, 2);
+
             this.btnApplySettings = new System.Windows.Forms.Button()
             {
                 Text = "Apply",
@@ -426,8 +459,11 @@
                 AutoSize = true
             };
 
-            tlpSettings.Controls.Add(this.btnApplySettings, 0, 5);
-            tlpSettings.Controls.Add(this.lblSettingsStatus, 1, 5);
+            tlpSettings.Controls.Add(this.btnApplySettings, 0, 7);
+            tlpSettings.Controls.Add(this.btnSaveSettings, 1, 7);
+
+            tlpSettings.Controls.Add(this.lblSettingsStatus, 0, 8);
+            tlpSettings.SetColumnSpan(this.lblSettingsStatus, 2);
 
             settingsScroll.Controls.Add(tlpSettings);
             // Create an outer layout to host settings controls on the left and a live coverage map on the right
@@ -470,11 +506,11 @@
 
             leftCol.RowStyles.Clear();
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // connection
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));  // drive (slightly reduced)
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));  // drive
             leftCol.RowStyles.Add(new RowStyle(SizeType.AutoSize));      // probe
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));  // settings (increased)
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F)); // simulation (small fixed height)
-            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));  // spacer / flexible
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));  // settings
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F)); // simulation / spare
+            leftCol.RowStyles.Add(new RowStyle(SizeType.Percent, 0F));   // spacer
 
             // Connection group at top of left column
             this.gbConnection = new System.Windows.Forms.GroupBox()
@@ -827,5 +863,10 @@
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.TableLayoutPanel headerLayout;
         private CoverageMapControl coverageMapControl;
+
+        private CheckBox chkUseCustomTurn90;
+        private NumericUpDown numTurn90Steps;
+        private Button btnSaveSettings;
+        private Button btnAdvancedSettings;
     }
 }

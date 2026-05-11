@@ -1,175 +1,174 @@
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Chainbox_controller
 {
-    // Minimal placeholder for the CoverageMapControl used by Form1.
-    // Replace with full implementation later; this stub prevents build errors
-    // and provides a simple visual placeholder in the UI.
     public class CoverageMapControl : UserControl
     {
-        private double poseX = 0.0;
-        private double poseY = 0.0;
-        private double poseTheta = 0.0; // radians
-        // store trace in mm coordinates (X mm, Y mm) so changing scale/redraw works
-        private readonly System.Collections.Generic.List<System.Drawing.PointF> traceMm = new();
+        private CoverageCell[,]? _grid;
+        private double _gridXMinMm = -2500.0;
+        private double _gridYMinMm = -2500.0;
+        private double _cellSizeMm = 10.0;
 
-        // pixels-per-mm scale (default 0.5 px/mm). Exposed property so UI can change it.
-        private float scale = 0.5f; // pixels per mm
-        public float Scale
+        private Pose2D _pose = new Pose2D(0, 0, 0);
+        private EstimatorParameters? _parameters;
+
+        private readonly List<PointF> _traceMm = new();
+
+        public CoverageMapControl()
         {
-            get => scale;
-            set
-            {
-                if (value <= 0) return;
-                scale = value;
-                this.Invalidate();
-            }
-        }
+            BackColor = Color.WhiteSmoke;
+            BorderStyle = BorderStyle.FixedSingle;
+            DoubleBuffered = true;
+            MinimumSize = new Size(160, 140);
 
-        // grid spacing in mm for drawing major grid lines and labels
-        public float GridSpacingMm { get; set; } = 100f;
-
-        // whether to auto-center map at control center (true) or use absolute coords (false)
-        public bool AutoCenter { get; set; } = true;
-
-        // clear trace
-        public void ClearTrace()
-        {
-            traceMm.Clear();
-            this.Invalidate();
+            SetStyle(ControlStyles.AllPaintingInWmPaint
+                   | ControlStyles.UserPaint
+                   | ControlStyles.OptimizedDoubleBuffer
+                   | ControlStyles.ResizeRedraw, true);
         }
 
         public void SetPose(double xMm, double yMm, double thetaRad)
         {
-            poseX = xMm;
-            poseY = yMm;
-            poseTheta = thetaRad;
-            // record trace point in mm
-            try
-            {
-                traceMm.Add(new System.Drawing.PointF((float)poseX, (float)poseY));
-                if (traceMm.Count > 20000) traceMm.RemoveRange(0, traceMm.Count - 20000);
-            }
-            catch { }
-            this.Invalidate();
+            _pose = new Pose2D(xMm, yMm, thetaRad);
+            AppendTracePoint((float)xMm, (float)yMm);
+            Invalidate();
         }
-        public CoverageMapControl()
+
+        public void UpdateMap(
+            CoverageCell[,]? grid,
+            double gridXMinMm,
+            double gridYMinMm,
+            double cellSizeMm,
+            Pose2D pose,
+            EstimatorParameters? parameters = null)
         {
-            this.BackColor = Color.WhiteSmoke;
-            this.BorderStyle = BorderStyle.FixedSingle;
-            this.DoubleBuffered = true;
-            this.MinimumSize = new Size(100, 100);
+            _grid = grid;
+            _gridXMinMm = gridXMinMm;
+            _gridYMinMm = gridYMinMm;
+            _cellSizeMm = Math.Max(1e-6, cellSizeMm);
+            _pose = pose;
+            if (parameters != null)
+                _parameters = parameters;
+
+            AppendTracePoint((float)pose.X, (float)pose.Y);
+            Invalidate();
+        }
+
+        private void AppendTracePoint(float xMm, float yMm)
+        {
+            if (_traceMm.Count == 0)
+            {
+                _traceMm.Add(new PointF(xMm, yMm));
+                return;
+            }
+
+            PointF last = _traceMm[_traceMm.Count - 1];
+            float dx = xMm - last.X;
+            float dy = yMm - last.Y;
+            if ((dx * dx + dy * dy) < 0.25f)
+                return;
+
+            _traceMm.Add(new PointF(xMm, yMm));
+            if (_traceMm.Count > 20000)
+                _traceMm.RemoveRange(0, _traceMm.Count - 20000);
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (var sf = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
-            using (var f = new Font("Segoe UI", 9f))
-            using (var brush = new SolidBrush(Color.DarkGray))
+
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.FromArgb(34, 37, 42));
+
+            Rectangle plotRect = new Rectangle(50, 25, Math.Max(10, Width - 70), Math.Max(10, Height - 60));
+            using var borderPen = new Pen(Color.Gray, 1f);
+            g.DrawRectangle(borderPen, plotRect);
+
+            if (_grid != null)
+                DrawGrid(g, plotRect);
+
+            DrawRobot(g, plotRect);
+            DrawTitle(g);
+        }
+
+        private void DrawGrid(Graphics g, Rectangle plotRect)
+        {
+            if (_grid == null) return;
+
+            int rows = _grid.GetLength(0);
+            int cols = _grid.GetLength(1);
+
+            double xMaxMm = _gridXMinMm + cols * _cellSizeMm;
+            double yMaxMm = _gridYMinMm + rows * _cellSizeMm;
+
+            float pxPerMmX = (float)(plotRect.Width / Math.Max(1.0, xMaxMm - _gridXMinMm));
+            float pxPerMmY = (float)(plotRect.Height / Math.Max(1.0, yMaxMm - _gridYMinMm));
+            float pxPerMm = Math.Min(pxPerMmX, pxPerMmY);
+
+            using var visitedBrush = new SolidBrush(Color.Goldenrod);
+            using var scannedBrush = new SolidBrush(Color.ForestGreen);
+
+            for (int row = 0; row < rows; row++)
             {
-                // Draw background
-                e.Graphics.Clear(this.BackColor);
-
-                var cx = this.ClientRectangle.Width / 2f;
-                var cy = this.ClientRectangle.Height / 2f;
-
-                // draw grid
-                DrawGrid(e.Graphics, cx, cy);
-
-                // draw trace (convert mm->px)
-                if (traceMm.Count > 1)
+                for (int col = 0; col < cols; col++)
                 {
-                    using (var pen = new Pen(Color.Blue, 2))
-                    {
-                        for (int i = 1; i < traceMm.Count; i++)
-                        {
-                            var p1 = new PointF(cx + traceMm[i - 1].X * scale, cy - traceMm[i - 1].Y * scale);
-                            var p2 = new PointF(cx + traceMm[i].X * scale, cy - traceMm[i].Y * scale);
-                            e.Graphics.DrawLine(pen, p1, p2);
-                        }
-                    }
-                }
+                    var cell = _grid[row, col];
+                    if (!cell.Visited && !cell.Scanned)
+                        continue;
 
-                // draw robot at current pose
-                var robotX = cx + (float)(poseX * scale);
-                var robotY = cy - (float)(poseY * scale);
-                float rw = Math.Max(12f, 0.08f * Math.Min(this.Width, this.Height));
-                float rh = rw * 0.6f; // robot icon size in pixels
-                e.Graphics.TranslateTransform(robotX, robotY);
-                e.Graphics.RotateTransform((float)(poseTheta * 180.0 / Math.PI));
-                using (var b = new SolidBrush(Color.Red))
-                using (var p = new Pen(Color.Black, 1))
-                {
-                    var rect = new RectangleF(-rw/2, -rh/2, rw, rh);
-                    e.Graphics.FillRectangle(b, rect);
-                    e.Graphics.DrawRectangle(p, rect.X, rect.Y, rect.Width, rect.Height);
-                    // heading arrow
-                    var arrow = new PointF[] { new PointF(rw/2, 0), new PointF(rw/2 - 8, -6), new PointF(rw/2 - 8, 6) };
-                    e.Graphics.FillPolygon(Brushes.Yellow, arrow);
-                    e.Graphics.DrawPolygon(p, arrow);
-                }
-                e.Graphics.ResetTransform();
+                    float x = plotRect.Left + (float)(col * _cellSizeMm * pxPerMm);
+                    float y = plotRect.Bottom - (float)((row + 1) * _cellSizeMm * pxPerMm);
+                    float size = Math.Max(1f, (float)(_cellSizeMm * pxPerMm));
 
-                // overlay title and axes labels
-                e.Graphics.DrawString("Coverage Map", f, brush, new RectangleF(0, 0, this.Width, 20), sf);
-                DrawAxisLabels(e.Graphics, cx, cy);
+                    g.FillRectangle(cell.Scanned ? scannedBrush : visitedBrush, x, y, size, size);
+                }
             }
         }
 
-        private void DrawGrid(Graphics g, float cx, float cy)
+        private void DrawRobot(Graphics g, Rectangle plotRect)
         {
-            try
-            {
-                float spacingPx = GridSpacingMm * scale;
-                if (spacingPx < 6) return; // too dense
+            double robotLengthMm = _parameters?.RobotLengthMm ?? 752.0;
+            double robotWidthMm = _parameters?.RobotWidthMm ?? 683.0;
 
-                var rect = this.ClientRectangle;
-                using (var pen = new Pen(Color.LightGray, 1))
-                using (var penMajor = new Pen(Color.Gray, 1.5f))
-                {
-                    // vertical lines
-                    for (float x = cx % spacingPx; x < rect.Width; x += spacingPx)
-                        g.DrawLine(pen, x, rect.Top, x, rect.Bottom);
-                    // horizontal lines
-                    for (float y = cy % spacingPx; y < rect.Height; y += spacingPx)
-                        g.DrawLine(pen, rect.Left, y, rect.Right, y);
-                }
-            }
-            catch { }
+            float cx = plotRect.Left + plotRect.Width / 2f;
+            float cy = plotRect.Top + plotRect.Height / 2f;
+
+            float rw = Math.Max(12f, (float)(robotLengthMm * 0.03));
+            float rh = Math.Max(10f, (float)(robotWidthMm * 0.03));
+
+            GraphicsState state = g.Save();
+            g.TranslateTransform(cx, cy);
+            g.RotateTransform((float)(-_pose.Theta * 180.0 / Math.PI));
+
+            using var fill = new SolidBrush(Color.Red);
+            using var outline = new Pen(Color.Black, 1.2f);
+
+            RectangleF rect = new RectangleF(-rw / 2f, -rh / 2f, rw, rh);
+            g.FillRectangle(fill, rect);
+            g.DrawRectangle(outline, rect.X, rect.Y, rect.Width, rect.Height);
+
+            PointF[] arrow =
+            {
+                new PointF(rw / 2f + 8f, 0f),
+                new PointF(rw / 2f - 4f, -5f),
+                new PointF(rw / 2f - 4f, 5f)
+            };
+            g.FillPolygon(Brushes.Yellow, arrow);
+            g.DrawPolygon(outline, arrow);
+
+            g.Restore(state);
         }
 
-        private void DrawAxisLabels(Graphics g, float cx, float cy)
+        private void DrawTitle(Graphics g)
         {
-            try
-            {
-                using (var f = new Font("Segoe UI", 8f))
-                using (var brush = new SolidBrush(Color.Black))
-                {
-                    // draw a few tick labels centered
-                    float spacingPx = GridSpacingMm * scale;
-                    if (spacingPx < 6) return;
-
-                    // x labels (every grid line +/- 5 lines)
-                    for (int i = -5; i <= 5; i++)
-                    {
-                        float x = cx + i * spacingPx;
-                        float labelMm = i * GridSpacingMm;
-                        g.DrawString($"{labelMm:0}", f, brush, x - 10, cy + 4);
-                    }
-
-                    // y labels
-                    for (int i = -5; i <= 5; i++)
-                    {
-                        float y = cy + i * spacingPx;
-                        float labelMm = -i * GridSpacingMm;
-                        g.DrawString($"{labelMm:0}", f, brush, cx + 4, y - 8);
-                    }
-                }
-            }
-            catch { }
+            using var font = new Font("Segoe UI", 9f, FontStyle.Bold);
+            using var brush = new SolidBrush(Color.White);
+            g.DrawString("Coverage Map", font, brush, new PointF(10, 5));
         }
     }
 }

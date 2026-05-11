@@ -23,7 +23,11 @@ namespace Chainbox_controller
         private DriveMixer mixer;
         private ControllerInterface controller;
         private ControllerSettings settings;
-        private DeadReckoner deadReckoner = new DeadReckoner();
+        private DeadReckoner deadReckoner = new DeadReckoner(
+            initialGridWidthMm: 5000.0,
+            initialGridHeightMm: 5000.0,
+            cellSizeMm: 1.0,
+            expandMarginCells: 50);
         private EstimatorParameters estParams = new EstimatorParameters();
         private DateTime _lastEstimatorUpdate = DateTime.UtcNow;
         private DateTime _lastDiagLog = DateTime.MinValue;
@@ -35,13 +39,25 @@ namespace Chainbox_controller
 
         private double leftDir = 1.0;
         private double rightDir = -1.0; // flip this motor
+
+        private bool _scanEnabled = false;
+        private readonly string _settingsFilePath =
+            System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ui_settings.json");
+        private UiSettings _uiSettings = new UiSettings();
+
         public Form1()
         {
             InitializeComponent();
 
             // ensure form receives key events before controls so we can suppress them when input mode forbids keyboard
             this.KeyPreview = true;
-            this.Icon = new Icon("../../../innovair.ico");
+            try
+            {
+                string iconPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "innovair.ico");
+                if (System.IO.File.Exists(iconPath))
+                    this.Icon = new Icon(iconPath);
+            }
+            catch { }
             this.KeyPreview = true;
             this.TabStop = false;
             this.KeyDown += Form1_KeyDown;
@@ -72,6 +88,11 @@ namespace Chainbox_controller
             // Controls created in Designer; wire runtime events
             WireUpEvents();
 
+            LoadUiSettings();
+            ApplyUiSettingsToControls(_uiSettings);
+            ApplyControlValuesToModels();
+
+            this.FormClosing += Form1_FormClosing;
             // Setup timer ~50Hz
             controlTimer = new System.Windows.Forms.Timer();
             controlTimer.Interval = 20;
@@ -112,8 +133,33 @@ namespace Chainbox_controller
             };
 
             // reset pose button
-            try { if (this.btnResetPose != null) this.btnResetPose.Click += (s, e) => { deadReckoner.Reset(); AppendLog("Pose reset"); }; } catch { }
+            try
+            {
+                if (this.btnResetPose != null)
+                {
+                    this.btnResetPose.Click += (s, e) =>
+                    {
+                        deadReckoner.Reset();
+                        _lastTpA = null;
+                        _lastTpB = null;
 
+                        try
+                        {
+                            this.coverageMapControl?.UpdateMap(
+                                deadReckoner.Grid,
+                                deadReckoner.GridXMinMm,
+                                deadReckoner.GridYMinMm,
+                                deadReckoner.CellSizeMm,
+                                deadReckoner.CurrentPose,
+                                estParams);
+                        }
+                        catch { }
+
+                        AppendLog("Pose and coverage reset");
+                    };
+                }
+            }
+            catch { }
             // Responsive UI hooks (temporarily disabled to preserve designer layout).
             // These can be re-enabled after responsive logic is aligned with the designer.
             // this.Load += (s, e) => ApplyUiProfileIfNeeded();
@@ -131,17 +177,42 @@ namespace Chainbox_controller
                     this.lblMotorsStatus.ForeColor = controller.MotorsEnabled ? System.Drawing.Color.Green : System.Drawing.Color.Orange;
             }
             catch { }
+            if (this.btnSaveSettings != null)
+            {
+                this.btnSaveSettings.Click += (s, e) =>
+                {
+                    SaveUiSettings();
+                    AppendLog("Settings saved");
+                    if (lblSettingsStatus != null) lblSettingsStatus.Text = "Settings: SAVED";
+                };
+            }
         }
 
         // Compute approximate encoder counts required for an in-place rotation
         // by given degrees. Uses estimator parameters (effective track width and counts per mm).
         private double RotationCountsForDegrees(double degrees)
         {
-            // distance each wheel must travel (mm) for in-place rotation: arc length = (π * trackWidth) * (degrees/360)
+            if (this.chkUseCustomTurn90 != null && this.chkUseCustomTurn90.Checked && this.numTurn90Steps != null)
+                return (double)this.numTurn90Steps.Value;
+
             double arcMm = Math.PI * estParams.EffectiveTrackWidthMm * (degrees / 360.0);
-            // convert mm to encoder counts using estimated counts per mm
             double counts = arcMm * estParams.EstimatedCountsPerMm;
             return counts;
+        }
+        private void BtnAdvancedSettings_Click(object? sender, EventArgs e)
+        {
+            var workingCopy = CaptureUiSettings();
+
+            using (var dlg = new AdvancedSettingsForm(workingCopy))
+            {
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    _uiSettings = dlg.Settings;
+                    ApplyUiSettingsToControls(_uiSettings);
+                    ApplyControlValuesToModels();
+                    SaveUiSettings();
+                }
+            }
         }
         private void BtnTurn90Left_Click(object? sender, EventArgs e)
         {
@@ -378,6 +449,9 @@ namespace Chainbox_controller
             this.btnTurn90Left.Click += BtnTurn90Left_Click;
             this.btnTurn90Right.Click += BtnTurn90Right_Click;
 
+            this.btnApplySettings.Click += BtnApplySettings_Click;
+            this.btnAdvancedSettings.Click += BtnAdvancedSettings_Click;
+
             this.btnProbeLeft.MouseDown += (s, e) => inputLayer.SetManualOverride(new InputState() { Probe = -1.0 });
             this.btnProbeLeft.MouseUp += (s, e) => inputLayer.ClearManualOverride();
 
@@ -463,13 +537,13 @@ namespace Chainbox_controller
 
         private void BtnApplySettings_Click(object? sender, EventArgs e)
         {
-            settings.MaxVelocityStepsPerSec = (double)numMaxSpeed.Value;
-            settings.AccelStepsPerSec2 = (double)numAccel.Value;
-            settings.DecelStepsPerSec2 = (double)numDecel.Value;
-            settings.StepsPerMm = (double)numStepsPerMm.Value;
+            ApplyControlValuesToModels();
+
             controller.ApplySettings(settings);
             AppendLog("Drive settings updated");
-            if (lblSettingsStatus != null) lblSettingsStatus.Text = "Settings: APPLIED";
+
+            if (lblSettingsStatus != null)
+                lblSettingsStatus.Text = "Settings: APPLIED";
         }
 
         private void MarkSettingsPending()
@@ -481,6 +555,7 @@ namespace Chainbox_controller
         {
             inputLayer.ClearManualOverride();
             controller.StopAll();
+            controller.ClearRelativeMoveFlag();
             AppendLog("Emergency STOP");
         }
 
@@ -587,10 +662,10 @@ namespace Chainbox_controller
                         AppendLog($"TP: A={tpA} dA={dA} B={tpB} dB={dB} dL={dLeftMm:0.###}mm dR={dRightMm:0.###}mm");
                     }
 
-                    // Integrate displacements
-                    deadReckoner.IntegrateDisplacement(dLeftMm, dRightMm, estParams.EffectiveTrackWidthMm);
+                    deadReckoner.IntegrateAndPaint(dLeftMm, dRightMm, estParams, _scanEnabled);
                     _lastEstimatorUpdate = nowEst;
-                    _lastTpA = tpA; _lastTpB = tpB;
+                    _lastTpA = tpA;
+                    _lastTpB = tpB;
 
                     if (this.lblPose != null)
                     {
@@ -598,8 +673,17 @@ namespace Chainbox_controller
                         this.lblPose.Text = $"Pose: X={deadReckoner.X:0.##} mm Y={deadReckoner.Y:0.##} mm Θ={thetaDeg:0.##}°";
                     }
 
-                    // update coverage map
-                    try { this.coverageMapControl?.SetPose(deadReckoner.X, deadReckoner.Y, deadReckoner.Theta); } catch { }
+                    try
+                    {
+                        this.coverageMapControl?.UpdateMap(
+                            deadReckoner.Grid,
+                            deadReckoner.GridXMinMm,
+                            deadReckoner.GridYMinMm,
+                            deadReckoner.CellSizeMm,
+                            deadReckoner.CurrentPose,
+                            estParams);
+                    }
+                    catch { }
                 }
                 catch { }
                 lblProbeVel.Text = $"Probe Velocity: {probeSteps:0} steps/s";
@@ -965,74 +1049,192 @@ namespace Chainbox_controller
         }
         private void MoveTracksRelative(double leftSteps, double rightSteps, double probeSteps = 0)
         {
-            // Send relative motion to controller. Caller provides motor-step deltas
-            // in controller axis sign. We do NOT update estimator optimistically here.
             controller.MoveRelative(leftSteps, rightSteps, probeSteps);
 
-            // Start a background monitor task that waits for the controller to finish
-            // the relative move (or the motion to settle) and then reads TP to compute
-            // the actual displacement. This allows user to stop mid-move and ensures
-            // estimator uses controller-reported positions.
             _ = System.Threading.Tasks.Task.Run(async () =>
             {
                 try
                 {
-                    // initial readings
-                    long startA = controller.QueryPosition('A');
-                    long startB = controller.QueryPosition('B');
-                    long prevA = startA, prevB = startB;
+                    long prevA = controller.QueryPosition('A');
+                    long prevB = controller.QueryPosition('B');
                     int stable = 0;
                     var sw = System.Diagnostics.Stopwatch.StartNew();
 
                     while (true)
                     {
                         await System.Threading.Tasks.Task.Delay(100);
+
                         long a = controller.QueryPosition('A');
                         long b = controller.QueryPosition('B');
 
-                        // if values unchanged for a few samples, assume motion settled
                         if (a == prevA && b == prevB)
                             stable++;
                         else
                             stable = 0;
 
-                        prevA = a; prevB = b;
+                        prevA = a;
+                        prevB = b;
 
-                        // stop if controller relative move flag cleared, or values stable for 3 samples, or timeout
-                        if (!controller.RelativeMoveActive || stable >= 3 || sw.ElapsedMilliseconds > 30000)
+                        if (stable >= 3 || sw.ElapsedMilliseconds > 30000)
                             break;
                     }
-
-                    long endA = prevA;
-                    long endB = prevB;
-                    long dA = endA - startA;
-                    long dB = endB - startB;
-
-                    double dLeftMm = (leftDir * dA) * estParams.LeftMmPerCount;
-                    double dRightMm = (rightDir * dB) * estParams.RightMmPerCount;
-
-                    // integrate into dead reckoner on UI thread
+                }
+                catch
+                {
+                    // ignore monitor errors; just ensure state is cleared
+                }
+                finally
+                {
                     try
                     {
                         this.BeginInvoke(new Action(() =>
                         {
+                            controller.ClearRelativeMoveFlag();
+
+                            if (this.lblPose != null)
+                            {
+                                double thetaDeg = deadReckoner.Theta * (180.0 / Math.PI);
+                                this.lblPose.Text = $"Pose: X={deadReckoner.X:0.##} mm Y={deadReckoner.Y:0.##} mm Θ={thetaDeg:0.##}°";
+                            }
+
                             try
                             {
-                                deadReckoner.IntegrateDisplacement(dLeftMm, dRightMm, estParams.EffectiveTrackWidthMm);
-                                if (this.lblPose != null)
-                                {
-                                    double thetaDeg = deadReckoner.Theta * (180.0 / Math.PI);
-                                    this.lblPose.Text = $"Pose: X={deadReckoner.X:0.##} mm Y={deadReckoner.Y:0.##} mm Θ={thetaDeg:0.##}°";
-                                }
-                                try { this.coverageMapControl?.SetPose(deadReckoner.X, deadReckoner.Y, deadReckoner.Theta); } catch { }
+                                this.coverageMapControl?.UpdateMap(
+                                    deadReckoner.Grid,
+                                    deadReckoner.GridXMinMm,
+                                    deadReckoner.GridYMinMm,
+                                    deadReckoner.CellSizeMm,
+                                    deadReckoner.CurrentPose,
+                                    estParams);
                             }
                             catch { }
                         }));
                     }
                     catch { }
                 }
-                catch { }
             });
+        }
+        private void ApplyControlValuesToModels()
+        {
+            settings.MaxVelocityStepsPerSec = (double)numMaxSpeed.Value;
+            settings.AccelStepsPerSec2 = (double)numAccel.Value;
+            settings.DecelStepsPerSec2 = (double)numDecel.Value;
+            settings.StepsPerMm = (double)numStepsPerMm.Value;
+
+            estParams.GridResolutionMm = 1.0;
+        }
+
+        private UiSettings CaptureUiSettings()
+        {
+            return new UiSettings
+            {
+                IpAddress = this.txtIp?.Text ?? "192.168.0.101",
+                SimulationMode = this.chkSimulation?.Checked ?? false,
+                InputModeIndex = this.cmbInputMode?.SelectedIndex ?? 0,
+
+                MaxVelocityStepsPerSec = (double)this.numMaxSpeed.Value,
+                AccelStepsPerSec2 = (double)this.numAccel.Value,
+                DecelStepsPerSec2 = (double)this.numDecel.Value,
+                StepsPerMm = (double)this.numStepsPerMm.Value,
+                JogSteps = (double)this.numJogSteps.Value,
+
+                UseCustomTurn90Counts = this.chkUseCustomTurn90?.Checked ?? false,
+                Turn90Counts = (double)this.numTurn90Steps.Value,
+
+                LeftMmPerCount = estParams.LeftMmPerCount,
+                RightMmPerCount = estParams.RightMmPerCount,
+                EffectiveTrackWidthMm = estParams.EffectiveTrackWidthMm,
+                SwapAxes = estParams.SwapAxes,
+
+                RobotWidthMm = estParams.RobotWidthMm,
+                RobotLengthMm = estParams.RobotLengthMm,
+                ProbeWidthMm = estParams.ProbeWidthMm,
+                ProbeForwardOffsetMm = estParams.ProbeForwardOffsetMm,
+                ProbeLateralOffsetMm = estParams.ProbeLateralOffsetMm,
+                GridResolutionMm = estParams.GridResolutionMm
+            };
+        }
+
+        private void ApplyUiSettingsToControls(UiSettings? s = null)
+        {
+            s ??= new UiSettings();
+
+            if (this.txtIp != null) this.txtIp.Text = s.IpAddress;
+            if (this.chkSimulation != null) this.chkSimulation.Checked = s.SimulationMode;
+            if (this.cmbInputMode != null)
+            {
+                int idx = Math.Max(0, Math.Min(this.cmbInputMode.Items.Count - 1, s.InputModeIndex));
+                this.cmbInputMode.SelectedIndex = idx;
+            }
+
+            this.numMaxSpeed.Value = ClampDecimal((decimal)s.MaxVelocityStepsPerSec, this.numMaxSpeed.Minimum, this.numMaxSpeed.Maximum);
+            this.numAccel.Value = ClampDecimal((decimal)s.AccelStepsPerSec2, this.numAccel.Minimum, this.numAccel.Maximum);
+            this.numDecel.Value = ClampDecimal((decimal)s.DecelStepsPerSec2, this.numDecel.Minimum, this.numDecel.Maximum);
+            this.numStepsPerMm.Value = ClampDecimal((decimal)s.StepsPerMm, this.numStepsPerMm.Minimum, this.numStepsPerMm.Maximum);
+            this.numJogSteps.Value = ClampDecimal((decimal)s.JogSteps, this.numJogSteps.Minimum, this.numJogSteps.Maximum);
+
+            if (this.chkUseCustomTurn90 != null) this.chkUseCustomTurn90.Checked = s.UseCustomTurn90Counts;
+            if (this.numTurn90Steps != null) this.numTurn90Steps.Value = ClampDecimal((decimal)s.Turn90Counts, this.numTurn90Steps.Minimum, this.numTurn90Steps.Maximum);
+
+            estParams.LeftMmPerCount = s.LeftMmPerCount;
+            estParams.RightMmPerCount = s.RightMmPerCount;
+            estParams.EffectiveTrackWidthMm = s.EffectiveTrackWidthMm;
+            estParams.SwapAxes = s.SwapAxes;
+
+            estParams.RobotWidthMm = s.RobotWidthMm;
+            estParams.RobotLengthMm = s.RobotLengthMm;
+            estParams.ProbeWidthMm = s.ProbeWidthMm;
+            estParams.ProbeForwardOffsetMm = s.ProbeForwardOffsetMm;
+            estParams.ProbeLateralOffsetMm = s.ProbeLateralOffsetMm;
+            estParams.GridResolutionMm = s.GridResolutionMm;
+        }
+
+        private void LoadUiSettings()
+        {
+            try
+            {
+                if (!System.IO.File.Exists(_settingsFilePath))
+                    return;
+
+                string json = System.IO.File.ReadAllText(_settingsFilePath);
+                var loaded = System.Text.Json.JsonSerializer.Deserialize<UiSettings>(json);
+                if (loaded != null)
+                    _uiSettings = loaded;
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Load settings failed: " + ex.Message);
+            }
+        }
+
+        private void SaveUiSettings()
+        {
+            try
+            {
+                _uiSettings = CaptureUiSettings();
+
+                var json = System.Text.Json.JsonSerializer.Serialize(
+                    _uiSettings,
+                    new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+                System.IO.File.WriteAllText(_settingsFilePath, json);
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Save settings failed: " + ex.Message);
+            }
+        }
+
+        private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            SaveUiSettings();
+        }
+
+        private static decimal ClampDecimal(decimal value, decimal min, decimal max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
         }
         private void AppendLog(string s)
         {
